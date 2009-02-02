@@ -1,0 +1,13 @@
+C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControlsTester\bin\Release\SmoothControlsTester.exe
+C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControlsTester\bin\Release\SmoothControlsTester.pdb
+C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControlsTester\bin\Release\SmoothControls.dll
+C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControlsTester\bin\Release\Gradient.dll
+C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControlsTester\bin\Release\Gradient.pdb
+C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControlsTester\bin\Release\SmoothControls.pdb
+C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControlsTester\obj\Release\ResolveAssemblyReference.cache
+C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControlsTester\obj\Release\SmoothControlsTester.Form1.resources
+C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControlsTester\obj\Release\SmoothControlsTester.Form2.resources
+C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControlsTester\obj\Release\SmoothControlsTester.Properties.Resources.resources
+C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControlsTester\obj\Release\SmoothControlsTester.csproj.GenerateResource.Cache
+C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControlsTester\obj\Release\SmoothControlsTester.exe
+C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControlsTester\obj\Release\SmoothControlsTester.pdb

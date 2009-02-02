@@ -1,0 +1,397 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3389CC81-8DE8-4566-89EC-13076407AECE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SmoothControls</RootNamespace>
+    <AssemblyName>SmoothControls</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Gradient, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\GradientPainter\Gradient\bin\Release\Gradient.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationProvider">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CheckBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CheckBox.Designer.cs">
+      <DependentUpon>CheckBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ColorWell.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ColorWell.Designer.cs">
+      <DependentUpon>ColorWell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ComboBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ComboBox.designer.cs">
+      <DependentUpon>ComboBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ComboPopout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ComboPopout.Designer.cs">
+      <DependentUpon>ComboPopout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ComboPopoutItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ComboPopoutItem.Designer.cs">
+      <DependentUpon>ComboPopoutItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RibbonButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="RibbonButton.Designer.cs">
+      <DependentUpon>RibbonButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RibbonDivider.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="RibbonDivider.designer.cs">
+      <DependentUpon>RibbonDivider.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SegmentChooser.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SegmentChooser.Designer.cs">
+      <DependentUpon>SegmentChooser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SmoothRibbon.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SmoothRibbon.Designer.cs">
+      <DependentUpon>SmoothRibbon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VerticalLine.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="VerticalLine.Designer.cs">
+      <DependentUpon>VerticalLine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DBGraphics.cs" />
+    <Compile Include="General.cs" />
+    <Compile Include="HorizontalLine.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HorizontalLine.Designer.cs">
+      <DependentUpon>HorizontalLine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HorizontalSlider.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HorizontalSlider.Designer.cs">
+      <DependentUpon>HorizontalSlider.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ListClasses.cs" />
+    <Compile Include="ListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ListView.Designer.cs">
+      <DependentUpon>ListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ListViewHeader.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ListViewHeader.designer.cs">
+      <DependentUpon>ListViewHeader.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ListViewRow.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ListViewRow.Designer.cs">
+      <DependentUpon>ListViewRow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Message.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Message.Designer.cs">
+      <DependentUpon>Message.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MessageBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MessageBox.Designer.cs">
+      <DependentUpon>MessageBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OptionButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="OptionButton.designer.cs">
+      <DependentUpon>OptionButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="RoundButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="RoundButton.Designer.cs">
+      <DependentUpon>RoundButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SliderHandle.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SliderHandle.Designer.cs">
+      <DependentUpon>SliderHandle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SmoothContainer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SmoothContainer.Designer.cs">
+      <DependentUpon>SmoothContainer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SmoothGroupBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SmoothGroupBox.Designer.cs">
+      <DependentUpon>SmoothGroupBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SmoothLabel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SmoothLabel.Designer.cs">
+      <DependentUpon>SmoothLabel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TabPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TabPanel.Designer.cs">
+      <DependentUpon>TabPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TextBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TextBox.Designer.cs">
+      <DependentUpon>TextBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VerticalScrollBar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="VerticalScrollBar.Designer.cs">
+      <DependentUpon>VerticalScrollBar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VerticalScrollHandle.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="VerticalScrollHandle.Designer.cs">
+      <DependentUpon>VerticalScrollHandle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewChooser.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ViewChooser.Designer.cs">
+      <DependentUpon>ViewChooser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewChooserRow.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ViewChooserRow.Designer.cs">
+      <DependentUpon>ViewChooserRow.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Message.resx">
+      <DependentUpon>Message.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RoundButton.resx">
+      <DependentUpon>RoundButton.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\MyriadPro-Regular.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MessageBox.resx">
+      <DependentUpon>MessageBox.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\exclamation.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\MyriadPro-Bold.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\information.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\question.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CheckBox.resx">
+      <DependentUpon>CheckBox.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ColorWell.resx">
+      <DependentUpon>ColorWell.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ComboBox.resx">
+      <DependentUpon>ComboBox.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ComboPopout.resx">
+      <DependentUpon>ComboPopout.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ComboPopoutItem.resx">
+      <DependentUpon>ComboPopoutItem.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RibbonButton.resx">
+      <DependentUpon>RibbonButton.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RibbonDivider.resx">
+      <DependentUpon>RibbonDivider.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SegmentChooser.resx">
+      <DependentUpon>SegmentChooser.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SmoothRibbon.resx">
+      <DependentUpon>SmoothRibbon.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VerticalLine.resx">
+      <DependentUpon>VerticalLine.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HorizontalLine.resx">
+      <DependentUpon>HorizontalLine.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HorizontalSlider.resx">
+      <DependentUpon>HorizontalSlider.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListView.resx">
+      <DependentUpon>ListView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListViewHeader.resx">
+      <DependentUpon>ListViewHeader.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListViewRow.resx">
+      <DependentUpon>ListViewRow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionButton.resx">
+      <DependentUpon>OptionButton.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\error.png" />
+    <EmbeddedResource Include="SliderHandle.resx">
+      <DependentUpon>SliderHandle.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SmoothGroupBox.resx">
+      <DependentUpon>SmoothGroupBox.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SmoothLabel.resx">
+      <DependentUpon>SmoothLabel.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabPanel.resx">
+      <DependentUpon>TabPanel.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TextBox.resx">
+      <DependentUpon>TextBox.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VerticalScrollBar.resx">
+      <DependentUpon>VerticalScrollBar.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VerticalScrollHandle.resx">
+      <DependentUpon>VerticalScrollHandle.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewChooser.resx">
+      <DependentUpon>ViewChooser.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewChooserRow.resx">
+      <DependentUpon>ViewChooserRow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

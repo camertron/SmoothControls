@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmoothControls", "SmoothControls\SmoothControls.csproj", "{3389CC81-8DE8-4566-89EC-13076407AECE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmoothControlsTester", "SmoothControlsTester\SmoothControlsTester.csproj", "{03536AA7-EA07-4204-915C-F9C065D7874F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3389CC81-8DE8-4566-89EC-13076407AECE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3389CC81-8DE8-4566-89EC-13076407AECE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3389CC81-8DE8-4566-89EC-13076407AECE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3389CC81-8DE8-4566-89EC-13076407AECE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03536AA7-EA07-4204-915C-F9C065D7874F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03536AA7-EA07-4204-915C-F9C065D7874F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03536AA7-EA07-4204-915C-F9C065D7874F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03536AA7-EA07-4204-915C-F9C065D7874F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
