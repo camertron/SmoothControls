@@ -28,6 +28,7 @@ namespace WildMouse.SmoothControls
 
         private bool IsMouseOver;
         private bool IsMouseDown;
+        private Keys kShortcutKey;
 
         //these must be differently named or the background won't appear when hovering
         public event MouseEventHandler CtrlMouseMove;
@@ -84,6 +85,29 @@ namespace WildMouse.SmoothControls
 
             pImage = null;
             bEnabled = false;
+        }
+
+        /// <summary>
+        /// Clicks on this control if the given key matches this button's shortcut key.
+        /// </summary>
+        /// <param name="kKey">The key that was pressed.</param>
+        public void ReceiveKeys(Keys kKey)
+        {
+            if (kKey == kShortcutKey)
+            {
+                if (CtrlClick != null)
+                    CtrlClick(this, EventArgs.Empty);
+            }
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Always)]
+        [Browsable(true)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        [Bindable(true)]
+        public Keys ShortcutKey
+        {
+            get { return kShortcutKey; }
+            set { kShortcutKey = value; }
         }
 
         //overrides inherited member Enabled
