@@ -7,6 +7,7 @@ using System.Drawing.Text;
 using System.Reflection;
 using System.Drawing;
 using System.Runtime.InteropServices;
+using System.Collections.Specialized;
 
 namespace WildMouse.SmoothControls
 {
@@ -50,32 +51,50 @@ namespace WildMouse.SmoothControls
             return pfc;
         }
 
-        /*
-        public static void PrepFont(string FontFileName, PrivateFontCollection pfc)
-        {
-            Assembly _assembly = Assembly.GetExecutingAssembly();
-
-            Stream fontStream = _assembly.GetManifestResourceStream(RESOURCE_BASE + FontFileName);
-            byte[] fontdata = new byte[fontStream.Length];
-
-            fontStream.Read(fontdata, 0, (int)fontStream.Length);
-            fontStream.Close();
-
-            unsafe
-            {
-                fixed (byte* pFontData = fontdata)
-                {
-                    pfc.AddMemoryFont((System.IntPtr)pFontData, fontdata.Length);
-                }
-            }
-        }
-        */
-
         public static Bitmap GetBitmap(string ImageFileName)
         {
             Assembly _assembly = Assembly.GetExecutingAssembly();
             Stream _imageStream = _assembly.GetManifestResourceStream(RESOURCE_BASE + ImageFileName);
             return new Bitmap(_imageStream);
+        }
+    }
+
+    public class StringCollectionWithEvents : StringCollection
+    {
+        public delegate void ItemAddedEventHandler(object sender, string sNewStr);
+        public delegate void ItemRemovedEventHandler(object sender, int iIndex);
+        public delegate void ItemChangedEventHandler(object sender, int iChangedIndex);
+
+        public event ItemAddedEventHandler ItemAdded;
+        public event ItemRemovedEventHandler ItemRemoved;
+        public event ItemChangedEventHandler ItemChanged;
+
+        public new void Add(string sNewStr)
+        {
+            base.Add(sNewStr);
+
+            if (ItemAdded != null)
+                ItemAdded(this, sNewStr);
+        }
+
+        public new void RemoveAt(int iIndex)
+        {
+            base.RemoveAt(iIndex);
+
+            if (ItemRemoved != null)
+                ItemRemoved(this, iIndex);
+        }
+
+        public new string this[int iIndex]
+        {
+            get { return base[iIndex]; }
+            set
+            {
+                base[iIndex] = value;
+
+                if (ItemChanged != null)
+                    ItemChanged(this, iIndex);
+            }
         }
     }
 }

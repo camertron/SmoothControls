@@ -50,15 +50,6 @@ namespace WildMouse.SmoothControls
             NotPressed = 2
         }
 
-        /*
-        ~RoundButton()
-        {
-            pfc.Families[0].Dispose();
-            pfc.Dispose();
-            pFont.Dispose();
-        }
-        */
-
         public RoundButton()
         {
             InitializeComponent();
@@ -169,15 +160,6 @@ namespace WildMouse.SmoothControls
 
         private void MakeFont()
         {
-            /*
-            if (pfc != null)
-            {
-                pfc.Families[0].Dispose();
-                pfc.Dispose();
-                pFont.Dispose();
-            }
-            */
-
             pfc = General.PrepFont("MyriadPro-Regular.ttf");
             pFont = new Font(pfc.Families[0], pFontSize);
         }

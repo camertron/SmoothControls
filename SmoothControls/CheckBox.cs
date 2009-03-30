@@ -38,7 +38,7 @@ namespace WildMouse.SmoothControls
         private string pText;
         private bool pChecked;
 
-        DBGraphics memGraphics;
+        private DBGraphics memGraphics;
 
         private const int BOXDIM = 14;
 

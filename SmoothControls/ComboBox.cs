@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using WildMouse.Graphics;
 using System.Drawing.Text;
 using System.Collections.Specialized;
+using System.Runtime.InteropServices;
 
 namespace WildMouse.SmoothControls
 {
@@ -34,13 +35,36 @@ namespace WildMouse.SmoothControls
         private const int POPOUT_PADDING = 7;
         private const int PADDING = 10;
 
-        private ComboPopout Popout;
+        private int m_iSelectedIndex;
+        private StringCollectionWithEvents m_scItems;
+
+        private List<ComboPopoutItem> m_clListControls;
+        private ToolStripDropDown m_tsDropDown;
+        private ToolStripControlHost m_tsHost;
+        private Panel m_Panel;
+        private ComboPopoutItem m_cpiLastSelected;
 
         public event System.EventHandler SelectedIndexChanged;
 
         public ComboBox()
         {
             InitializeComponent();
+
+            m_cpiLastSelected = null;
+
+            m_clListControls = new List<ComboPopoutItem>();
+
+            m_Panel = new Panel();
+            m_tsHost = new ToolStripControlHost(m_Panel);
+
+            m_tsDropDown = new ToolStripDropDown();
+            m_tsDropDown.AutoSize = false;
+            m_tsDropDown.Items.Add(m_tsHost);
+
+            m_scItems = new StringCollectionWithEvents();
+            m_scItems.ItemAdded += new StringCollectionWithEvents.ItemAddedEventHandler(m_scItems_ItemAdded);
+            m_scItems.ItemRemoved += new StringCollectionWithEvents.ItemRemovedEventHandler(m_scItems_ItemRemoved);
+            m_iSelectedIndex = -1;
 
             this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
@@ -64,10 +88,6 @@ namespace WildMouse.SmoothControls
 
             UpdateRegion();
 
-            Popout = new ComboPopout();
-            Popout.SelectedIndexChanged += new EventHandler(Popout_SelectedIndexChanged);
-            Popout.FinishedDisappearing += new EventHandler(Popout_FinishedDisappearing);
-
             pfc = General.PrepFont("MyriadPro-Regular.ttf");
             pFontSize = 10;
 
@@ -82,12 +102,58 @@ namespace WildMouse.SmoothControls
             UpdateRegion();
         }
 
+        private void m_scItems_ItemRemoved(object sender, int iIndex)
+        {
+            m_Panel.Controls.Remove(m_clListControls[iIndex]);
+            m_clListControls.RemoveAt(iIndex);
+        }
+
+        private void m_scItems_ItemAdded(object sender, string sNewStr)
+        {
+            ComboPopoutItem cpiNewItem = new ComboPopoutItem();
+
+            cpiNewItem.Text = sNewStr;
+
+            cpiNewItem.Click += new EventHandler(ListItem_Click);
+            cpiNewItem.MouseEnter += new EventHandler(ListItem_MouseEnter);
+
+            m_clListControls.Add(cpiNewItem);
+            m_Panel.Controls.Add(cpiNewItem);
+        }
+
+        private void ListItem_MouseEnter(object sender, EventArgs e)
+        {
+            ((ComboPopoutItem)sender).Selected = true;
+
+            if (m_cpiLastSelected != null)
+                m_cpiLastSelected.Selected = false;
+
+            m_cpiLastSelected = (ComboPopoutItem)sender;
+        }
+
+        private void ListItem_Click(object sender, EventArgs e)
+        {
+            if (m_iSelectedIndex > -1)
+                m_clListControls[m_iSelectedIndex].Checked = false;
+
+            m_iSelectedIndex = m_clListControls.IndexOf((ComboPopoutItem)sender);
+
+            if (SelectedIndexChanged != null)
+                SelectedIndexChanged(this, EventArgs.Empty);
+
+            m_tsDropDown.Hide();
+            m_cpiLastSelected = null;
+            m_clListControls[m_iSelectedIndex].Checked = true;
+
+            this.Invalidate();
+        }
+
         public int SelectedIndex
         {
-            get { return Popout.SelectedIndex; }
+            get { return m_iSelectedIndex; }
             set
             {
-                Popout.SelectedIndex = value;
+                m_iSelectedIndex = value;
                 this.Invalidate();
 
                 if (SelectedIndexChanged != null)
@@ -101,25 +167,10 @@ namespace WildMouse.SmoothControls
                 ShowPopout();
         }
 
-        private void Popout_FinishedDisappearing(object sender, EventArgs e)
+        public StringCollectionWithEvents Items
         {
-            this.Focus();
-            Popout.Hide();
-        }
-
-        private void Popout_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            this.Invalidate();
-
-            if (SelectedIndexChanged != null)
-                SelectedIndexChanged(this, EventArgs.Empty);
-        }
-
-        [Editor("System.Windows.Forms.Design.StringCollectionEditor, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", typeof(System.Drawing.Design.UITypeEditor))]
-        public StringCollection Items
-        {
-            get { return Popout.Items; }
-            set { Popout.Items = value; }
+            get { return m_scItems; }
+            set { m_scItems = value; }
         }
 
         private void InvalidateParent()
@@ -210,7 +261,7 @@ namespace WildMouse.SmoothControls
             int SeparatorX = this.Width - (PopoutBtn.Width + (POPOUT_PADDING * 2));
             e.Graphics.DrawLine(BorderPen, SeparatorX, 0, SeparatorX, this.Height - 1);
 
-            if (Popout.SelectedIndex != -1)
+            if (m_iSelectedIndex != -1)
                 e.Graphics.DrawString(PrintString, pFont, TextBrush, PADDING, 1);
         }
 
@@ -221,55 +272,44 @@ namespace WildMouse.SmoothControls
 
         private void ShowPopout()
         {
-            if (Popout.Items.Count == 0)
+            if (m_scItems.Count == 0)
                 return;
 
             int MaxWidth = 0;
+            int iTop = 0;
 
-            for (int i = 0; i < Items.Count; i ++)
+            for (int i = 0; i < m_scItems.Count; i ++)
             {
-                MeasureLbl.Text = Items[i];
+                MeasureLbl.Text = m_scItems[i];
 
                 if (MeasureLbl.Width > MaxWidth)
                     MaxWidth = MeasureLbl.Width;
+
+                m_clListControls[i].Top = iTop;
+                m_clListControls[i].Left = 2;
+
+                iTop += ComboPopoutItem.CONTROL_HEIGHT;
             }
 
             if (this.Width > MaxWidth)
-                MaxWidth = this.Width;
+                MaxWidth = this.Width - 8;
 
-            Popout.Opacity = 0;
-            Popout.Show();
-            Popout.UpdateLayout();
+            for (int i = 0; i < m_scItems.Count; i++)
+                m_clListControls[i].Width = MaxWidth;
 
-            Point Location = this.PointToScreen(this.Location);
+            Point Location = new Point(0, this.Height);
 
-            if (Popout.SelectedIndex > -1)
-                Location.Y -= (ComboPopoutItem.CONTROL_HEIGHT * Popout.SelectedIndex);
+            if (m_iSelectedIndex > -1)
+                Location.Y -= (ComboPopoutItem.CONTROL_HEIGHT * (m_iSelectedIndex + 1));
 
-            Popout.Width = MaxWidth + 10;
-            Popout.Top = Location.Y - this.Top;
-            Popout.Left = (Location.X - this.Left) - ((MaxWidth - this.Width) + 16);
+            m_tsDropDown.BackColor = Color.White;
+            m_tsDropDown.Width = MaxWidth + 7;
+            m_tsDropDown.Height = (ComboPopoutItem.CONTROL_HEIGHT * m_scItems.Count) + 7;
 
-            Popout.Activate();
+            m_Panel.Height = m_tsDropDown.Height;
+            m_Panel.Width = m_tsDropDown.Width;
+
+            m_tsDropDown.Show(this, Location, ToolStripDropDownDirection.BelowRight);
         }
-        
-        //transparency stuff
-        /*
-        protected override void OnPaintBackground(PaintEventArgs e)
-        {
-            //do nothing
-        }
-
-        protected override CreateParams CreateParams
-        {
-            get
-            {
-                //turn the form transparent - sweet, eh?
-                CreateParams cp = base.CreateParams;
-                cp.ExStyle |= 0x20;
-                return cp;
-            }
-        }
-        */
     }
 }

@@ -57,6 +57,8 @@ namespace WildMouse.SmoothControls
 
             BorderPen = new Pen(Color.Black);
             ColorCounter = 0;
+
+            this.BackColor = Color.White;
         }
 
         private void TextField_TextChanged(object sender, EventArgs e)

@@ -10,7 +10,7 @@ using WildMouse.Graphics;
 
 namespace WildMouse.SmoothControls
 {
-    internal partial class ComboPopoutItem : UserControl
+    public partial class ComboPopoutItem : UserControl
     {
         private string pText;
         private bool pChecked;

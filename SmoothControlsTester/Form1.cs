@@ -18,6 +18,10 @@ namespace SmoothControlsTester
             InitializeComponent();
 
             verticalScrollBar1.Scroll += new ScrollEventHandler(verticalScrollBar1_Scroll);
+
+            comboBox1.Items.Add("Supercalifragilisticexpialidotious");
+            for (int i = 0; i < 10; i++)
+                comboBox1.Items.Add(i.ToString());
         }
 
         private void verticalScrollBar1_Scroll(object sender, ScrollEventArgs e)
@@ -30,12 +34,12 @@ namespace SmoothControlsTester
             //WildMouse.SmoothControls.MessageBox.Show(this, "Cameron Rules", "Important Message", MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Information);
             //horizontalSlider1.Value = 25;
 
-            WildMouse.SmoothControls.ListViewItem Item;
+            WildMouse.SmoothControls.ListItem Item;
             WildMouse.SmoothControls.ListSubItem SubItem;
 
             //for (int i = 0; i < 20; i++)
             //{
-                Item = new WildMouse.SmoothControls.ListViewItem();
+                Item = new WildMouse.SmoothControls.ListItem();
                 SubItem = new WildMouse.SmoothControls.ListSubItem();
 
                 Item.Text = "cameron " + Counter.ToString();
@@ -50,12 +54,12 @@ namespace SmoothControlsTester
                 Counter ++;
             //}
 
-            WildMouse.SmoothControls.ListHeader CurHeader;
+            WildMouse.SmoothControls.ListHeaderClass CurHeader;
             WildMouse.SmoothControls.ListHeaderCollection Headers = new WildMouse.SmoothControls.ListHeaderCollection();
 
             for (int i = 0; i < 3; i++)
             {
-                CurHeader = new WildMouse.SmoothControls.ListHeader();
+                CurHeader = new WildMouse.SmoothControls.ListHeaderClass();
                 CurHeader.Text = "Header " + i.ToString();
                 CurHeader.Width = 70;
                 CurHeader.TextAlign = ContentAlignment.MiddleCenter;
@@ -69,6 +73,7 @@ namespace SmoothControlsTester
 
         private void button1_Click(object sender, EventArgs e)
         {
+            listView1.Width += 10;
             //listView1.Headers[0].Width = 100;
             //listView1.Headers[0].Text = "Ender!";
 

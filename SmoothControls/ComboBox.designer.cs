@@ -62,7 +62,7 @@
             this.Controls.Add(this.MeasureLbl);
             this.Controls.Add(this.PopoutBtn);
             this.Name = "ComboBox";
-            this.Size = new System.Drawing.Size(261, 29);
+            this.Size = new System.Drawing.Size(261, 40);
             ((System.ComponentModel.ISupportInitialize)(this.PopoutBtn)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

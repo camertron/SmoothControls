@@ -4,9 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Collections;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace WildMouse.SmoothControls
 {
+    public interface IListRow
+    {
+        int Width { get; set; }
+        int Height { get; set; }
+        int Top { get; set; }
+        int Left { get; set; }
+        int Bottom { get; }
+        int Right { get; }
+
+        int ControlHeight { get; }
+        bool Selected { get; set; }
+        Color BackColor { get; set; }
+    }
+
     internal interface ListComponent
     {
         string Text { get; set; }
@@ -14,7 +29,7 @@ namespace WildMouse.SmoothControls
         ContentAlignment TextAlign { get; set; }
     }
 
-    public class ListViewItem : ListComponent
+    public class ListItem : ListComponent
     {
         private string pText;
         private int pWidth;
@@ -30,7 +45,7 @@ namespace WildMouse.SmoothControls
         public event SubItemChangedHandler SubItemChanged;
         public event System.EventHandler SubItemRemoved;
 
-        public ListViewItem()
+        public ListItem()
         {
             pText = "";
             pWidth = 70;
@@ -41,7 +56,7 @@ namespace WildMouse.SmoothControls
             HookUpSubItems();
         }
 
-        public ListViewItem(string InitText)
+        public ListItem(string InitText)
         {
             Text = InitText;
             pWidth = 70;
@@ -180,12 +195,12 @@ namespace WildMouse.SmoothControls
             return Items.IndexOf(ToFind);
         }
 
-        public void Add(ListViewItem NewItem)
+        public void Add(ListItem NewItem)
         {
             Items.Add(NewItem);
             NewItem.Changed += new EventHandler(Item_Changed);
             NewItem.SubItemAdded += new EventHandler(NewItem_SubItemAdded);
-            NewItem.SubItemChanged += new ListViewItem.SubItemChangedHandler(NewItem_SubItemChanged);
+            NewItem.SubItemChanged += new ListItem.SubItemChangedHandler(NewItem_SubItemChanged);
             NewItem.SubItemRemoved += new EventHandler(NewItem_SubItemRemoved);
             NewItem.SubItemsCleared += new EventHandler(NewItem_SubItemsCleared);
 
@@ -225,11 +240,11 @@ namespace WildMouse.SmoothControls
 
         public void Add(string Text)
         {
-            ListViewItem NewItem = new ListViewItem(Text);
+            ListItem NewItem = new ListItem(Text);
 
             NewItem.Changed += new EventHandler(Item_Changed);
             NewItem.SubItemAdded += new EventHandler(NewItem_SubItemAdded);
-            NewItem.SubItemChanged += new ListViewItem.SubItemChangedHandler(NewItem_SubItemChanged);
+            NewItem.SubItemChanged += new ListItem.SubItemChangedHandler(NewItem_SubItemChanged);
             NewItem.SubItemRemoved += new EventHandler(NewItem_SubItemRemoved);
             NewItem.SubItemsCleared += new EventHandler(NewItem_SubItemsCleared);
 
@@ -248,17 +263,17 @@ namespace WildMouse.SmoothControls
                 EntryRemoved(this, EventArgs.Empty);
         }
 
-        public ListViewItem this[int Index]
+        public ListItem this[int Index]
         {
-            get { return (ListViewItem)Items[Index]; }
+            get { return (ListItem)Items[Index]; }
             set
             {
                 Items[Index] = value;
-                ((ListViewItem)Items[Index]).Changed += new EventHandler(Item_Changed);
-                ((ListViewItem)Items[Index]).SubItemAdded += new EventHandler(NewItem_SubItemAdded);
-                ((ListViewItem)Items[Index]).SubItemChanged += new ListViewItem.SubItemChangedHandler(NewItem_SubItemChanged);
-                ((ListViewItem)Items[Index]).SubItemRemoved += new EventHandler(NewItem_SubItemRemoved);
-                ((ListViewItem)Items[Index]).SubItemsCleared += new EventHandler(NewItem_SubItemsCleared);
+                ((ListItem)Items[Index]).Changed += new EventHandler(Item_Changed);
+                ((ListItem)Items[Index]).SubItemAdded += new EventHandler(NewItem_SubItemAdded);
+                ((ListItem)Items[Index]).SubItemChanged += new ListItem.SubItemChangedHandler(NewItem_SubItemChanged);
+                ((ListItem)Items[Index]).SubItemRemoved += new EventHandler(NewItem_SubItemRemoved);
+                ((ListItem)Items[Index]).SubItemsCleared += new EventHandler(NewItem_SubItemsCleared);
                     
                 if (EntryChanged != null)
                     EntryChanged(this, Index);
@@ -415,7 +430,7 @@ namespace WildMouse.SmoothControls
         }
     }
 
-    internal class DoubleQueue<E>
+    public class DoubleQueue<E>
     {
         private LinkedList<E> Items;
 
@@ -469,9 +484,14 @@ namespace WildMouse.SmoothControls
         {
             get { return Items.Count; }
         }
+
+        public LinkedList<E>.Enumerator GetEnumerator()
+        {
+            return Items.GetEnumerator();
+        }
     }
 
-    public class ListHeader : ListComponent
+    public class ListHeaderClass : ListComponent
     {
         private string pText;
         private int pWidth;
@@ -479,28 +499,28 @@ namespace WildMouse.SmoothControls
 
         public event System.EventHandler HeaderChanged;
 
-        public ListHeader()
+        public ListHeaderClass()
         {
             pText = "";
             pWidth = 0;
             pTextAlign = ContentAlignment.MiddleCenter;
         }
 
-        public ListHeader(string InitText)
+        public ListHeaderClass(string InitText)
         {
             pText = InitText;
             pWidth = 0;
             pTextAlign = ContentAlignment.MiddleCenter;
         }
 
-        public ListHeader(string InitText, ContentAlignment InitTextAlign)
+        public ListHeaderClass(string InitText, ContentAlignment InitTextAlign)
         {
             pText = InitText;
             pTextAlign = InitTextAlign;
             pWidth = 0;
         }
 
-        public ListHeader(string InitText, ContentAlignment InitTextAlign, int InitWidth)
+        public ListHeaderClass(string InitText, ContentAlignment InitTextAlign, int InitWidth)
         {
             pText = InitText;
             pTextAlign = InitTextAlign;
@@ -564,7 +584,7 @@ namespace WildMouse.SmoothControls
             return Items.IndexOf(ToFind);
         }
 
-        public void Add(ListHeader NewItem)
+        public void Add(ListHeaderClass NewItem)
         {
             Items.Add(NewItem);
             NewItem.HeaderChanged += new EventHandler(Item_HeaderChanged);
@@ -587,13 +607,13 @@ namespace WildMouse.SmoothControls
                 EntryRemoved(this, Index);
         }
 
-        public ListHeader this[int Index]
+        public ListHeaderClass this[int Index]
         {
-            get { return (ListHeader)Items[Index]; }
+            get { return (ListHeaderClass)Items[Index]; }
             set
             {
                 Items[Index] = value;
-                ((ListHeader)Items[Index]).HeaderChanged += new EventHandler(Item_HeaderChanged);
+                ((ListHeaderClass)Items[Index]).HeaderChanged += new EventHandler(Item_HeaderChanged);
 
                 if (EntryChanged != null)
                     EntryChanged(this, Index);

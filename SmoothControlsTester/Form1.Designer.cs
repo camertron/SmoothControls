@@ -33,6 +33,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.comboBox1 = new WildMouse.SmoothControls.ComboBox();
             this.smoothLabel1 = new WildMouse.SmoothControls.SmoothLabel();
             this.textBox1 = new WildMouse.SmoothControls.TextBox();
             this.smoothGroupBox1 = new WildMouse.SmoothControls.SmoothGroupBox();
@@ -43,7 +44,6 @@
             this.AxisLabelsPanel = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
             this.roundButton1 = new WildMouse.SmoothControls.RoundButton();
-            this.comboBox1 = new WildMouse.SmoothControls.ComboBox();
             this.horizontalSlider1 = new WildMouse.SmoothControls.HorizontalSlider();
             this.optionButton1 = new WildMouse.SmoothControls.OptionButton();
             this.optionButton2 = new WildMouse.SmoothControls.OptionButton();
@@ -66,7 +66,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(101, 284);
+            this.button1.Location = new System.Drawing.Point(107, 340);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 10;
@@ -77,16 +77,24 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(141, 387);
+            this.label3.Location = new System.Drawing.Point(147, 443);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(35, 13);
             this.label3.TabIndex = 19;
             this.label3.Text = "label3";
             // 
+            // comboBox1
+            // 
+            this.comboBox1.Location = new System.Drawing.Point(192, 475);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.SelectedIndex = -1;
+            this.comboBox1.Size = new System.Drawing.Size(171, 20);
+            this.comboBox1.TabIndex = 21;
+            // 
             // smoothLabel1
             // 
             this.smoothLabel1.FontSize = 8;
-            this.smoothLabel1.Location = new System.Drawing.Point(239, 457);
+            this.smoothLabel1.Location = new System.Drawing.Point(245, 513);
             this.smoothLabel1.Name = "smoothLabel1";
             this.smoothLabel1.Size = new System.Drawing.Size(150, 23);
             this.smoothLabel1.TabIndex = 18;
@@ -95,6 +103,7 @@
             // 
             // textBox1
             // 
+            this.textBox1.BackColor = System.Drawing.Color.White;
             this.textBox1.Location = new System.Drawing.Point(485, 457);
             this.textBox1.MaxLength = 32767;
             this.textBox1.Multiline = false;
@@ -124,11 +133,11 @@
             this.tabPanel1.Controls.Add(this.AxisLabelsPanel);
             this.tabPanel1.Location = new System.Drawing.Point(485, 31);
             this.tabPanel1.Name = "tabPanel1";
+            this.tabPanel1.SelectedTab = 0;
             this.tabPanel1.Size = new System.Drawing.Size(324, 209);
             this.tabPanel1.TabHeight = 25;
             this.tabPanel1.TabIndex = 14;
             this.tabPanel1.Tabs = ((System.Collections.Specialized.StringCollection)(resources.GetObject("tabPanel1.Tabs")));
-            this.tabPanel1.SelectedTab = 0;
             // 
             // BackgroundsPanel
             // 
@@ -168,7 +177,7 @@
             // 
             this.roundButton1.BackColor = System.Drawing.Color.Transparent;
             this.roundButton1.FontSize = 10;
-            this.roundButton1.Location = new System.Drawing.Point(195, 345);
+            this.roundButton1.Location = new System.Drawing.Point(201, 401);
             this.roundButton1.Name = "roundButton1";
             this.roundButton1.Size = new System.Drawing.Size(196, 23);
             this.roundButton1.State = WildMouse.SmoothControls.RoundButton.ButtonState.NotPressed;
@@ -179,18 +188,9 @@
             this.roundButton1.TextColor = System.Drawing.Color.Black;
             this.roundButton1.Click += new System.EventHandler(this.roundButton1_Click);
             // 
-            // comboBox1
-            // 
-            this.comboBox1.Items = ((System.Collections.Specialized.StringCollection)(resources.GetObject("comboBox1.Items")));
-            this.comboBox1.Location = new System.Drawing.Point(224, 419);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.SelectedIndex = 3;
-            this.comboBox1.Size = new System.Drawing.Size(122, 20);
-            this.comboBox1.TabIndex = 13;
-            // 
             // horizontalSlider1
             // 
-            this.horizontalSlider1.Location = new System.Drawing.Point(186, 384);
+            this.horizontalSlider1.Location = new System.Drawing.Point(192, 440);
             this.horizontalSlider1.Maximum = 250;
             this.horizontalSlider1.Minimum = 10;
             this.horizontalSlider1.Name = "horizontalSlider1";
@@ -202,7 +202,7 @@
             // optionButton1
             // 
             this.optionButton1.Checked = true;
-            this.optionButton1.Location = new System.Drawing.Point(239, 293);
+            this.optionButton1.Location = new System.Drawing.Point(245, 349);
             this.optionButton1.Name = "optionButton1";
             this.optionButton1.OptionIndex = 0;
             this.optionButton1.Size = new System.Drawing.Size(107, 14);
@@ -213,7 +213,7 @@
             // optionButton2
             // 
             this.optionButton2.Checked = false;
-            this.optionButton2.Location = new System.Drawing.Point(239, 313);
+            this.optionButton2.Location = new System.Drawing.Point(245, 369);
             this.optionButton2.Name = "optionButton2";
             this.optionButton2.OptionIndex = 0;
             this.optionButton2.Size = new System.Drawing.Size(107, 14);
@@ -226,10 +226,10 @@
             this.listView1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.listView1.FontSize = 9;
             this.listView1.Headers = listHeaderCollection1;
-            this.listView1.Location = new System.Drawing.Point(161, 31);
+            this.listView1.Location = new System.Drawing.Point(93, 13);
             this.listView1.Name = "listView1";
             this.listView1.SelectedIndex = -1;
-            this.listView1.Size = new System.Drawing.Size(296, 209);
+            this.listView1.Size = new System.Drawing.Size(270, 248);
             this.listView1.TabIndex = 8;
             this.listView1.TextColor = System.Drawing.Color.Empty;
             // 
@@ -248,7 +248,7 @@
             // checkBox1
             // 
             this.checkBox1.Checked = true;
-            this.checkBox1.Location = new System.Drawing.Point(245, 260);
+            this.checkBox1.Location = new System.Drawing.Point(251, 316);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(101, 14);
             this.checkBox1.TabIndex = 3;
@@ -259,8 +259,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(890, 514);
+            this.BackColor = System.Drawing.Color.Gainsboro;
+            this.ClientSize = new System.Drawing.Size(890, 563);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.smoothLabel1);
             this.Controls.Add(this.textBox1);
@@ -269,7 +270,6 @@
             this.Controls.Add(this.tabPanel1);
             this.Controls.Add(this.roundButton1);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.horizontalSlider1);
             this.Controls.Add(this.optionButton1);
             this.Controls.Add(this.optionButton2);
@@ -302,7 +302,6 @@
         private System.Windows.Forms.Button button1;
         private WildMouse.SmoothControls.OptionButton optionButton1;
         private WildMouse.SmoothControls.OptionButton optionButton2;
-        private WildMouse.SmoothControls.ComboBox comboBox1;
         private WildMouse.SmoothControls.TabPanel tabPanel1;
         private WildMouse.SmoothControls.SmoothContainer smoothContainer1;
         private WildMouse.SmoothControls.SmoothGroupBox smoothGroupBox1;
@@ -313,7 +312,7 @@
         private System.Windows.Forms.Button button2;
         private WildMouse.SmoothControls.SmoothLabel smoothLabel1;
         private System.Windows.Forms.Label label3;
-
+        private WildMouse.SmoothControls.ComboBox comboBox1;
     }
 }
 

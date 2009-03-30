@@ -9,21 +9,22 @@ using System.Collections;
 
 namespace WildMouse.SmoothControls
 {
-    public partial class ListViewRow : UserControl
+    public partial class ListRow : UserControl, IListRow
     {
         public static int CONTROL_HEIGHT = 17;
-        private ListViewItem pListInfo;
+
+        private ListItem pListInfo;
         private ArrayList DisplayLabels;
         private Color SeparatorColor;
         private Pen SeparatorPen;
         private Color pTextColor;
 
-        public delegate void ArrowPressedHandler(object sender, Keys Key);
+        public delegate void CmdKeyPressedHandler(object sender, Keys Key);
 
         public new event System.EventHandler OnClick;
-        public event ArrowPressedHandler ArrowPressed;
+        public event CmdKeyPressedHandler ArrowPressed;
 
-        public ListViewRow()
+        public ListRow()
         {
             InitializeComponent();
 
@@ -44,6 +45,19 @@ namespace WildMouse.SmoothControls
             this.Click += new System.EventHandler(ListViewRow_Click);
 
             pTextColor = Color.Black;
+        }
+
+        //this property should be tied to the background color of the usercontrol,
+        //but currently ListView sets that when necessary
+        public bool Selected
+        {
+            get { return false; }
+            set { }
+        }
+
+        public int ControlHeight
+        {
+            get { return CONTROL_HEIGHT; }
         }
 
         private void InvalidateParent()
@@ -95,7 +109,7 @@ namespace WildMouse.SmoothControls
                 e.Graphics.DrawLine(SeparatorPen, ((SmoothLabel)DisplayLabels[i]).Right + 1, 0, ((SmoothLabel)DisplayLabels[i]).Right + 1, this.Height);
         }
 
-        public ListViewItem ListInfo
+        public ListItem ListInfo
         {
             get { return pListInfo; }
             set

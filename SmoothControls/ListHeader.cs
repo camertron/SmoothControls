@@ -11,7 +11,7 @@ using WildMouse.Graphics;
 
 namespace WildMouse.SmoothControls
 {
-    internal partial class ListViewHeader : UserControl
+    internal partial class ListHeader : UserControl
     {
         public static int CONTROL_HEIGHT = 18;
         private ListHeaderCollection pHeaders;
@@ -30,7 +30,7 @@ namespace WildMouse.SmoothControls
         public delegate void ChangeHandler(object sender, int Index);
         public event ChangeHandler Changed;
 
-        public ListViewHeader()
+        public ListHeader()
         {
             InitializeComponent();
 

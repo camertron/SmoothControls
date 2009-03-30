@@ -1,6 +1,6 @@
 ﻿namespace WildMouse.SmoothControls
 {
-    partial class ListViewRow
+    partial class ListRow
     {
         /// <summary> 
         /// Required designer variable.
@@ -30,7 +30,7 @@
         {
             this.SuspendLayout();
             // 
-            // ListViewRow
+            // ListRow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
