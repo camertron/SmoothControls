@@ -33,7 +33,7 @@ namespace WildMouse.SmoothControls
         private const int CONTROL_HEIGHT = 17;
         private const int PADDING = 15;
 
-        private Bitmap BackgroundImage;
+        private new Bitmap BackgroundImage;
 
         public HorizontalSlider()
         {

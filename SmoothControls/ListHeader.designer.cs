@@ -47,7 +47,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.MeasureLbl);
             this.DoubleBuffered = true;
-            this.Name = "ListViewHeader";
+            this.Name = "ListHeader";
             this.Size = new System.Drawing.Size(179, 30);
             this.ResumeLayout(false);
             this.PerformLayout();

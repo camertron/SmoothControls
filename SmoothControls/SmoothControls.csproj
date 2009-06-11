@@ -113,6 +113,12 @@
     <Compile Include="ListBox.designer.cs">
       <DependentUpon>ListBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="RectButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="RectButton.designer.cs">
+      <DependentUpon>RectButton.cs</DependentUpon>
+    </Compile>
     <Compile Include="RibbonButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -137,11 +143,29 @@
     <Compile Include="SequentialListBox.Designer.cs">
       <DependentUpon>SequentialListBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="SimpleListRow.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SimpleListRow.Designer.cs">
+      <DependentUpon>SimpleListRow.cs</DependentUpon>
+    </Compile>
     <Compile Include="SmoothRibbon.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="SmoothRibbon.Designer.cs">
       <DependentUpon>SmoothRibbon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SmoothToggle.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SmoothToggle.Designer.cs">
+      <DependentUpon>SmoothToggle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SmoothToggleSwitch.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SmoothToggleSwitch.Designer.cs">
+      <DependentUpon>SmoothToggleSwitch.cs</DependentUpon>
     </Compile>
     <Compile Include="VerticalLine.cs">
       <SubType>UserControl</SubType>
@@ -304,6 +328,10 @@
     <EmbeddedResource Include="Resources\question.png" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AlphaListBox.resx">
+      <DependentUpon>AlphaListBox.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="AlphaListRow.resx">
       <DependentUpon>AlphaListRow.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -332,6 +360,10 @@
       <DependentUpon>ListBox.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="RectButton.resx">
+      <DependentUpon>RectButton.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="RibbonButton.resx">
       <DependentUpon>RibbonButton.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -348,8 +380,16 @@
       <DependentUpon>SequentialListBox.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="SimpleListRow.resx">
+      <DependentUpon>SimpleListRow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="SmoothRibbon.resx">
       <DependentUpon>SmoothRibbon.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SmoothToggleSwitch.resx">
+      <DependentUpon>SmoothToggleSwitch.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="VerticalLine.resx">

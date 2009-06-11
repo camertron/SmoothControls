@@ -62,7 +62,7 @@ namespace WildMouse.SmoothControls
     public class StringCollectionWithEvents : StringCollection
     {
         public delegate void ItemAddedEventHandler(object sender, string sNewStr);
-        public delegate void ItemRemovedEventHandler(object sender, int iIndex);
+        public delegate void ItemRemovedEventHandler(object sender, int iIndex, string sItemText);
         public delegate void ItemChangedEventHandler(object sender, int iChangedIndex);
 
         public event ItemAddedEventHandler ItemAdded;
@@ -79,10 +79,11 @@ namespace WildMouse.SmoothControls
 
         public new void RemoveAt(int iIndex)
         {
+            string sRemovedTxt = base[iIndex];
             base.RemoveAt(iIndex);
 
             if (ItemRemoved != null)
-                ItemRemoved(this, iIndex);
+                ItemRemoved(this, iIndex, sRemovedTxt);
         }
 
         public new string this[int iIndex]

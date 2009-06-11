@@ -52,8 +52,8 @@ namespace WildMouse.SmoothControls
             pSelectedIndex = -1;
             RowSelectedColor = Color.FromArgb(213, 218, 244);
 
-            RowColor1 = Color.FromArgb(255, 255, 255);
-            RowColor2 = Color.FromArgb(245, 245, 245);
+            RowColor2 = Color.FromArgb(255, 255, 255);
+            RowColor1 = Color.FromArgb(245, 245, 245);
 
             pFontSize = 9;
             MakeFont();
@@ -194,6 +194,7 @@ namespace WildMouse.SmoothControls
 
                 ListRows[0].Top = -Overhang;
                 UpdateLayout();
+                this.Refresh();
             }
         }
 
@@ -231,6 +232,7 @@ namespace WildMouse.SmoothControls
                 ListRows[i].BackColor = GetRowColor(ScrollIndex + i);
                 ListRows[i].Font = pFont;
                 ListRows[i].Visible = true;
+                ListRows[i].Width = ElementsPanel.Width;
             }
         }
 

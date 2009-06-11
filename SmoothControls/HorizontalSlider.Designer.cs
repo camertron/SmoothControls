@@ -51,6 +51,6 @@
 
         #endregion
 
-        private SliderHandle Handle;
+        private new SliderHandle Handle;
     }
 }

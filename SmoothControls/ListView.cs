@@ -55,6 +55,8 @@ namespace WildMouse.SmoothControls
             pFontSize = 9;
             MakeFont();
             TextBrush = new SolidBrush(Color.Black);
+
+            UpdateLayout();
         }
 
         private void pListItems_SubItemsCleared(object sender, int EntryIndex)
@@ -143,6 +145,10 @@ namespace WildMouse.SmoothControls
             ElementsPanel.Left = 1;
 
             HeaderBar.Width = this.Width;
+
+            base.List_Resize(sender, e);
+
+            ListScroller.BringToFront();
         }
 
         protected override void ListItems_EntryRemoved(object sender, EventArgs e)
@@ -191,8 +197,11 @@ namespace WildMouse.SmoothControls
 
         protected override void UpdateLayout()
         {
-            HeaderBar.Font = pFont;
-            base.UpdateLayout();
+            if (HeaderBar != null)
+            {
+                HeaderBar.Font = pFont;
+                base.UpdateLayout();
+            }
         }
     }
 }

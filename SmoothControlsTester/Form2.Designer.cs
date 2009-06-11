@@ -31,7 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
             this.button1 = new System.Windows.Forms.Button();
             this.sequentialListBox1 = new WildMouse.SmoothControls.SequentialListBox();
-            this.listBox1 = new WildMouse.SmoothControls.ListBox();
+            this.alphaListBox1 = new WildMouse.SmoothControls.AlphaListBox();
+            this.smoothToggleSwitch1 = new WildMouse.SmoothControls.SmoothToggleSwitch();
             this.viewChooser1 = new WildMouse.SmoothControls.ViewChooser();
             this.smoothRibbon1 = new WildMouse.SmoothControls.SmoothRibbon();
             this.ribbonButton4 = new WildMouse.SmoothControls.RibbonButton();
@@ -44,7 +45,6 @@
             this.segmentChooser1 = new WildMouse.SmoothControls.SegmentChooser();
             this.colorWell1 = new WildMouse.SmoothControls.ColorWell();
             this.smoothLabel1 = new WildMouse.SmoothControls.SmoothLabel();
-            this.alphaListRow1 = new WildMouse.SmoothControls.AlphaListRow();
             this.smoothRibbon1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,22 +62,31 @@
             // 
             this.sequentialListBox1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.sequentialListBox1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(152)))));
-            this.sequentialListBox1.Location = new System.Drawing.Point(377, 238);
+            this.sequentialListBox1.Location = new System.Drawing.Point(450, 254);
             this.sequentialListBox1.Name = "sequentialListBox1";
             this.sequentialListBox1.SelectedIndex = -1;
-            this.sequentialListBox1.Size = new System.Drawing.Size(174, 116);
-            this.sequentialListBox1.TabIndex = 9;
+            this.sequentialListBox1.Size = new System.Drawing.Size(168, 150);
+            this.sequentialListBox1.TabIndex = 10;
+            this.sequentialListBox1.UseRowColoring = false;
             // 
-            // listBox1
+            // alphaListBox1
             // 
-            this.listBox1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.listBox1.FontSize = 9;
-            this.listBox1.Location = new System.Drawing.Point(377, 70);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.SelectedIndex = -1;
-            this.listBox1.Size = new System.Drawing.Size(174, 149);
-            this.listBox1.TabIndex = 8;
-            this.listBox1.TextColor = System.Drawing.Color.Red;
+            this.alphaListBox1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.alphaListBox1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(152)))));
+            this.alphaListBox1.Location = new System.Drawing.Point(450, 59);
+            this.alphaListBox1.Name = "alphaListBox1";
+            this.alphaListBox1.SelectedIndex = -1;
+            this.alphaListBox1.Size = new System.Drawing.Size(168, 160);
+            this.alphaListBox1.TabIndex = 9;
+            this.alphaListBox1.UseRowColoring = false;
+            // 
+            // smoothToggleSwitch1
+            // 
+            this.smoothToggleSwitch1.IsOn = false;
+            this.smoothToggleSwitch1.Location = new System.Drawing.Point(260, 303);
+            this.smoothToggleSwitch1.Name = "smoothToggleSwitch1";
+            this.smoothToggleSwitch1.Size = new System.Drawing.Size(65, 22);
+            this.smoothToggleSwitch1.TabIndex = 8;
             // 
             // viewChooser1
             // 
@@ -167,6 +176,7 @@
             // 
             // smoothLabel2
             // 
+            this.smoothLabel2.Bold = false;
             this.smoothLabel2.FontSize = 10;
             this.smoothLabel2.Location = new System.Drawing.Point(35, 99);
             this.smoothLabel2.Name = "smoothLabel2";
@@ -204,6 +214,7 @@
             // 
             // smoothLabel1
             // 
+            this.smoothLabel1.Bold = true;
             this.smoothLabel1.FontSize = 10;
             this.smoothLabel1.Location = new System.Drawing.Point(23, 26);
             this.smoothLabel1.Name = "smoothLabel1";
@@ -212,24 +223,15 @@
             this.smoothLabel1.Text = "Cameron";
             this.smoothLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // alphaListRow1
-            // 
-            this.alphaListRow1.Location = new System.Drawing.Point(601, 238);
-            this.alphaListRow1.Name = "alphaListRow1";
-            this.alphaListRow1.Selected = false;
-            this.alphaListRow1.Size = new System.Drawing.Size(212, 18);
-            this.alphaListRow1.TabIndex = 10;
-            this.alphaListRow1.Text = "AlphaListRow";
-            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(934, 552);
-            this.Controls.Add(this.alphaListRow1);
             this.Controls.Add(this.sequentialListBox1);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.alphaListBox1);
+            this.Controls.Add(this.smoothToggleSwitch1);
             this.Controls.Add(this.viewChooser1);
             this.Controls.Add(this.smoothRibbon1);
             this.Controls.Add(this.smoothLabel2);
@@ -261,8 +263,8 @@
         private WildMouse.SmoothControls.RibbonButton ribbonButton4;
         private WildMouse.SmoothControls.RibbonDivider ribbonDivider1;
         private WildMouse.SmoothControls.ViewChooser viewChooser1;
-        private WildMouse.SmoothControls.ListBox listBox1;
+        private WildMouse.SmoothControls.SmoothToggleSwitch smoothToggleSwitch1;
+        private WildMouse.SmoothControls.AlphaListBox alphaListBox1;
         private WildMouse.SmoothControls.SequentialListBox sequentialListBox1;
-        private WildMouse.SmoothControls.AlphaListRow alphaListRow1;
     }
 }

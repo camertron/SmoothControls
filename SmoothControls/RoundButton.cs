@@ -19,8 +19,8 @@ namespace WildMouse.SmoothControls
         private DBGraphics memGraphics;
 
         private Color BorderColor;
-        private float Diameter;
-        private float Radius;
+        private float m_fDiameter;
+        private float m_fRadius;
         private Color[] GradientColors;
         private Color[] PressedColors;
         private Color[] NotPressedColors;
@@ -34,6 +34,7 @@ namespace WildMouse.SmoothControls
         private SolidBrush TextBrush;
         private PrivateFontCollection pfc;
         private Pen FocusDashedLine;
+        private Bitmap m_bmpIcon;
 
         private Font pFont;
         private int pFontSize;
@@ -71,8 +72,8 @@ namespace WildMouse.SmoothControls
             GradientColors = NotPressedColors;
 
             GradientPen = new Pen(Color.Black);
-            Radius = 0;
-            Diameter = 0;
+            m_fRadius = 0;
+            m_fDiameter = 0;
 
             pFontSize = 10;
             MakeFont();
@@ -103,6 +104,18 @@ namespace WildMouse.SmoothControls
 
             FocusDashedLine = new Pen(Color.FromArgb(120, 120, 120), 1);
             FocusDashedLine.DashPattern = new float[2] { 2, 2 };
+
+            m_bmpIcon = null;
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Always)]
+        [Browsable(true)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        [Bindable(true)]
+        public Bitmap Icon
+        {
+            get { return m_bmpIcon; }
+            set { m_bmpIcon = value; InvalidateParent(); }
         }
 
         private void RoundButton_LostFocus(object sender, EventArgs e)
@@ -148,10 +161,10 @@ namespace WildMouse.SmoothControls
 
             System.Drawing.Drawing2D.GraphicsPath FormRegion = new System.Drawing.Drawing2D.GraphicsPath();
 
-            FormRegion.AddArc(0, 0, Diameter, Diameter, -90, -180);
-            FormRegion.AddLine(Radius, this.Height - 1, this.Width - Diameter, this.Height - 1);
-            FormRegion.AddArc(this.Width, 0, Diameter, Diameter, 90, -180);
-            FormRegion.AddLine(Radius, 0, this.Width - Diameter, 0);
+            FormRegion.AddArc(0, 0, m_fDiameter, m_fDiameter, -90, -180);
+            FormRegion.AddLine(m_fRadius, this.Height - 1, this.Width - m_fDiameter, this.Height - 1);
+            FormRegion.AddArc(this.Width, 0, m_fDiameter, m_fDiameter, 90, -180);
+            FormRegion.AddLine(m_fRadius, 0, this.Width - m_fDiameter, 0);
 
             FormRegion.CloseAllFigures();
 
@@ -301,11 +314,11 @@ namespace WildMouse.SmoothControls
         private void FindDiameter()
         {
             if (this.Height <= this.Width)
-                Diameter = this.Height - 1;
+                m_fDiameter = this.Height - 1;
             else
-                Diameter = this.Width - 1;
+                m_fDiameter = this.Width - 1;
 
-            Radius = Diameter / 2.0f;
+            m_fRadius = m_fDiameter / 2.0f;
         }
 
         private void RoundButton_Paint(object sender, PaintEventArgs e)
@@ -326,7 +339,7 @@ namespace WildMouse.SmoothControls
             FindDiameter();
 
             //draw gradient
-            float RadiusSquared = (float)Math.Pow(Radius - 1, 2);
+            float RadiusSquared = (float)Math.Pow(m_fRadius - 1, 2);
             float HalfHeight = (float)(this.Height - 2) / 2.0f;
             float ChordWidth;
 
@@ -334,14 +347,14 @@ namespace WildMouse.SmoothControls
             {
                 ChordWidth = (float)Math.Sqrt(RadiusSquared - Math.Pow(HalfHeight - i, 2));
                 GradientPen.Color = GradientColors[(int)i];
-                memGraphics.g.DrawLine(GradientPen, Radius - ChordWidth, (float)i + 1, this.Width - ((Radius - ChordWidth) + 2), (float)i + 1);
+                memGraphics.g.DrawLine(GradientPen, m_fRadius - ChordWidth, (float)i + 1, this.Width - ((m_fRadius - ChordWidth) + 2), (float)i + 1);
             }
 
             //draw visible border
-            memGraphics.g.DrawArc(BorderPen, 1, 1, Diameter - 2, Diameter - 2, 90, 180);
-            memGraphics.g.DrawArc(BorderPen, this.Width - (Diameter + 1), 1, Diameter - 2, Diameter - 2, 90, -180);
-            memGraphics.g.DrawLine(BorderPen, Radius, 1, this.Width - (Radius + 2), 1);
-            memGraphics.g.DrawLine(BorderPen, Radius, this.Height - 2, this.Width - (Radius + 1), this.Height - 2);
+            memGraphics.g.DrawArc(BorderPen, 1, 1, m_fDiameter - 2, m_fDiameter - 2, 90, 180);
+            memGraphics.g.DrawArc(BorderPen, this.Width - (m_fDiameter + 1), 1, m_fDiameter - 2, m_fDiameter - 2, 90, -180);
+            memGraphics.g.DrawLine(BorderPen, m_fRadius, 1, this.Width - (m_fRadius + 2), 1);
+            memGraphics.g.DrawLine(BorderPen, m_fRadius, this.Height - 2, this.Width - (m_fRadius + 1), this.Height - 2);
 
             float Top = 0;
             float Left = 0;
@@ -386,11 +399,16 @@ namespace WildMouse.SmoothControls
                     break;
             }
 
-            memGraphics.g.DrawString(SizeLbl.Text, pFont, TextBrush, Left, Top);
-            SizeF TextSize = memGraphics.g.MeasureString(SizeLbl.Text, pFont);
-            
-            if (this.Focused)
-                memGraphics.g.DrawLine(FocusDashedLine, Left + 3, (Top + TextSize.Height) - 3, (Left + TextSize.Width) - 4, (Top + TextSize.Height) - 3);
+            if (m_bmpIcon == null)
+            {
+                memGraphics.g.DrawString(SizeLbl.Text, pFont, TextBrush, Left, Top);
+                SizeF TextSize = memGraphics.g.MeasureString(SizeLbl.Text, pFont);
+
+                if (this.Focused)
+                    memGraphics.g.DrawLine(FocusDashedLine, Left + 3, (Top + TextSize.Height) - 3, (Left + TextSize.Width) - 4, (Top + TextSize.Height) - 3);
+            }
+            else
+                memGraphics.g.DrawImage((Image)m_bmpIcon, (this.Width / 2) - ((m_bmpIcon.Width / 2) + 1), (this.Height / 2) - (m_bmpIcon.Height / 2));
 
             memGraphics.Render(e.Graphics);
             CreateDoubleBuffer();

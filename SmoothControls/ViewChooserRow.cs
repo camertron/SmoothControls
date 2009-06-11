@@ -171,7 +171,7 @@ namespace WildMouse.SmoothControls
             base.Add(NewItem);
         }
 
-        public ViewChooserRow this[int Index]
+        public new ViewChooserRow this[int Index]
         {
             get { return (ViewChooserRow)base[Index]; }
             set { base[Index] = value; }

@@ -103,7 +103,7 @@
 
         #endregion
 
-        private VerticalScrollHandle Handle;
+        private new VerticalScrollHandle Handle;
         private System.Windows.Forms.PictureBox UpButton;
         private System.Windows.Forms.PictureBox DownButton;
         private System.Windows.Forms.PictureBox BackPic;

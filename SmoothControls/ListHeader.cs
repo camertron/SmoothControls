@@ -14,6 +14,7 @@ namespace WildMouse.SmoothControls
     internal partial class ListHeader : UserControl
     {
         public static int CONTROL_HEIGHT = 18;
+        public static int START_X = 2;
         private ListHeaderCollection pHeaders;
 
         private Color GradientStart;
@@ -26,6 +27,8 @@ namespace WildMouse.SmoothControls
         private Pen BorderPen;
         private SolidBrush TextBrush;
         private Font pFont;
+        private int ResizeIndex;
+        private int ResizeLeft;
 
         public delegate void ChangeHandler(object sender, int Index);
         public event ChangeHandler Changed;
@@ -43,6 +46,7 @@ namespace WildMouse.SmoothControls
 
             this.Paint += new PaintEventHandler(ListViewHeader_Paint);
             this.Resize += new EventHandler(ListViewHeader_Resize);
+            this.MouseMove += new MouseEventHandler(ListHeader_MouseMove);
 
             SeparatorColor = Color.FromArgb(100, 100, 100);
             SeparatorPen = new Pen(SeparatorColor);
@@ -60,6 +64,42 @@ namespace WildMouse.SmoothControls
             HookUpHeaders();
 
             pFont = new Font("Arial", 9);
+        }
+
+        private void ListHeader_MouseMove(object sender, MouseEventArgs e)
+        {
+            //make sure some columns exist before showing VSplit
+            if (pHeaders.Count == 0)
+                return;
+
+            int iX = START_X + pHeaders[0].Width;
+
+            if ((e.Button == MouseButtons.Left) && (ResizeIndex > -1))
+            {
+                pHeaders[ResizeIndex].Width = e.X - ResizeLeft;
+                this.Invalidate();
+            }
+            else
+            {
+                for (int i = 1; i < pHeaders.Count + 1; i++)
+                {
+                    if ((e.X >= (iX - 2)) && (e.X <= (iX + 2)))
+                    {
+                        this.Cursor = Cursors.VSplit;
+                        ResizeIndex = i - 1;
+                        ResizeLeft = iX - pHeaders[i - 1].Width;
+                        break;
+                    }
+                    else
+                    {
+                        this.Cursor = Cursors.Arrow;
+                        ResizeIndex = -1;
+                    }
+
+                    if (i < pHeaders.Count)
+                        iX += pHeaders[i].Width + 1;
+                }
+            }
         }
 
         public override Font Font
@@ -125,7 +165,7 @@ namespace WildMouse.SmoothControls
                 e.Graphics.DrawLine(GradientPen, 0, i, this.Width, i);
             }
 
-            int X = 2;
+            int X = START_X;
 
             for (int i = 0; i < pHeaders.Count; i ++)
             {

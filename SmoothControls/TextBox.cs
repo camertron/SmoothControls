@@ -22,11 +22,15 @@ namespace WildMouse.SmoothControls
         private int pFontSize;
         private Font pFont;
         private int ColorCounter;
+        private bool bShowBorder;
 
         private const int PADDING = 3;
         private const int GRADIENT_DISTANCE = 25;
 
-        public event System.EventHandler TextChanged;
+        public new event System.EventHandler TextChanged;
+        public new event System.Windows.Forms.KeyPressEventHandler KeyPress;
+        public new event System.EventHandler LostFocus;
+        public new event System.EventHandler GotFocus;
 
         public TextBox()
         {
@@ -44,6 +48,7 @@ namespace WildMouse.SmoothControls
             TextField.GotFocus += new EventHandler(TextField_GotFocus);
             TextField.LostFocus += new EventHandler(TextField_LostFocus);
             TextField.TextChanged += new EventHandler(TextField_TextChanged);
+            TextField.KeyPress += new KeyPressEventHandler(TextField_KeyPress);
 
             pfc = General.PrepFont("MyriadPro-Regular.ttf");
             pFontSize = 10;
@@ -59,6 +64,13 @@ namespace WildMouse.SmoothControls
             ColorCounter = 0;
 
             this.BackColor = Color.White;
+            bShowBorder = true;
+        }
+
+        private void TextField_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (KeyPress != null)
+                KeyPress(this, e);
         }
 
         private void TextField_TextChanged(object sender, EventArgs e)
@@ -75,6 +87,26 @@ namespace WildMouse.SmoothControls
         {
             get { return TextField.MaxLength; }
             set { TextField.MaxLength = value; }
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Always)]
+        [Browsable(true)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        [Bindable(true)]
+        public bool ShowBorder
+        {
+            get { return bShowBorder; }
+            set { bShowBorder = value; }
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Always)]
+        [Browsable(true)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        [Bindable(true)]
+        public ScrollBars ScrollBars
+        {
+            get { return TextField.ScrollBars; }
+            set { TextField.ScrollBars = value; }
         }
 
         [EditorBrowsable(EditorBrowsableState.Always)]
@@ -100,11 +132,17 @@ namespace WildMouse.SmoothControls
         private void TextField_LostFocus(object sender, EventArgs e)
         {
             ControlLostFocus();
+
+            if (LostFocus != null)
+                LostFocus(this, EventArgs.Empty);
         }
 
         private void TextField_GotFocus(object sender, EventArgs e)
         {
             ControlGotFocus();
+
+            if (GotFocus != null)
+                GotFocus(this, EventArgs.Empty);
         }
 
         private void TextBox_LostFocus(object sender, EventArgs e)
@@ -147,15 +185,24 @@ namespace WildMouse.SmoothControls
 
         private void TextBox_Paint(object sender, PaintEventArgs e)
         {
-            if ((ColorCounter >= GRADIENT_DISTANCE) || (ColorCounter < 0))  //just in case
-                return;
+            if (bShowBorder)
+            {
+                if ((ColorCounter >= GRADIENT_DISTANCE) || (ColorCounter < 0))  //just in case
+                    return;
 
-            BorderPen.Color = BorderColors[ColorCounter];
-            e.Graphics.DrawRectangle(BorderPen, 0, 0, this.Width - 1, this.Height - 1);
+                BorderPen.Color = BorderColors[ColorCounter];
+                e.Graphics.DrawRectangle(BorderPen, 0, 0, this.Width - 1, this.Height - 1);
+            }
         }
 
         private void InflateTmr_Tick(object sender, EventArgs e)
         {
+            if (! bShowBorder)
+            {
+                InflateTmr.Enabled = false;
+                return;
+            }
+
             if ((ColorCounter + 1) >= GRADIENT_DISTANCE)
             {
                 InflateTmr.Enabled = false;
@@ -169,6 +216,12 @@ namespace WildMouse.SmoothControls
 
         private void DeflateTmr_Tick(object sender, EventArgs e)
         {
+            if (! bShowBorder)
+            {
+                InflateTmr.Enabled = false;
+                return;
+            }
+
             if ((ColorCounter - 1) < 0)
             {
                 DeflateTmr.Enabled = false;

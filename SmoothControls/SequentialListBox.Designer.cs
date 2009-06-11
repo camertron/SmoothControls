@@ -59,6 +59,7 @@
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.Controls.Add(this.ElementsPanel);
             this.Controls.Add(this.ListScroller);
+            this.DoubleBuffered = true;
             this.Name = "SequentialListBox";
             this.ResumeLayout(false);
 

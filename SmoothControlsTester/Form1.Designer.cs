@@ -93,13 +93,16 @@
             // 
             // smoothLabel1
             // 
+            this.smoothLabel1.Bold = false;
             this.smoothLabel1.FontSize = 8;
+            this.smoothLabel1.Italic = false;
             this.smoothLabel1.Location = new System.Drawing.Point(245, 513);
             this.smoothLabel1.Name = "smoothLabel1";
             this.smoothLabel1.Size = new System.Drawing.Size(150, 23);
             this.smoothLabel1.TabIndex = 18;
             this.smoothLabel1.Text = "smoothLabel1";
             this.smoothLabel1.TextAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.smoothLabel1.TextColor = System.Drawing.Color.Black;
             // 
             // textBox1
             // 
@@ -108,6 +111,8 @@
             this.textBox1.MaxLength = 32767;
             this.textBox1.Multiline = false;
             this.textBox1.Name = "textBox1";
+            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textBox1.ShowBorder = true;
             this.textBox1.Size = new System.Drawing.Size(150, 23);
             this.textBox1.TabIndex = 17;
             this.textBox1.Text = "textBox1";
@@ -177,6 +182,7 @@
             // 
             this.roundButton1.BackColor = System.Drawing.Color.Transparent;
             this.roundButton1.FontSize = 10;
+            this.roundButton1.Icon = null;
             this.roundButton1.Location = new System.Drawing.Point(201, 401);
             this.roundButton1.Name = "roundButton1";
             this.roundButton1.Size = new System.Drawing.Size(196, 23);

@@ -28,9 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ListScroller = new WildMouse.SmoothControls.VerticalScrollBar();
             this.ElementsPanel = new System.Windows.Forms.Panel();
+            this.ListScroller = new WildMouse.SmoothControls.VerticalScrollBar();
             this.SuspendLayout();
+            // 
+            // ElementsPanel
+            // 
+            this.ElementsPanel.Location = new System.Drawing.Point(3, 3);
+            this.ElementsPanel.Name = "ElementsPanel";
+            this.ElementsPanel.Size = new System.Drawing.Size(148, 100);
+            this.ElementsPanel.TabIndex = 2;
             // 
             // ListScroller
             // 
@@ -44,20 +51,13 @@
             this.ListScroller.TabIndex = 0;
             this.ListScroller.Value = 0;
             // 
-            // ElementsPanel
-            // 
-            this.ElementsPanel.Location = new System.Drawing.Point(3, 3);
-            this.ElementsPanel.Name = "ElementsPanel";
-            this.ElementsPanel.Size = new System.Drawing.Size(148, 100);
-            this.ElementsPanel.TabIndex = 2;
-            // 
             // ListBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.Controls.Add(this.ElementsPanel);
             this.Controls.Add(this.ListScroller);
+            this.Controls.Add(this.ElementsPanel);
             this.DoubleBuffered = true;
             this.Name = "ListBox";
             this.Size = new System.Drawing.Size(174, 132);

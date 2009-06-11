@@ -46,7 +46,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.SizeLbl);
-            this.Name = "FatListViewRow";
+            this.DoubleBuffered = true;
+            this.Name = "IconListRow";
             this.Size = new System.Drawing.Size(166, 42);
             this.ResumeLayout(false);
             this.PerformLayout();

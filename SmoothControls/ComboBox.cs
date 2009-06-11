@@ -102,7 +102,7 @@ namespace WildMouse.SmoothControls
             UpdateRegion();
         }
 
-        private void m_scItems_ItemRemoved(object sender, int iIndex)
+        private void m_scItems_ItemRemoved(object sender, int iIndex, string sItemText)
         {
             m_Panel.Controls.Remove(m_clListControls[iIndex]);
             m_clListControls.RemoveAt(iIndex);

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using WildMouse.SmoothControls;
+using System.IO;
 
 namespace SmoothControlsTester
 {
@@ -20,6 +21,31 @@ namespace SmoothControlsTester
             //viewChooser1.Tabs.Add("Casey");
             //viewChooser1.Tabs.Add("Michelle");
 
+            //SimpleListRow NewSimple = new SimpleListRow();
+            //NewSimple.Text = "Cameron";
+            //alphaListBox1.RowControls.Add(NewSimple);
+
+            /*
+            NewAlpha = new AlphaListRow();
+            NewAlpha.Text = "Casey";
+            alphaListBox1.RowControls.Add(NewAlpha);
+
+            NewAlpha = new AlphaListRow();
+            NewAlpha.Text = "Michelle";
+            alphaListBox1.RowControls.Add(NewAlpha);
+            */
+
+            for (int i = 0; i < 10; i++)
+            {
+                alphaListBox1.Items.Add(((char)(i + 65)).ToString());
+                alphaListBox1.Items.Add(((char)(i + 65)).ToString());
+                alphaListBox1.Items.Add(((char)(i + 65)).ToString());
+            }
+
+            for (int i = 0; i < 10; i++)
+                sequentialListBox1.Items.Add(i.ToString());
+
+            /*
             IconListRow NewRow;
 
             NewRow = new IconListRow();
@@ -51,6 +77,18 @@ namespace SmoothControlsTester
             NewRow.Icon = (Bitmap)Bitmap.FromFile("C:\\Cameron's Stuff\\DotNET\\Wallet\\Icons\\face-smile.png");
             //NewRow.Selected = true;
             sequentialListBox1.RowControls.Add(NewRow);
+            */
+
+            //LoadDummyWords();
+        }
+
+        private void LoadDummyWords()
+        {
+            StreamReader srReader = new StreamReader("C:/Cameron's Stuff/DotNET/Wallet/words.txt");
+            string[] Words = srReader.ReadToEnd().Split(new char[1] { ' ' });
+
+            for (int i = 0; i < Words.Length; i++)
+                alphaListBox1.Items.Add(Words[i]);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -58,7 +96,7 @@ namespace SmoothControlsTester
             //segmentChooser1.SelectedIndex = 2;
             //ribbonButton1.ButtonEnabled = false;
             //listBox1.Items.Add("Cameron Rules!");
-            sequentialListBox1.Height += 10;
+            //sequentialListBox1.Height += 10;
         }
 
         private void Form2_Load(object sender, EventArgs e)

@@ -38,3 +38,6 @@ C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControls\obj\Debug\WildMouse.Smoo
 C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControls\obj\Debug\WildMouse.SmoothControls.ListHeader.resources
 C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControls\obj\Debug\WildMouse.SmoothControls.SequentialListBox.resources
 C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControls\obj\Debug\WildMouse.SmoothControls.AlphaListRow.resources
+C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControls\obj\Debug\WildMouse.SmoothControls.SimpleListRow.resources
+C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControls\obj\Debug\WildMouse.SmoothControls.AlphaListBox.resources
+C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControls\obj\Debug\WildMouse.SmoothControls.SmoothToggleSwitch.resources

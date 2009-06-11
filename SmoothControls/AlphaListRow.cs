@@ -33,6 +33,11 @@ namespace WildMouse.SmoothControls
         {
             InitializeComponent();
 
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            this.SetStyle(ControlStyles.UserPaint, true);
+            this.UpdateStyles();
+
             memGraphics = new DBGraphics();
             CreateDoubleBuffer();
 

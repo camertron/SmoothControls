@@ -20,6 +20,7 @@ namespace WildMouse.SmoothControls
         int ControlHeight { get; }
         bool Selected { get; set; }
         Color BackColor { get; set; }
+        string Text { get; set; }
     }
 
     internal interface ListComponent
@@ -256,7 +257,7 @@ namespace WildMouse.SmoothControls
 
         public void RemoveAt(int Index)
         {
-            return;
+            //return;
             Items.RemoveAt(Index);
 
             if (EntryRemoved != null)
@@ -349,6 +350,7 @@ namespace WildMouse.SmoothControls
             set
             {
                 pWidth = value;
+                RaiseItemChanged();
             }
         }
 

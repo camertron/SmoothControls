@@ -30,6 +30,8 @@ namespace WildMouse.SmoothControls
         private Bitmap pIcon;
         private bool bSelected;
         private SolidBrush BackBrush;
+        private Pen m_pnSeparatorPen;
+        private Color m_clrSeparatorColor;
 
         private Font pFont;
         private int pFontSize;
@@ -69,6 +71,20 @@ namespace WildMouse.SmoothControls
 
             BackBrush = new SolidBrush(this.BackColor);
             this.BackColorChanged += new EventHandler(IconListRow_BackColorChanged);
+
+            m_clrSeparatorColor = Color.FromArgb(220, 220, 220);
+            m_pnSeparatorPen = new Pen(m_clrSeparatorColor);
+        }
+
+        public Color SeparatorColor
+        {
+            get { return m_clrSeparatorColor; }
+            set
+            {
+                m_clrSeparatorColor = value;
+                m_pnSeparatorPen.Color = value;
+                InvalidateParent();
+            }
         }
 
         private void IconListRow_BackColorChanged(object sender, EventArgs e)
@@ -132,7 +148,7 @@ namespace WildMouse.SmoothControls
                 memGraphics.g.DrawString(SizeLbl.Text, pFont, TextBrush, ((this.Width / 2) - (SizeLbl.Width / 2)) + 3, ((this.Height / 2) - (SizeLbl.Height / 2)) - 1);
 
             //memGraphics.g.DrawLine(new Pen(Color.White), 0, this.Height - 1, this.Width, this.Height - 1);
-            memGraphics.g.DrawLine(new Pen(Color.FromArgb(220, 220, 220)), 0, this.Height - 1, this.Width, this.Height - 1);
+            memGraphics.g.DrawLine(m_pnSeparatorPen, 0, this.Height - 1, this.Width, this.Height - 1);
 
             memGraphics.Render(e.Graphics);
         }

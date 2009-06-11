@@ -15,10 +15,12 @@ namespace WildMouse.SmoothControls
         private Font pFont;
         private int pFontSize;
         private PrivateFontCollection pfc;
-        private Color TextColor;
+        private Color pTextColor;
         private SolidBrush TextBrush;
         private string pText;
         private ContentAlignment pTextAlign;
+        private bool bFontBold;
+        private bool bFontItalic;
 
         public SmoothLabel()
         {
@@ -31,8 +33,8 @@ namespace WildMouse.SmoothControls
 
             this.Paint += new PaintEventHandler(SmoothLabel_Paint);
 
-            TextColor = Color.Black;
-            TextBrush = new SolidBrush(TextColor);
+            pTextColor = Color.Black;
+            TextBrush = new SolidBrush(pTextColor);
 
             pfc = General.PrepFont("MyriadPro-Regular.ttf");
             pFontSize = 10;
@@ -46,13 +48,57 @@ namespace WildMouse.SmoothControls
         [Browsable(true)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         [Bindable(true)]
-        public override Color ForeColor
+        public bool Bold
         {
-            get { return TextColor; }
+            get { return bFontBold; }
             set
             {
-                TextColor = value;
-                TextBrush.Color = TextColor;
+                bFontBold = value;
+                RedoFont();
+                this.Invalidate();
+            }
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Always)]
+        [Browsable(true)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        [Bindable(true)]
+        public bool Italic
+        {
+            get { return bFontItalic; }
+            set
+            {
+                bFontItalic = value;
+                RedoFont();
+                this.Invalidate();
+            }
+        }
+
+        private void RedoFont()
+        {
+            FontStyle FinalStyle;
+
+            if (bFontItalic && bFontBold)
+                FinalStyle = FontStyle.Bold & FontStyle.Italic;
+            else if (bFontItalic)
+                FinalStyle = FontStyle.Italic;
+            else
+                FinalStyle = FontStyle.Bold;
+
+            pFont = new Font(pfc.Families[0], pFontSize, FinalStyle);
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Always)]
+        [Browsable(true)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        [Bindable(true)]
+        public Color TextColor
+        {
+            get { return pTextColor; }
+            set
+            {
+                pTextColor = value;
+                TextBrush.Color = pTextColor;
                 this.Invalidate();
             }
         }
@@ -67,8 +113,7 @@ namespace WildMouse.SmoothControls
             set
             {
                 pFontSize = value;
-                pFont = new Font(pfc.Families[0], pFontSize);
-                MeasureLbl.Font = pFont;
+                RedoFont();
                 this.Invalidate();
             }
         }
@@ -77,6 +122,8 @@ namespace WildMouse.SmoothControls
         {
             e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             e.Graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
+
+            e.Graphics.FillRectangle(new SolidBrush(this.BackColor), 0, 0, this.Width, this.Height);
 
             float Top = 0;
             float Left = 0;
