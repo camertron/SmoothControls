@@ -30,6 +30,8 @@ namespace WildMouse.SmoothControls
         protected SolidBrush TextBrush;
         protected Color pTextColor;
         protected Font pFont;
+        protected bool bLayoutUpdating;
+        protected bool bScrollbarUpdating;
 
         public event System.EventHandler SelectedIndexChanged;
 
@@ -68,6 +70,7 @@ namespace WildMouse.SmoothControls
             pListItems.EntryRemoved += new EventHandler(ListItems_EntryRemoved);
 
             ListScroller.Visible = false;
+            bLayoutUpdating = false;
 
             UpdateLayout();
         }
@@ -174,12 +177,14 @@ namespace WildMouse.SmoothControls
             pListItems[pListItems.Count - 1].Width = ElementsPanel.Width;
 
             UpdateScrollBar();
+            List_Resize(this, EventArgs.Empty);
             UpdateLayout();
         }
 
         protected virtual void ListItems_EntriesCleared(object sender, EventArgs e)
         {
             UpdateScrollBar();
+            List_Resize(this, EventArgs.Empty);
             UpdateLayout();
         }
 
@@ -200,58 +205,46 @@ namespace WildMouse.SmoothControls
 
         protected virtual void UpdateLayout()
         {
-            MaxVisibleRows = (this.Height / ListRow.CONTROL_HEIGHT) + 2;
-
-            if (ListRows.Count < MaxVisibleRows)
+            if (!bLayoutUpdating)
             {
-                ListRow NewRow;
+                bLayoutUpdating = true;
 
-                //for (int i = 0; i < MaxVisibleRows - ListRows.Count; i ++)
-                for (int i = 0; i < MaxVisibleRows; i++)
+                MaxVisibleRows = (this.Height / ListRow.CONTROL_HEIGHT) + 2;
+
+                if (ListRows.Count < MaxVisibleRows)
                 {
-                    NewRow = new ListRow();
-                    NewRow.ArrowPressed += new ListRow.CmdKeyPressedHandler(Row_ArrowPressed);
-                    NewRow.OnClick += new EventHandler(Row_OnClick);
-                    NewRow.Width = this.Width;
-                    NewRow.Left = 0;
-                    ElementsPanel.Controls.Add(NewRow);
-                    ListRows.EnqueueBack(NewRow);
+                    ListRow NewRow;
+
+                    //for (int i = 0; i < MaxVisibleRows - ListRows.Count; i ++)
+                    for (int i = 0; i < MaxVisibleRows; i++)
+                    {
+                        NewRow = new ListRow();
+                        NewRow.ArrowPressed += new ListRow.CmdKeyPressedHandler(Row_ArrowPressed);
+                        NewRow.OnClick += new EventHandler(Row_OnClick);
+                        NewRow.Width = this.Width;
+                        NewRow.Left = 0;
+                        ElementsPanel.Controls.Add(NewRow);
+                        ListRows.EnqueueBack(NewRow);
+                    }
                 }
-            }
 
-            int ScrollIndex = (int)Math.Floor((double)ListScroller.Value / (double)ListRow.CONTROL_HEIGHT);
+                int ScrollIndex = (int)Math.Floor((double)ListScroller.Value / (double)ListRow.CONTROL_HEIGHT);
 
-            for (int i = 0; i < ListRows.Count; i++)
-            {
-                if ((ScrollIndex + i) >= pListItems.Count)
-                    ListRows[i].ListInfo = null;
-                else
-                    ListRows[i].ListInfo = pListItems[ScrollIndex + i];
+                for (int i = 0; i < ListRows.Count; i++)
+                {
+                    if ((ScrollIndex + i) >= pListItems.Count)
+                        ListRows[i].ListInfo = null;
+                    else
+                        ListRows[i].ListInfo = pListItems[ScrollIndex + i];
 
-                ListRows[i].Top = (i * ListRow.CONTROL_HEIGHT) - (ListScroller.Value % ListRow.CONTROL_HEIGHT);
-                ListRows[i].BackColor = GetRowColor(ScrollIndex + i);
-                ListRows[i].Font = pFont;
-                ListRows[i].Visible = true;
-                ListRows[i].Width = ElementsPanel.Width;
-            }
-        }
+                    ListRows[i].Top = (i * ListRow.CONTROL_HEIGHT) - (ListScroller.Value % ListRow.CONTROL_HEIGHT);
+                    ListRows[i].BackColor = GetRowColor(ScrollIndex + i);
+                    ListRows[i].Font = pFont;
+                    ListRows[i].Visible = true;
+                    ListRows[i].Width = ElementsPanel.Width;
+                }
 
-        protected virtual void UpdateScrollBar()
-        {
-            int ScrollMax = (pListItems.Count * ListRow.CONTROL_HEIGHT) - ElementsPanel.Height;
-
-            if (ScrollMax >= 0)
-            {
-                ListScroller.Maximum = ScrollMax;
-                ListScroller.LargeChange = SCROLL_LARGE_CHANGE;
-                ListScroller.Visible = true;
-                List_Resize(this, EventArgs.Empty);
-            }
-            else
-            {
-                ListScroller.Maximum = 0;
-                ListScroller.Visible = false;
-                List_Resize(this, EventArgs.Empty);
+                bLayoutUpdating = false;
             }
         }
 
@@ -283,6 +276,30 @@ namespace WildMouse.SmoothControls
                     if (SelectedIndexChanged != null)
                         SelectedIndexChanged(this, EventArgs.Empty);
                 }
+            }
+        }
+
+        protected virtual void UpdateScrollBar()
+        {
+            if (! bScrollbarUpdating)
+            {
+                bScrollbarUpdating = true;
+
+                int ScrollMax = (pListItems.Count * ListRow.CONTROL_HEIGHT) - ElementsPanel.Height;
+
+                if (ScrollMax >= 0)
+                {
+                    ListScroller.Maximum = ScrollMax;
+                    ListScroller.LargeChange = SCROLL_LARGE_CHANGE;
+                    ListScroller.Visible = true;
+                }
+                else
+                {
+                    ListScroller.Maximum = 0;
+                    ListScroller.Visible = false;
+                }
+
+                bScrollbarUpdating = false;
             }
         }
 

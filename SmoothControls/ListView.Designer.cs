@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            WildMouse.SmoothControls.ListHeaderCollection listHeaderCollection13 = new WildMouse.SmoothControls.ListHeaderCollection();
+            WildMouse.SmoothControls.ListHeaderCollection listHeaderCollection1 = new WildMouse.SmoothControls.ListHeaderCollection();
             this.HeaderBar = new WildMouse.SmoothControls.ListHeader();
             this.SuspendLayout();
             // 
@@ -44,7 +44,7 @@
             // 
             // HeaderBar
             // 
-            this.HeaderBar.Headers = listHeaderCollection13;
+            this.HeaderBar.Headers = listHeaderCollection1;
             this.HeaderBar.Location = new System.Drawing.Point(0, 0);
             this.HeaderBar.Name = "HeaderBar";
             this.HeaderBar.Size = new System.Drawing.Size(160, 18);
