@@ -8,6 +8,8 @@ using System.Windows.Forms;
 
 namespace WildMouse.SmoothControls
 {
+    public delegate void CmdKeyPressedHandler(object sender, Keys Key);
+
     public interface IListRow
     {
         int Width { get; set; }
@@ -21,6 +23,10 @@ namespace WildMouse.SmoothControls
         bool Selected { get; set; }
         Color BackColor { get; set; }
         string Text { get; set; }
+        event System.EventHandler Click;
+        event CmdKeyPressedHandler CmdKeyPressed;
+        bool Visible { get; set; }
+        System.Windows.Forms.BorderStyle BorderStyle { get; set; }
     }
 
     internal interface ListComponent

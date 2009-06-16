@@ -19,10 +19,8 @@ namespace WildMouse.SmoothControls
         private Pen SeparatorPen;
         private Color pTextColor;
 
-        public delegate void CmdKeyPressedHandler(object sender, Keys Key);
-
         public new event System.EventHandler OnClick;
-        public event CmdKeyPressedHandler ArrowPressed;
+        public event CmdKeyPressedHandler CmdKeyPressed;
 
         public ListRow()
         {
@@ -177,8 +175,8 @@ namespace WildMouse.SmoothControls
 
         protected override bool ProcessCmdKey(ref System.Windows.Forms.Message m, Keys keyData)
         {
-            if (ArrowPressed != null)
-                ArrowPressed(this, keyData);
+            if (CmdKeyPressed != null)
+                CmdKeyPressed(this, keyData);
 
             return true;
         }

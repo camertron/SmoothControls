@@ -36,6 +36,8 @@ namespace WildMouse.SmoothControls
         private Font pFont;
         private int pFontSize;
 
+        public event CmdKeyPressedHandler CmdKeyPressed;
+
         public IconListRow()
         {
             InitializeComponent();
@@ -229,6 +231,14 @@ namespace WildMouse.SmoothControls
                 TextBrush.Color = SizeLbl.ForeColor;
                 InvalidateParent();
             }
+        }
+
+        protected override bool ProcessCmdKey(ref System.Windows.Forms.Message m, Keys keyData)
+        {
+            if (CmdKeyPressed != null)
+                CmdKeyPressed(this, keyData);
+
+            return true;
         }
     }
 }

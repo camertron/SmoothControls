@@ -22,6 +22,7 @@ namespace WildMouse.SmoothControls
         private Font pFont;
         private int pFontSize;
         private DBGraphics memGraphics;
+        public event CmdKeyPressedHandler CmdKeyPressed;
 
         public SimpleListRow()
         {
@@ -152,6 +153,14 @@ namespace WildMouse.SmoothControls
         public int ControlHeight
         {
             get { return CONTROL_HEIGHT; }
+        }
+
+        protected override bool ProcessCmdKey(ref System.Windows.Forms.Message m, Keys keyData)
+        {
+            if (CmdKeyPressed != null)
+                CmdKeyPressed(this, keyData);
+
+            return true;
         }
     }
 }

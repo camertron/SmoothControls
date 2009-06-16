@@ -33,6 +33,19 @@ namespace WildMouse.SmoothControls
             m_bUpdating = false;
         }
 
+        protected override void pRowControls_EntryAdded(object sender, EventArgs e)
+        {
+            RowEntryAdded();
+        }
+
+        protected override void pRowControls_EntryChanged(object sender, int EntryIndex, string OldValue)
+        {
+        }
+
+        protected override void pRowControls_EntryRemoved(object sender, int RemovedIndex)
+        {
+        }
+
         protected override void StringItemRemoved(int iIndex, string sItemText)
         {
             int iGroupIndex = TranslateChar(sItemText[0]);
@@ -72,24 +85,6 @@ namespace WildMouse.SmoothControls
             }
         }
 
-        protected override void RowEntryChanged(int ChangedIndex, string OldValue)
-        {
-            if (! m_bUpdating)
-            {
-                IListRow lrCurRow = (IListRow)ControlAtIndex(ChangedIndex);
-                int iIndex = TranslateChar(lrCurRow.Text[0]);
-
-                //change only if text has changed
-                if (!m_lrGroups[iIndex].Items.Contains(lrCurRow))
-                {
-                    m_lrGroups[TranslateChar(OldValue[0])].Items.Remove(lrCurRow);
-                    PlaceControl((Control)lrCurRow);
-                }
-
-                base.RowEntryChanged(ChangedIndex, OldValue);
-            }
-        }
-
         private void PlaceControl(Control ctrlToPlace)
         {
             if (ctrlToPlace.Text != "")
@@ -106,6 +101,24 @@ namespace WildMouse.SmoothControls
                     lrgCurGroup = m_lrGroups[iIndex];
 
                 lrgCurGroup.Items.Add((IListRow)ctrlToPlace);
+            }
+        }
+
+        protected override void RowEntryChanged(int ChangedIndex, string OldValue)
+        {
+            if (! m_bUpdating)
+            {
+                IListRow lrCurRow = (IListRow)ControlAtIndex(ChangedIndex);
+                int iIndex = TranslateChar(lrCurRow.Text[0]);
+
+                //change only if text has changed
+                if (!m_lrGroups[iIndex].Items.Contains(lrCurRow))
+                {
+                    m_lrGroups[TranslateChar(OldValue[0])].Items.Remove(lrCurRow);
+                    PlaceControl((Control)lrCurRow);
+                }
+
+                base.RowEntryChanged(ChangedIndex, OldValue);
             }
         }
 
@@ -131,7 +144,7 @@ namespace WildMouse.SmoothControls
 
             base.pRowControls.Clear();
 
-            for (int i = 0; i < m_lrGroups.Length; i ++)
+            for (int i = 0; i < m_lrGroups.Length; i++)
             {
                 //sort
                 if (m_lrGroups[i] != null)
@@ -156,6 +169,24 @@ namespace WildMouse.SmoothControls
             base.UpdateLayout();
             base.UpdateScrollBar();
             m_bUpdating = false;
+        }
+
+        protected override Color GetRowColor(int Index)
+        {
+            if (m_bUseRowColoring)
+            {
+                int iGroup = TranslateChar(ControlAtIndex(Index).Text[0]);
+                int iPos = m_lrGroups[iGroup].Items.IndexOf((IListRow)ControlAtIndex(Index));
+
+                if (Index == pSelectedIndex)
+                    return RowSelectedColor;
+                else if ((iPos % 2) == 0)
+                    return RowColor2;
+                else
+                    return RowColor1;
+            }
+            else
+                return this.BackColor;
         }
     }
 

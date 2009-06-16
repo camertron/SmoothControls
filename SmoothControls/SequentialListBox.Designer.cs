@@ -28,9 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ListScroller = new WildMouse.SmoothControls.VerticalScrollBar();
             this.ElementsPanel = new System.Windows.Forms.Panel();
+            this.ListScroller = new WildMouse.SmoothControls.VerticalScrollBar();
             this.SuspendLayout();
+            // 
+            // ElementsPanel
+            // 
+            this.ElementsPanel.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.ElementsPanel.Location = new System.Drawing.Point(3, 3);
+            this.ElementsPanel.Name = "ElementsPanel";
+            this.ElementsPanel.Size = new System.Drawing.Size(121, 100);
+            this.ElementsPanel.TabIndex = 1;
             // 
             // ListScroller
             // 
@@ -43,14 +51,6 @@
             this.ListScroller.SmallChange = 1;
             this.ListScroller.TabIndex = 0;
             this.ListScroller.Value = 0;
-            // 
-            // ElementsPanel
-            // 
-            this.ElementsPanel.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.ElementsPanel.Location = new System.Drawing.Point(3, 3);
-            this.ElementsPanel.Name = "ElementsPanel";
-            this.ElementsPanel.Size = new System.Drawing.Size(121, 100);
-            this.ElementsPanel.TabIndex = 1;
             // 
             // SequentialListBox
             // 
@@ -68,7 +68,7 @@
         #endregion
 
         private WildMouse.SmoothControls.VerticalScrollBar ListScroller;
-        private System.Windows.Forms.Panel ElementsPanel;
+        protected System.Windows.Forms.Panel ElementsPanel;
 
     }
 }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Collections;
+using System.Reflection;
 
 namespace WildMouse.SmoothControls
 {
@@ -48,6 +49,8 @@ namespace WildMouse.SmoothControls
             pRowControls.EntryAdded += new EventHandler(pRowControls_EntryAdded);
             pRowControls.EntryRemoved += new ListRowCollection.EntryRemovedHandler(pRowControls_EntryRemoved);
             pRowControls.EntryChanged += new ListRowCollection.EntryChangedHandler(pRowControls_EntryChanged);
+            pRowControls.EntryClicked += new ListRowCollection.EntryClickedHandler(pRowControls_EntryClicked);
+            pRowControls.CmdKeyPressed += new CmdKeyPressedHandler(pRowControls_CmdKeyPressed);
 
             ListScroller.Scroll += new ScrollEventHandler(ListScroller_Scroll);
 
@@ -66,12 +69,48 @@ namespace WildMouse.SmoothControls
             RowColor1 = Color.FromArgb(245, 245, 245);
         }
 
+        private void pRowControls_CmdKeyPressed(object sender, Keys Key)
+        {
+            if (Key == Keys.Up)
+            {
+                if (pSelectedIndex > 0)
+                {
+                    SelectedIndex --;
+
+                    if (CalcScrollIndex(pRowControls[pSelectedIndex]) >= pSelectedIndex)
+                    {
+                        ListScroller.Value = (SelectedIndex * ListRow.CONTROL_HEIGHT);
+                        UpdateLayout();
+                    }
+                }
+            }
+            else if (Key == Keys.Down)
+            {
+                if (pSelectedIndex < (pRowControls.Count - 1))
+                {
+                    SelectedIndex ++;
+                    ListScroller.Value = ((pSelectedIndex + 1) * ((IListRow)sender).ControlHeight) - ElementsPanel.Height;
+                    UpdateLayout();
+                }
+            }
+        }
+
+        protected virtual int CalcScrollIndex(object objListItem)
+        {
+            return (int)Math.Floor((double)ListScroller.Value / (double)((IListRow)objListItem).ControlHeight);
+        }
+
+        private void pRowControls_EntryClicked(object sender, int EntryIndex)
+        {
+            SelectedIndex = EntryIndex;
+        }
+
         public bool UseRowColoring
         {
             get { return m_bUseRowColoring; }
             set { m_bUseRowColoring = value; }
         }
-
+        
         public StringCollectionWithEvents Items
         {
             get { return m_scItems; }
@@ -123,16 +162,21 @@ namespace WildMouse.SmoothControls
             get { return pSelectedIndex; }
             set
             {
-                if (pSelectedIndex > -1)
-                    pRowControls[pSelectedIndex].Selected = false;
+                if (value != pSelectedIndex)
+                {
+                    if (pSelectedIndex > -1)
+                        pRowControls[pSelectedIndex].Selected = false;
 
-                pSelectedIndex = value;
+                    pSelectedIndex = value;
 
-                if (pSelectedIndex > -1)
-                    pRowControls[pSelectedIndex].Selected = true;
+                    if (pSelectedIndex > -1)
+                        pRowControls[pSelectedIndex].Selected = true;
 
-                if (SelectedIndexChanged != null)
-                    SelectedIndexChanged(this, EventArgs.Empty);
+                    if (SelectedIndexChanged != null)
+                        SelectedIndexChanged(this, EventArgs.Empty);
+
+                    UpdateLayout();
+                }
             }
         }
 
@@ -147,17 +191,17 @@ namespace WildMouse.SmoothControls
             get { return pRowControls; }
         }
 
-        private void pRowControls_EntryChanged(object sender, int EntryIndex, string OldValue)
+        protected virtual void pRowControls_EntryChanged(object sender, int EntryIndex, string OldValue)
         {
             RowEntryChanged(EntryIndex, OldValue);
         }
 
-        private void pRowControls_EntryAdded(object sender, EventArgs e)
+        protected virtual void pRowControls_EntryAdded(object sender, EventArgs e)
         {
             RowEntryAdded();
         }
 
-        private void pRowControls_EntryRemoved(object sender, int RemovedIndex)
+        protected virtual void pRowControls_EntryRemoved(object sender, int RemovedIndex)
         {
             RowEntryRemoved(RemovedIndex);
         }
@@ -189,12 +233,6 @@ namespace WildMouse.SmoothControls
         protected void HookUpRow(Control ToHookUp)
         {
             ElementsPanel.Controls.Add(ToHookUp);
-            ToHookUp.Click += new EventHandler(ListEntry_Click);
-        }
-
-        private void ListEntry_Click(object sender, EventArgs e)
-        {
-            SelectedIndex = pRowControls.IndexOf((IListRow)sender);
         }
 
         private void ListScroller_Scroll(object sender, ScrollEventArgs e)
@@ -318,10 +356,13 @@ namespace WildMouse.SmoothControls
 
         public delegate void EntryChangedHandler(object sender, int EntryIndex, string OldText);
         public delegate void EntryRemovedHandler(object sender, int RemovedIndex);
+        public delegate void EntryClickedHandler(object sender, int EntryIndex);
         public event System.EventHandler EntryAdded;
         public event EntryRemovedHandler EntryRemoved;
         public event EntryChangedHandler EntryChanged;
         public event System.EventHandler EntriesCleared;
+        public event EntryClickedHandler EntryClicked;
+        public event CmdKeyPressedHandler CmdKeyPressed;
 
         public ListRowCollection() { Items = new List<IListRow>(); }
 
@@ -357,8 +398,27 @@ namespace WildMouse.SmoothControls
         {
             Items.Add(NewItem);
 
+            Attach(NewItem);
+
             if (EntryAdded != null)
                 EntryAdded(this, EventArgs.Empty);
+        }
+
+        public void AddAgain(IListRow NewItem)
+        {
+            Items.Add(NewItem);
+        }
+
+        private void Entry_CmdKeyPressed(object sender, Keys Key)
+        {
+            if (CmdKeyPressed != null)
+                CmdKeyPressed(sender, Key);
+        }
+
+        private void Entry_Click(object sender, EventArgs e)
+        {
+            if (EntryClicked != null)
+                EntryClicked(sender, Items.IndexOf((IListRow)sender));
         }
 
         public void RemoveAt(int Index)
@@ -371,7 +431,20 @@ namespace WildMouse.SmoothControls
 
         public void Remove(IListRow ToRemove)
         {
+            Detach(ToRemove);
             Items.Remove(ToRemove);
+        }
+
+        private void Attach(IListRow ToAttach)
+        {
+            ToAttach.Click += new EventHandler(Entry_Click);
+            ToAttach.CmdKeyPressed += new CmdKeyPressedHandler(Entry_CmdKeyPressed);
+        }
+
+        private void Detach(IListRow ToDetach)
+        {
+            ToDetach.CmdKeyPressed -= new CmdKeyPressedHandler(Entry_CmdKeyPressed);
+            ToDetach.Click -= new EventHandler(Entry_Click);
         }
 
         public IListRow this[int Index]
@@ -389,6 +462,9 @@ namespace WildMouse.SmoothControls
 
         public void Clear()
         {
+            for (int i = 0; i < Items.Count; i++)
+                Detach(Items[i]);
+
             Items.Clear();
 
             if (EntriesCleared != null)

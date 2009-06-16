@@ -34,12 +34,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.DoubleBuffered = true;
             this.Name = "AlphaListBox";
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
     }
 }

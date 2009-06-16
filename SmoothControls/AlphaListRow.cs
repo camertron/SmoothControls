@@ -29,6 +29,8 @@ namespace WildMouse.SmoothControls
         private SolidBrush TextBrush;
         private PrivateFontCollection pfc;
 
+        public event CmdKeyPressedHandler CmdKeyPressed;
+
         public AlphaListRow()
         {
             InitializeComponent();
@@ -127,6 +129,14 @@ namespace WildMouse.SmoothControls
         private void CreateDoubleBuffer()
         {
             memGraphics.CreateDoubleBuffer(this.CreateGraphics(), this.ClientRectangle.Width, this.ClientRectangle.Height);
+        }
+
+        protected override bool ProcessCmdKey(ref System.Windows.Forms.Message m, Keys keyData)
+        {
+            if (CmdKeyPressed != null)
+                CmdKeyPressed(this, keyData);
+
+            return true;
         }
     }
 }

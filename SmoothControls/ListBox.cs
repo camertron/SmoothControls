@@ -219,7 +219,7 @@ namespace WildMouse.SmoothControls
                     for (int i = 0; i < MaxVisibleRows; i++)
                     {
                         NewRow = new ListRow();
-                        NewRow.ArrowPressed += new ListRow.CmdKeyPressedHandler(Row_ArrowPressed);
+                        NewRow.CmdKeyPressed += new CmdKeyPressedHandler(Row_ArrowPressed);
                         NewRow.OnClick += new EventHandler(Row_OnClick);
                         NewRow.Width = this.Width;
                         NewRow.Left = 0;
