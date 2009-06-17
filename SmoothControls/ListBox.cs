@@ -205,7 +205,7 @@ namespace WildMouse.SmoothControls
 
         protected virtual void UpdateLayout()
         {
-            if (!bLayoutUpdating)
+            if (! bLayoutUpdating)
             {
                 bLayoutUpdating = true;
 
@@ -316,8 +316,8 @@ namespace WildMouse.SmoothControls
             ElementsPanel.Height = this.Height - (ElementsPanel.Top + 1);
             ElementsPanel.Left = 1;
 
-            for (int i = 0; i < pListItems.Count; i ++)
-                pListItems[i].Width = ElementsPanel.Width;
+            for (int i = 0; i < ListRows.Count; i ++)
+                ListRows[i].Width = ElementsPanel.Width;
         }
 
         protected virtual void List_Paint(object sender, PaintEventArgs e)

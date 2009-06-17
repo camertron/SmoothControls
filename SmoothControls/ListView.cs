@@ -29,6 +29,7 @@ namespace WildMouse.SmoothControls
             pListItems.EntriesCleared += new EventHandler(ListItems_EntriesCleared);
             pListItems.EntryAdded += new EventHandler(ListItems_EntryAdded);
             pListItems.EntryRemoved += new EventHandler(ListItems_EntryRemoved);
+            //pListItems.EntryChanged += new ListViewItemCollection.EntryChangedHandler(pListItems_EntryChanged);
 
             pListItems.SubEntryAdded += new ListViewItemCollection.EntryChangedHandler(pListItems_SubEntryAdded);
             pListItems.SubEntryRemoved += new ListViewItemCollection.EntryChangedHandler(pListItems_SubEntryRemoved);
@@ -56,6 +57,12 @@ namespace WildMouse.SmoothControls
             base.List_Resize(this, EventArgs.Empty);
         }
 
+        //private void pListItems_EntryChanged(object sender, int EntryIndex)
+        //{
+            //for (int i = 0; i < ListRows.Count; i++)
+                //ListRows[i].UpdateLayout();
+        //}
+
         private void pListItems_SubItemsCleared(object sender, int EntryIndex)
         {
             UpdateLayout();
@@ -71,6 +78,7 @@ namespace WildMouse.SmoothControls
         private void pListItems_SubEntryAdded(object sender, int EntryIndex)
         {
             UpdateLayout();
+            UpdateRowWidths();
             base.UpdateScrollBar();
             List_Resize(this, EventArgs.Empty);
         }
@@ -82,28 +90,33 @@ namespace WildMouse.SmoothControls
             {
                 HeaderBar.Headers = value;
 
-                ListComponent CurComponent;
-
-                for (int i = 0; i < pListItems.Count; i ++)
-                {
-                    for (int c = 0; c < Headers.Count; c ++)
-                    {
-                        if (c == 0)
-                            CurComponent = pListItems[i];
-                        else
-                        {
-                            if (pListItems[i].SubItems.Count > (c - 1))
-                                CurComponent = pListItems[i].SubItems[c - 1];
-                            else
-                                CurComponent = null;
-                        }
-
-                        if (CurComponent != null)
-                            CurComponent.Width = Headers[c].Width;
-                    }
-                }
+                UpdateRowWidths();
 
                 HeaderBar.Invalidate();
+            }
+        }
+
+        private void UpdateRowWidths()
+        {
+            ListComponent CurComponent;
+
+            for (int i = 0; i < pListItems.Count; i++)
+            {
+                for (int c = 0; c < Headers.Count; c++)
+                {
+                    if (c == 0)
+                        CurComponent = pListItems[i];
+                    else
+                    {
+                        if (pListItems[i].SubItems.Count > (c - 1))
+                            CurComponent = pListItems[i].SubItems[c - 1];
+                        else
+                            CurComponent = null;
+                    }
+
+                    if (CurComponent != null)
+                        CurComponent.Width = Headers[c].Width;
+                }
             }
         }
 
@@ -124,10 +137,13 @@ namespace WildMouse.SmoothControls
                     CurComponent.Width = Headers[Index].Width;
             }
 
-            for (int s = 0; s < pListItems[Index].SubItems.Count; s ++)
+            if (pListItems.Count > Index)
             {
-                if (Headers.Count > (s + 1))
-                    pListItems[Index].SubItems[s].Width = Headers[s + 1].Width;
+                for (int s = 0; s < pListItems[Index].SubItems.Count; s++)
+                {
+                    if (Headers.Count > (s + 1))
+                        pListItems[Index].SubItems[s].Width = Headers[s + 1].Width;
+                }
             }
 
             UpdateLayout();
@@ -166,9 +182,10 @@ namespace WildMouse.SmoothControls
 
         protected override void ListItems_EntryAdded(object sender, EventArgs e)
         {
+            UpdateLayout();
+            UpdateRowWidths();
             base.UpdateScrollBar();
             List_Resize(this, EventArgs.Empty);
-            UpdateLayout();
         }
 
         protected override void ListItems_EntriesCleared(object sender, EventArgs e)
@@ -192,11 +209,6 @@ namespace WildMouse.SmoothControls
                 if (HeaderBar != null)
                     HeaderBar.Font = pFont;
             }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            ListScroller.BringToFront();
         }
     }
 }

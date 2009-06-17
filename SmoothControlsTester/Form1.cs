@@ -34,6 +34,22 @@ namespace SmoothControlsTester
             //WildMouse.SmoothControls.MessageBox.Show(this, "Cameron Rules", "Important Message", MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Information);
             //horizontalSlider1.Value = 25;
 
+            WildMouse.SmoothControls.ListHeaderClass CurHeader;
+            WildMouse.SmoothControls.ListHeaderCollection Headers = new WildMouse.SmoothControls.ListHeaderCollection();
+
+            for (int i = 0; i < 3; i++)
+            {
+                CurHeader = new WildMouse.SmoothControls.ListHeaderClass();
+                CurHeader.Text = "Header " + i.ToString();
+                CurHeader.Width = 70;
+                CurHeader.TextAlign = ContentAlignment.MiddleCenter;
+                Headers.Add(CurHeader);
+            }
+
+            //listViewHeader1.Headers = Headers;
+
+            listView1.Headers = Headers;
+
             WildMouse.SmoothControls.ListItem Item;
             WildMouse.SmoothControls.ListSubItem SubItem;
 
@@ -54,21 +70,6 @@ namespace SmoothControlsTester
                 Counter ++;
             //}
 
-            WildMouse.SmoothControls.ListHeaderClass CurHeader;
-            WildMouse.SmoothControls.ListHeaderCollection Headers = new WildMouse.SmoothControls.ListHeaderCollection();
-
-            for (int i = 0; i < 3; i++)
-            {
-                CurHeader = new WildMouse.SmoothControls.ListHeaderClass();
-                CurHeader.Text = "Header " + i.ToString();
-                CurHeader.Width = 70;
-                CurHeader.TextAlign = ContentAlignment.MiddleCenter;
-                Headers.Add(CurHeader);
-            }
-
-            //listViewHeader1.Headers = Headers;
-
-            listView1.Headers = Headers;
         }
 
         private void button1_Click(object sender, EventArgs e)
