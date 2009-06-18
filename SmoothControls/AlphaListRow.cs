@@ -27,7 +27,6 @@ namespace WildMouse.SmoothControls
         private Font pFont;
         private int pFontSize;
         private SolidBrush TextBrush;
-        private PrivateFontCollection pfc;
 
         public event CmdKeyPressedHandler CmdKeyPressed;
 
@@ -53,16 +52,10 @@ namespace WildMouse.SmoothControls
             GradientFinish = Color.FromArgb(160, 160, 160);
 
             pFontSize = 10;
-            MakeFont();
+            pFont = FontVault.GetFontVault().GetFont(FontVault.AvailableFonts.MyriadPro, pFontSize);
             TextBrush = new SolidBrush(Color.Black);
 
             UpdateGradients();
-        }
-
-        private void MakeFont()
-        {
-            pfc = General.PrepFont("MyriadPro-Regular.ttf");
-            pFont = new Font(pfc.Families[0], pFontSize);
         }
 
         [EditorBrowsable(EditorBrowsableState.Always)]

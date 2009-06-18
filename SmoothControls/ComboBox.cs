@@ -22,7 +22,6 @@ namespace WildMouse.SmoothControls
         private Color GradientFinish;
         private Color[] GradientColors;
         private Pen GradientPen;
-        private PrivateFontCollection pfc;
         private Font pFont;
         private int pFontSize;
         private Color TextColor;
@@ -88,10 +87,8 @@ namespace WildMouse.SmoothControls
 
             UpdateRegion();
 
-            pfc = General.PrepFont("MyriadPro-Regular.ttf");
             pFontSize = 10;
-
-            pFont = new Font(pfc.Families[0], pFontSize);
+            pFont = FontVault.GetFontVault().GetFont(FontVault.AvailableFonts.MyriadPro, pFontSize);
             MeasureLbl.Font = pFont;
 
             TextColor = Color.Black;

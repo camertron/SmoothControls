@@ -32,7 +32,6 @@ namespace WildMouse.SmoothControls
         private Pen BorderPen;
         private Pen HighlightPen;
         private SolidBrush TextBrush;
-        private PrivateFontCollection pfc;
         private Pen FocusDashedLine;
         private Bitmap m_bmpIcon;
 
@@ -76,7 +75,7 @@ namespace WildMouse.SmoothControls
             m_fDiameter = 0;
 
             pFontSize = 10;
-            MakeFont();
+            pFont = FontVault.GetFontVault().GetFont(FontVault.AvailableFonts.MyriadPro, pFontSize);
             SizeLbl.Font = pFont;
             SizeLbl.Text = "Round Button";
             SizeLbl.TextAlign = ContentAlignment.MiddleCenter;
@@ -171,16 +170,10 @@ namespace WildMouse.SmoothControls
             this.Region = new System.Drawing.Region(FormRegion);
         }
 
-        private void MakeFont()
-        {
-            pfc = General.PrepFont("MyriadPro-Regular.ttf");
-            pFont = new Font(pfc.Families[0], pFontSize);
-        }
-
         private void RoundButton_Click(object sender, EventArgs e)
         {
-            //if (Click != null)
-                //Click(this, EventArgs.Empty);
+            if (Click != null)
+                Click(this, EventArgs.Empty);
         }
 
         private void UpdateGradients()
@@ -199,7 +192,7 @@ namespace WildMouse.SmoothControls
             set
             {
                 pFontSize = value;
-                MakeFont();
+                pFont = FontVault.GetFontVault().GetFont(FontVault.AvailableFonts.MyriadPro, pFontSize);
                 SizeLbl.Font = pFont;
                 InvalidateParent();
             }
@@ -285,8 +278,8 @@ namespace WildMouse.SmoothControls
             if (MouseDown != null)
                 MouseDown(this, e);
 
-            if (Click != null)
-                Click(this, EventArgs.Empty);
+            //if (Click != null)
+                //Click(this, EventArgs.Empty);
         }
 
         private void RoundButton_MouseUp(object sender, MouseEventArgs e)

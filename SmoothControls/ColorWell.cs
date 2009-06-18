@@ -39,8 +39,8 @@ namespace WildMouse.SmoothControls
 
             FillBrush = new SolidBrush(Color.Black);
 
-            Diameter = 10.0f;
-            Radius = 5.0f;
+            Diameter = 8.0f;
+            Radius = 4.0f;
         }
 
         private void ColorTxt_TextChanged(object sender, EventArgs e)
@@ -117,7 +117,7 @@ namespace WildMouse.SmoothControls
 
         private void ColorWell_Resize(object sender, EventArgs e)
         {
-            this.Width = CONTROL_WIDTH;
+            ColorTxt.Width = this.Width - ColorTxt.Left;
             this.Height = CONTROL_HEIGHT;
         }
 

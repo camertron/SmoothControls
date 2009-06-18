@@ -178,12 +178,14 @@
             // 
             this.smoothLabel2.Bold = false;
             this.smoothLabel2.FontSize = 10;
+            this.smoothLabel2.Italic = false;
             this.smoothLabel2.Location = new System.Drawing.Point(35, 99);
             this.smoothLabel2.Name = "smoothLabel2";
             this.smoothLabel2.Size = new System.Drawing.Size(269, 25);
             this.smoothLabel2.TabIndex = 5;
             this.smoothLabel2.Text = "smoothLabel2";
             this.smoothLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.smoothLabel2.TextColor = System.Drawing.Color.Black;
             // 
             // listViewRow1
             // 
@@ -209,19 +211,21 @@
             this.colorWell1.DisplayColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.colorWell1.Location = new System.Drawing.Point(159, 12);
             this.colorWell1.Name = "colorWell1";
-            this.colorWell1.Size = new System.Drawing.Size(160, 29);
+            this.colorWell1.Size = new System.Drawing.Size(166, 29);
             this.colorWell1.TabIndex = 1;
             // 
             // smoothLabel1
             // 
             this.smoothLabel1.Bold = true;
             this.smoothLabel1.FontSize = 10;
+            this.smoothLabel1.Italic = false;
             this.smoothLabel1.Location = new System.Drawing.Point(23, 26);
             this.smoothLabel1.Name = "smoothLabel1";
             this.smoothLabel1.Size = new System.Drawing.Size(100, 29);
             this.smoothLabel1.TabIndex = 0;
             this.smoothLabel1.Text = "Cameron";
             this.smoothLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.smoothLabel1.TextColor = System.Drawing.Color.Black;
             // 
             // Form2
             // 

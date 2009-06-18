@@ -33,7 +33,6 @@ namespace WildMouse.SmoothControls
         private Color GradientStart;
         private Color GradientFinish;
         private Color[] GradientColors;
-        private PrivateFontCollection pfc;
 
         private float TabDiameter;
         private float TabRadius;
@@ -78,9 +77,8 @@ namespace WildMouse.SmoothControls
             TabDiameter = 10.0f;
             TabRadius = 5.0f;
 
-            pfc = General.PrepFont("MyriadPro-Regular.ttf");
             pFontSize = 10;
-            pFont = new Font(pfc.Families[0], pFontSize);
+            pFont = FontVault.GetFontVault().GetFont(FontVault.AvailableFonts.MyriadPro, pFontSize);
             MeasureLbl.Font = pFont;
 
             BodyFillColor = Color.White;

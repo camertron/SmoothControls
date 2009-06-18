@@ -14,7 +14,7 @@ namespace WildMouse.SmoothControls
     {
         private Font pFont;
         private int pFontSize;
-        private PrivateFontCollection pfc;
+        //private PrivateFontCollection pfc;
         private Color pTextColor;
         private SolidBrush TextBrush;
         private string pText;
@@ -36,9 +36,8 @@ namespace WildMouse.SmoothControls
             pTextColor = Color.Black;
             TextBrush = new SolidBrush(pTextColor);
 
-            pfc = General.PrepFont("MyriadPro-Regular.ttf");
             pFontSize = 10;
-            pFont = new Font(pfc.Families[0], pFontSize);
+            pFont = FontVault.GetFontVault().GetFont(FontVault.AvailableFonts.MyriadPro, pFontSize);
             MeasureLbl.Font = pFont;
 
             pTextAlign = ContentAlignment.TopLeft;
@@ -85,7 +84,8 @@ namespace WildMouse.SmoothControls
             else
                 FinalStyle = FontStyle.Bold;
 
-            pFont = new Font(pfc.Families[0], pFontSize, FinalStyle);
+            pFont = FontVault.GetFontVault().GetFont(FontVault.AvailableFonts.MyriadPro, pFontSize);
+            pFont = new Font(pFont.FontFamily, pFontSize, FinalStyle);
         }
 
         [EditorBrowsable(EditorBrowsableState.Always)]

@@ -25,7 +25,6 @@ namespace WildMouse.SmoothControls
         protected Color RowSelectedColor;
         protected Color RowColor1;
         protected Color RowColor2;
-        protected PrivateFontCollection pfc;
         protected int pFontSize;
         protected SolidBrush TextBrush;
         protected Color pTextColor;
@@ -58,7 +57,7 @@ namespace WildMouse.SmoothControls
             RowColor1 = Color.FromArgb(245, 245, 245);
 
             pFontSize = 9;
-            MakeFont();
+            pFont = FontVault.GetFontVault().GetFont(FontVault.AvailableFonts.MyriadPro, pFontSize);
             TextBrush = new SolidBrush(Color.Black);
 
             pListItems = new ListViewItemCollection();
@@ -90,19 +89,6 @@ namespace WildMouse.SmoothControls
             this.Parent.Invalidate(rc, true);
         }
 
-        protected virtual void MakeFont()
-        {
-            if (pfc != null)
-            {
-                pfc.Families[0].Dispose();
-                pfc.Dispose();
-                pFont.Dispose();
-            }
-
-            pfc = General.PrepFont("MyriadPro-Regular.ttf");
-            pFont = new Font(pfc.Families[0], pFontSize);
-        }
-
         [EditorBrowsable(EditorBrowsableState.Always)]
         [Browsable(true)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
@@ -113,7 +99,7 @@ namespace WildMouse.SmoothControls
             set
             {
                 pFontSize = value;
-                MakeFont();
+                pFont = FontVault.GetFontVault().GetFont(FontVault.AvailableFonts.MyriadPro, pFontSize);
                 InvalidateParent();
             }
         }
@@ -183,6 +169,7 @@ namespace WildMouse.SmoothControls
 
         protected virtual void ListItems_EntriesCleared(object sender, EventArgs e)
         {
+            SelectedIndex = -1;
             UpdateScrollBar();
             List_Resize(this, EventArgs.Empty);
             UpdateLayout();

@@ -29,25 +29,27 @@
         private void InitializeComponent()
         {
             this.ColorPanel = new System.Windows.Forms.Panel();
-            this.ColorTxt = new WildMouse.SmoothControls.TextBox();
             this.ColorPickerDlg = new System.Windows.Forms.ColorDialog();
+            this.ColorTxt = new WildMouse.SmoothControls.TextBox();
             this.SuspendLayout();
             // 
             // ColorPanel
             // 
             this.ColorPanel.Location = new System.Drawing.Point(3, 3);
             this.ColorPanel.Name = "ColorPanel";
-            this.ColorPanel.Size = new System.Drawing.Size(77, 23);
+            this.ColorPanel.Size = new System.Drawing.Size(26, 23);
             this.ColorPanel.TabIndex = 0;
             // 
             // ColorTxt
             // 
             this.ColorTxt.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.ColorTxt.Location = new System.Drawing.Point(85, 3);
+            this.ColorTxt.Location = new System.Drawing.Point(35, 3);
             this.ColorTxt.MaxLength = 6;
             this.ColorTxt.Multiline = false;
             this.ColorTxt.Name = "ColorTxt";
-            this.ColorTxt.Size = new System.Drawing.Size(70, 23);
+            this.ColorTxt.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.ColorTxt.ShowBorder = true;
+            this.ColorTxt.Size = new System.Drawing.Size(120, 23);
             this.ColorTxt.TabIndex = 1;
             // 
             // ColorWell

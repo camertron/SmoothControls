@@ -26,7 +26,6 @@ namespace WildMouse.SmoothControls
         private Color GradientFinish;
         private Pen GradientPen;
         private SolidBrush TextBrush;
-        private PrivateFontCollection pfc;
         private Bitmap pIcon;
         private bool bSelected;
         private SolidBrush BackBrush;
@@ -61,7 +60,7 @@ namespace WildMouse.SmoothControls
             
             //figure out font stuff
             pFontSize = 10;
-            MakeFont();
+            pFont = FontVault.GetFontVault().GetFont(FontVault.AvailableFonts.MyriadPro, pFontSize);
             SizeLbl.Font = pFont;
             SizeLbl.Text = "FatListViewRow";
             SizeLbl.TextAlign = ContentAlignment.MiddleCenter;
@@ -117,12 +116,6 @@ namespace WildMouse.SmoothControls
         private void CreateDoubleBuffer()
         {
             memGraphics.CreateDoubleBuffer(this.CreateGraphics(), this.ClientRectangle.Width, this.ClientRectangle.Height);
-        }
-
-        private void MakeFont()
-        {
-            pfc = General.PrepFont("MyriadPro-Regular.ttf");
-            pFont = new Font(pfc.Families[0], pFontSize);
         }
 
         private void FatListViewRow_Paint(object sender, PaintEventArgs e)
@@ -184,7 +177,7 @@ namespace WildMouse.SmoothControls
             set
             {
                 pFontSize = value;
-                MakeFont();
+                pFont = FontVault.GetFontVault().GetFont(FontVault.AvailableFonts.MyriadPro, pFontSize);
                 SizeLbl.Font = pFont;
                 InvalidateParent();
             }

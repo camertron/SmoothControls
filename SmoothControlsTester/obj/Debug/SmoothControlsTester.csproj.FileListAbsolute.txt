@@ -7,8 +7,8 @@ C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControlsTester\bin\Debug\SmoothCo
 C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControlsTester\obj\Debug\ResolveAssemblyReference.cache
 C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControlsTester\obj\Debug\SmoothControlsTester.Form1.resources
 C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControlsTester\obj\Debug\SmoothControlsTester.Form2.resources
+C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControlsTester\obj\Debug\SmoothControlsTester.Form3.resources
 C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControlsTester\obj\Debug\SmoothControlsTester.Properties.Resources.resources
 C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControlsTester\obj\Debug\SmoothControlsTester.csproj.GenerateResource.Cache
 C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControlsTester\obj\Debug\SmoothControlsTester.exe
 C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControlsTester\obj\Debug\SmoothControlsTester.pdb
-C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControlsTester\obj\Debug\SmoothControlsTester.Form3.resources

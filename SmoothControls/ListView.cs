@@ -29,7 +29,7 @@ namespace WildMouse.SmoothControls
             pListItems.EntriesCleared += new EventHandler(ListItems_EntriesCleared);
             pListItems.EntryAdded += new EventHandler(ListItems_EntryAdded);
             pListItems.EntryRemoved += new EventHandler(ListItems_EntryRemoved);
-            //pListItems.EntryChanged += new ListViewItemCollection.EntryChangedHandler(pListItems_EntryChanged);
+            pListItems.EntryChanged += new ListViewItemCollection.EntryChangedHandler(pListItems_EntryChanged);
 
             pListItems.SubEntryAdded += new ListViewItemCollection.EntryChangedHandler(pListItems_SubEntryAdded);
             pListItems.SubEntryRemoved += new ListViewItemCollection.EntryChangedHandler(pListItems_SubEntryRemoved);
@@ -50,18 +50,18 @@ namespace WildMouse.SmoothControls
             RowColor2 = Color.FromArgb(245, 245, 245);
 
             pFontSize = 9;
-            MakeFont();
+            pFont = FontVault.GetFontVault().GetFont(FontVault.AvailableFonts.MyriadPro, pFontSize);
             TextBrush = new SolidBrush(Color.Black);
 
             UpdateLayout();
             base.List_Resize(this, EventArgs.Empty);
         }
 
-        //private void pListItems_EntryChanged(object sender, int EntryIndex)
-        //{
+        private void pListItems_EntryChanged(object sender, int EntryIndex)
+        {
             //for (int i = 0; i < ListRows.Count; i++)
-                //ListRows[i].UpdateLayout();
-        //}
+                ListRows[EntryIndex].UpdateLayout();
+        }
 
         private void pListItems_SubItemsCleared(object sender, int EntryIndex)
         {

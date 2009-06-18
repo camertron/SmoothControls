@@ -29,7 +29,6 @@ namespace WildMouse.SmoothControls
         private Pen BorderPen;
         private Color pTextColor;
         private SolidBrush TextBrush;
-        private PrivateFontCollection pfc;
         private Color CheckColor;
         private Pen CheckPen;
 
@@ -48,10 +47,8 @@ namespace WildMouse.SmoothControls
         {
             InitializeComponent();
 
-            pfc = General.PrepFont("MyriadPro-Regular.ttf");
             pFontSize = 10;
-
-            pFont = new Font(pfc.Families[0], pFontSize);
+            pFont = FontVault.GetFontVault().GetFont(FontVault.AvailableFonts.MyriadPro, pFontSize);
 
             this.Paint += new PaintEventHandler(CheckBox_Paint);
             this.Resize += new EventHandler(CheckBox_Resize);

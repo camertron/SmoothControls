@@ -30,7 +30,6 @@ namespace WildMouse.SmoothControls
         private Pen GradientPen;
         private float Diameter;
         private float Radius;
-        private PrivateFontCollection pfc;
         private int pFontSize;
         private Font pFont;
         private StringCollection pItems;
@@ -79,10 +78,8 @@ namespace WildMouse.SmoothControls
             UpdateGradients();
             GradientColors = PGradientColors;
 
-            pfc = General.PrepFont("MyriadPro-Regular.ttf");
             pFontSize = 10;
-
-            pFont = new Font(pfc.Families[0], pFontSize);
+            pFont = FontVault.GetFontVault().GetFont(FontVault.AvailableFonts.MyriadPro, pFontSize);
             MeasureLbl.Font = pFont;
 
             pItems = new StringCollection();

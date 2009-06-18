@@ -14,7 +14,6 @@ namespace WildMouse.SmoothControls
     [DefaultEvent("TextChanged")]
     public partial class TextBox : UserControl
     {
-        private PrivateFontCollection pfc;
         private Color StartColor;
         private Color FinishColor;
         private Color[] BorderColors;
@@ -50,10 +49,8 @@ namespace WildMouse.SmoothControls
             TextField.TextChanged += new EventHandler(TextField_TextChanged);
             TextField.KeyPress += new KeyPressEventHandler(TextField_KeyPress);
 
-            pfc = General.PrepFont("MyriadPro-Regular.ttf");
             pFontSize = 10;
-
-            pFont = new Font(pfc.Families[0], pFontSize);
+            pFont = FontVault.GetFontVault().GetFont(FontVault.AvailableFonts.MyriadPro, pFontSize);
             TextField.Font = pFont;
 
             StartColor = Color.FromArgb(230, 230, 230);

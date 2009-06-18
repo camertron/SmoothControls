@@ -146,6 +146,7 @@ namespace WildMouse.SmoothControls
                 for (int i = 0; i <= (pListInfo.SubItems.Count) - LabelCount; i ++)
                 {
                     CurLbl = new SmoothLabel();
+                    CurLbl.Click += new System.EventHandler(DisplayLbl_Click);
                     CurLbl.AutoSize = false;
                     this.Controls.Add(CurLbl);
                     DisplayLabels.Add(CurLbl);
@@ -161,7 +162,6 @@ namespace WildMouse.SmoothControls
 
                 CurLbl = (SmoothLabel)DisplayLabels[i];
                 CurLbl.ForeColor = pTextColor;
-                CurLbl.Click += new System.EventHandler(DisplayLbl_Click);
                 CurLbl.Text = CurComponent.Text;
                 CurLbl.TextAlign = CurComponent.TextAlign;
                 CurLbl.Height = CONTROL_HEIGHT;

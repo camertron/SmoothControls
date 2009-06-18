@@ -18,7 +18,6 @@ namespace WildMouse.SmoothControls
         private const int CONTROL_HEIGHT = 17;
 
         private SolidBrush TextBrush;
-        private PrivateFontCollection pfc;
         private Font pFont;
         private int pFontSize;
         private DBGraphics memGraphics;
@@ -37,7 +36,7 @@ namespace WildMouse.SmoothControls
             this.Paint += new PaintEventHandler(SimpleListRow_Paint);
 
             pFontSize = 10;
-            MakeFont();
+            pFont = FontVault.GetFontVault().GetFont(FontVault.AvailableFonts.MyriadPro, pFontSize);
             SizeLbl.Font = pFont;
             SizeLbl.Text = "Round Button";
             SizeLbl.TextAlign = ContentAlignment.MiddleCenter;
@@ -60,12 +59,6 @@ namespace WildMouse.SmoothControls
         private void CreateDoubleBuffer()
         {
             memGraphics.CreateDoubleBuffer(this.CreateGraphics(), this.ClientRectangle.Width, this.ClientRectangle.Height);
-        }
-
-        private void MakeFont()
-        {
-            pfc = General.PrepFont("MyriadPro-Regular.ttf");
-            pFont = new Font(pfc.Families[0], pFontSize);
         }
 
         private void SimpleListRow_Paint(object sender, PaintEventArgs e)
@@ -95,7 +88,7 @@ namespace WildMouse.SmoothControls
             set
             {
                 pFontSize = value;
-                MakeFont();
+                pFont = FontVault.GetFontVault().GetFont(FontVault.AvailableFonts.MyriadPro, pFontSize);
                 SizeLbl.Font = pFont;
                 InvalidateParent();
             }

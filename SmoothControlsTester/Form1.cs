@@ -74,7 +74,9 @@ namespace SmoothControlsTester
 
         private void button1_Click(object sender, EventArgs e)
         {
-            listView1.Width += 10;
+            workingIndicator1.AnimateOn();
+            //smoothLabel2.FontSize = 12;
+            //listView1.Width += 10;
             //listView1.Headers[0].Width = 100;
             //listView1.Headers[0].Text = "Ender!";
 

@@ -15,7 +15,6 @@ namespace WildMouse.SmoothControls
     [Designer("System.Windows.Forms.Design.ParentControlDesigner, System.Design", typeof(IDesigner))]
     public partial class SmoothGroupBox : UserControl
     {
-        private PrivateFontCollection pfc;
         private Font pFont;
         private int pFontSize;
 
@@ -47,9 +46,8 @@ namespace WildMouse.SmoothControls
             this.Paint += new PaintEventHandler(SmoothGroupBox_Paint);
             this.Resize += new EventHandler(SmoothGroupBox_Resize);
 
-            pfc = General.PrepFont("MyriadPro-Regular.ttf");
             pFontSize = 10;
-            pFont = new Font(pfc.Families[0], pFontSize);
+            pFont = FontVault.GetFontVault().GetFont(FontVault.AvailableFonts.MyriadPro, pFontSize);
             MeasureLbl.Font = pFont;
 
             BorderColor = Color.FromArgb(200, 200, 200);

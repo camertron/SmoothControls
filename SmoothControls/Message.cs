@@ -29,8 +29,6 @@ namespace WildMouse.SmoothControls
         private Pen BorderPen;
         private Color pTextColor;
         private SolidBrush TextBrush;
-        private PrivateFontCollection pfc1;
-        private PrivateFontCollection pfc2;
         private string[] TextLines;
         private string[] TextSplitters;
 
@@ -48,13 +46,9 @@ namespace WildMouse.SmoothControls
         {
             InitializeComponent();
 
-            pfc1 = General.PrepFont("MyriadPro-Regular.ttf");
-            pfc2 = General.PrepFont("MyriadPro-Bold.ttf");
             pFontSize = 10;
-
-	        //pFont = new Font("Arial", pFontSize);
-            pFont = new Font(pfc1.Families[0], pFontSize);
-            pBoldFont = new Font(pfc2.Families[0], pFontSize, FontStyle.Bold);
+            pFont = FontVault.GetFontVault().GetFont(FontVault.AvailableFonts.MyriadPro, pFontSize);
+            pBoldFont = FontVault.GetFontVault().GetFont(FontVault.AvailableFonts.MyriadProBold, pFontSize);
 
             this.Paint += new PaintEventHandler(Message_Paint);
             this.Resize += new EventHandler(Message_Resize);
@@ -79,18 +73,6 @@ namespace WildMouse.SmoothControls
 
             TextLines = null;
             TextSplitters = new string[1] { " " };
-        }
-
-        ~Message()
-        {
-            pfc1.Families[0].Dispose();
-            pfc2.Families[0].Dispose();
-
-            pfc1.Dispose();
-            pfc2.Dispose();
-
-            pFont.Dispose();
-            pBoldFont.Dispose();
         }
 
         protected override void OnPaintBackground(PaintEventArgs e)

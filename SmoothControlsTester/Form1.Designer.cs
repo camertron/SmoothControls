@@ -33,6 +33,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.workingIndicator1 = new WildMouse.SmoothControls.WorkingIndicator();
+            this.smoothLabel2 = new WildMouse.SmoothControls.SmoothLabel();
             this.comboBox1 = new WildMouse.SmoothControls.ComboBox();
             this.smoothLabel1 = new WildMouse.SmoothControls.SmoothLabel();
             this.textBox1 = new WildMouse.SmoothControls.TextBox();
@@ -82,6 +84,28 @@
             this.label3.Size = new System.Drawing.Size(35, 13);
             this.label3.TabIndex = 19;
             this.label3.Text = "label3";
+            // 
+            // workingIndicator1
+            // 
+            this.workingIndicator1.Location = new System.Drawing.Point(251, 267);
+            this.workingIndicator1.Name = "workingIndicator1";
+            this.workingIndicator1.Size = new System.Drawing.Size(132, 30);
+            this.workingIndicator1.TabIndex = 23;
+            this.workingIndicator1.Text = "Cam is Cool";
+            // 
+            // smoothLabel2
+            // 
+            this.smoothLabel2.AutoSize = true;
+            this.smoothLabel2.Bold = false;
+            this.smoothLabel2.FontSize = 10;
+            this.smoothLabel2.Italic = false;
+            this.smoothLabel2.Location = new System.Drawing.Point(176, 276);
+            this.smoothLabel2.Name = "smoothLabel2";
+            this.smoothLabel2.Size = new System.Drawing.Size(150, 34);
+            this.smoothLabel2.TabIndex = 22;
+            this.smoothLabel2.Text = "hello";
+            this.smoothLabel2.TextAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.smoothLabel2.TextColor = System.Drawing.Color.Black;
             // 
             // comboBox1
             // 
@@ -267,6 +291,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(890, 563);
+            this.Controls.Add(this.workingIndicator1);
+            this.Controls.Add(this.smoothLabel2);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.smoothLabel1);
@@ -319,6 +345,8 @@
         private WildMouse.SmoothControls.SmoothLabel smoothLabel1;
         private System.Windows.Forms.Label label3;
         private WildMouse.SmoothControls.ComboBox comboBox1;
+        private WildMouse.SmoothControls.SmoothLabel smoothLabel2;
+        private WildMouse.SmoothControls.WorkingIndicator workingIndicator1;
     }
 }
 
