@@ -15,22 +15,23 @@ namespace WildMouse.SmoothControls
 {
     public partial class IconListRow : UserControl, IListRow
     {
-        public const int CONTROL_HEIGHT = 35;
-        private const int ICON_WIDTH = 50;
+        public const int C_CONTROL_HEIGHT = 35;
+        private const int C_DEFAULT_TEXT_LEFT = 50;
 
-        private DBGraphics memGraphics;
+        private DBGraphics m_dbgMemGraphics;
 
-        private Color BorderColor;
-        private Color[] GradientColors;
-        private Color GradientStart;
-        private Color GradientFinish;
-        private Pen GradientPen;
-        private SolidBrush TextBrush;
+        private Color m_cBorderColor;
+        private Color[] m_acGradientColors;
+        private Color m_cGradientStart;
+        private Color m_cGradientFinish;
+        private Pen m_pGradientPen;
+        private SolidBrush m_sbTextBrush;
         private Bitmap pIcon;
         private bool bSelected;
         private SolidBrush BackBrush;
         private Pen m_pnSeparatorPen;
         private Color m_clrSeparatorColor;
+        private int m_iTextLeft;
 
         private Font pFont;
         private int pFontSize;
@@ -38,6 +39,11 @@ namespace WildMouse.SmoothControls
         public event CmdKeyPressedHandler CmdKeyPressed;
 
         public IconListRow()
+        {
+            Init();
+        }
+
+        public void Init()
         {
             InitializeComponent();
 
@@ -48,14 +54,14 @@ namespace WildMouse.SmoothControls
             this.SetStyle(ControlStyles.UserPaint, true);
             this.UpdateStyles();
 
-            this.Resize += new EventHandler(FatListViewRow_Resize);
-            this.Paint += new PaintEventHandler(FatListViewRow_Paint);
+            this.Resize += new EventHandler(IconListRow_Resize);
+            this.Paint += new PaintEventHandler(IconListRow_Paint);
 
             //figure out gradient stuff
-            BorderColor = Color.Silver;
-            GradientStart = Color.FromArgb(215, 215, 215);
-            GradientFinish = Color.FromArgb(183, 183, 183);
-            GradientPen = new Pen(Color.Black);  //black as placeholder
+            m_cBorderColor = Color.Silver;
+            m_cGradientStart = Color.FromArgb(215, 215, 215);
+            m_cGradientFinish = Color.FromArgb(183, 183, 183);
+            m_pGradientPen = new Pen(Color.Black);  //black as placeholder
             UpdateGradients();
             
             //figure out font stuff
@@ -65,9 +71,9 @@ namespace WildMouse.SmoothControls
             SizeLbl.Text = "FatListViewRow";
             SizeLbl.TextAlign = ContentAlignment.MiddleCenter;
             SizeLbl.ForeColor = Color.Black;
-            TextBrush = new SolidBrush(SizeLbl.ForeColor);
+            m_sbTextBrush = new SolidBrush(SizeLbl.ForeColor);
 
-            memGraphics = new DBGraphics();
+            m_dbgMemGraphics = new DBGraphics();
             CreateDoubleBuffer();
 
             BackBrush = new SolidBrush(this.BackColor);
@@ -75,6 +81,17 @@ namespace WildMouse.SmoothControls
 
             m_clrSeparatorColor = Color.FromArgb(220, 220, 220);
             m_pnSeparatorPen = new Pen(m_clrSeparatorColor);
+
+            m_iTextLeft = C_DEFAULT_TEXT_LEFT;
+        }
+
+        public IconListRow(string sInitText, Bitmap bmpInitIcon)
+        {
+            Init();
+            SizeLbl.Text = sInitText;
+            pIcon = bmpInitIcon;
+
+            this.Invalidate();
         }
 
         public Color SeparatorColor
@@ -101,7 +118,13 @@ namespace WildMouse.SmoothControls
 
         public int ControlHeight
         {
-            get { return CONTROL_HEIGHT; }
+            get { return C_CONTROL_HEIGHT; }
+        }
+
+        public int TextLeft
+        {
+            get { return m_iTextLeft; }
+            set { m_iTextLeft = value; this.Invalidate(); }
         }
 
         private void InvalidateParent()
@@ -115,50 +138,50 @@ namespace WildMouse.SmoothControls
 
         private void CreateDoubleBuffer()
         {
-            memGraphics.CreateDoubleBuffer(this.CreateGraphics(), this.ClientRectangle.Width, this.ClientRectangle.Height);
+            m_dbgMemGraphics.CreateDoubleBuffer(this.CreateGraphics(), this.ClientRectangle.Width, this.ClientRectangle.Height);
         }
 
-        private void FatListViewRow_Paint(object sender, PaintEventArgs e)
+        private void IconListRow_Paint(object sender, PaintEventArgs e)
         {
-            memGraphics.g.TextRenderingHint = TextRenderingHint.AntiAlias;
-            memGraphics.g.SmoothingMode = SmoothingMode.AntiAlias;
+            m_dbgMemGraphics.g.TextRenderingHint = TextRenderingHint.AntiAlias;
+            m_dbgMemGraphics.g.SmoothingMode = SmoothingMode.AntiAlias;
 
             if (bSelected)
             {
                 for (int i = 0; i < this.Height; i++)
                 {
-                    GradientPen.Color = GradientColors[i];
-                    memGraphics.g.DrawLine(GradientPen, 0, i, this.Width, i);
+                    m_pGradientPen.Color = m_acGradientColors[i];
+                    m_dbgMemGraphics.g.DrawLine(m_pGradientPen, 0, i, this.Width, i);
                 }
             }
             else
-                memGraphics.g.FillRectangle(BackBrush, -1, -1, this.Width + 1, this.Height + 1);
+                m_dbgMemGraphics.g.FillRectangle(BackBrush, -1, -1, this.Width + 1, this.Height + 1);
 
             if (pIcon != null)
             {
-                memGraphics.g.DrawImage((Image)pIcon, (ICON_WIDTH / 2) - (pIcon.Width / 2), (this.Height / 2) - (pIcon.Height / 2), pIcon.Width, pIcon.Height);
-                memGraphics.g.DrawString(SizeLbl.Text, pFont, TextBrush, ICON_WIDTH, ((this.Height / 2) - (SizeLbl.Height / 2)) - 1);
+                m_dbgMemGraphics.g.DrawImage((Image)pIcon, (m_iTextLeft / 2) - (pIcon.Width / 2), (this.Height / 2) - (pIcon.Height / 2), pIcon.Width, pIcon.Height);
+                m_dbgMemGraphics.g.DrawString(SizeLbl.Text, pFont, m_sbTextBrush, m_iTextLeft, ((this.Height / 2) - (SizeLbl.Height / 2)) - 1);
             }
             else
-                memGraphics.g.DrawString(SizeLbl.Text, pFont, TextBrush, ((this.Width / 2) - (SizeLbl.Width / 2)) + 3, ((this.Height / 2) - (SizeLbl.Height / 2)) - 1);
+                m_dbgMemGraphics.g.DrawString(SizeLbl.Text, pFont, m_sbTextBrush, ((this.Width / 2) - (SizeLbl.Width / 2)) + 3, ((this.Height / 2) - (SizeLbl.Height / 2)) - 1);
 
             //memGraphics.g.DrawLine(new Pen(Color.White), 0, this.Height - 1, this.Width, this.Height - 1);
-            memGraphics.g.DrawLine(m_pnSeparatorPen, 0, this.Height - 1, this.Width, this.Height - 1);
+            m_dbgMemGraphics.g.DrawLine(m_pnSeparatorPen, 0, this.Height - 1, this.Width, this.Height - 1);
 
-            memGraphics.Render(e.Graphics);
+            m_dbgMemGraphics.Render(e.Graphics);
         }
 
-        private void FatListViewRow_Resize(object sender, EventArgs e)
+        private void IconListRow_Resize(object sender, EventArgs e)
         {
             CreateDoubleBuffer();
 
-            this.Height = CONTROL_HEIGHT;
+            this.Height = C_CONTROL_HEIGHT;
             UpdateGradients();
         }
 
         private void UpdateGradients()
         {
-            GradientColors = Gradient.ComputeGradient(GradientStart, GradientFinish, this.Height);
+            m_acGradientColors = Gradient.ComputeGradient(m_cGradientStart, m_cGradientFinish, this.Height);
         }
 
         public Bitmap Icon
@@ -221,7 +244,7 @@ namespace WildMouse.SmoothControls
             set
             {
                 SizeLbl.ForeColor = value;
-                TextBrush.Color = SizeLbl.ForeColor;
+                m_sbTextBrush.Color = SizeLbl.ForeColor;
                 InvalidateParent();
             }
         }

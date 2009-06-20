@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Collections.Specialized;
+using WildMouse.Graphics;
 
 namespace WildMouse.SmoothControls
 {
@@ -132,15 +133,37 @@ namespace WildMouse.SmoothControls
         }
     }
 
-    internal class General
+    public class General
     {
-        private static string RESOURCE_BASE = "SmoothControls.Resources.";
+        private static string C_RESOURCE_BASE = "SmoothControls.Resources.";
 
-        public static Bitmap GetBitmap(string ImageFileName)
+        public static Bitmap GetBitmap(string sImageFileName)
         {
             Assembly _assembly = Assembly.GetExecutingAssembly();
-            Stream _imageStream = _assembly.GetManifestResourceStream(RESOURCE_BASE + ImageFileName);
+            Stream _imageStream = _assembly.GetManifestResourceStream(C_RESOURCE_BASE + sImageFileName);
             return new Bitmap(_imageStream);
+        }
+
+        public static void DrawDropShadow(System.Drawing.Graphics gCanvas, Rectangle rImageArea, Color cStartColor, Color cEndColor, int iShadowWidth)
+        {
+            Color[] acColors = Gradient.ComputeGradient(cStartColor, cEndColor, iShadowWidth);
+            Pen pShadowPen = new Pen(Color.Black);
+
+            rImageArea.Width += ((iShadowWidth * 2) - 1);
+            rImageArea.Height += ((iShadowWidth * 2) - 1);
+            rImageArea.X -= iShadowWidth;
+            rImageArea.Y -= iShadowWidth;
+
+            for (int i = 0; i < iShadowWidth; i ++)
+            {
+                pShadowPen.Color = acColors[i];
+                gCanvas.DrawRectangle(pShadowPen, rImageArea);
+                rImageArea.X ++;
+                rImageArea.Y ++;
+                rImageArea.Width -= 2;
+                rImageArea.Height -= 2;
+            }
+            
         }
     }
 
