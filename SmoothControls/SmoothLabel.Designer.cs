@@ -28,33 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.MeasureLbl = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            // 
-            // MeasureLbl
-            // 
-            this.MeasureLbl.AutoSize = true;
-            this.MeasureLbl.Location = new System.Drawing.Point(3, 0);
-            this.MeasureLbl.Name = "MeasureLbl";
-            this.MeasureLbl.Size = new System.Drawing.Size(35, 13);
-            this.MeasureLbl.TabIndex = 0;
-            this.MeasureLbl.Text = "label1";
-            this.MeasureLbl.Visible = false;
             // 
             // SmoothLabel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.MeasureLbl);
             this.Name = "SmoothLabel";
             this.Size = new System.Drawing.Size(150, 23);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Label MeasureLbl;
     }
 }

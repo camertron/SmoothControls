@@ -279,6 +279,8 @@ namespace WildMouse.SmoothControls
                     ListScroller.Maximum = ScrollMax;
                     ListScroller.LargeChange = SCROLL_LARGE_CHANGE;
                     ListScroller.Visible = true;
+                    ListScroller.BringToFront();
+                    ListScroller.Left = this.Width - ListScroller.Width;
                 }
                 else
                 {

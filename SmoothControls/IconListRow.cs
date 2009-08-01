@@ -118,7 +118,7 @@ namespace WildMouse.SmoothControls
 
         public int ControlHeight
         {
-            get { return C_CONTROL_HEIGHT; }
+            get { return this.Height; }
         }
 
         public int TextLeft
@@ -175,7 +175,7 @@ namespace WildMouse.SmoothControls
         {
             CreateDoubleBuffer();
 
-            this.Height = C_CONTROL_HEIGHT;
+            //this.Height = C_CONTROL_HEIGHT;
             UpdateGradients();
         }
 

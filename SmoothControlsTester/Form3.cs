@@ -26,13 +26,13 @@ namespace SmoothControlsTester
             ilrCurRow.Text = "Argentina";
             ilrCurRow.Icon = (Bitmap)Bitmap.FromFile("C:/Cameron's Stuff/DotNET/FlagGrabber/FlagGrabber/Flags/Tiny JPG/Argentina.jpg");
 
-            alphaListBox1.RowControls.Add(ilrCurRow);
+            sequentialListBox1.RowControls.Add(ilrCurRow);
 
             ilrCurRow = new IconListRow();
             ilrCurRow.Text = "Hong Kong";
             ilrCurRow.Icon = (Bitmap)Bitmap.FromFile("C:/Cameron's Stuff/DotNET/FlagGrabber/FlagGrabber/Flags/Tiny JPG/Hong Kong.jpg");
 
-            alphaListBox1.RowControls.Add(ilrCurRow);
+            sequentialListBox1.RowControls.Add(ilrCurRow);
         }
 
         private string GenRandomString(int iSeed)
@@ -61,6 +61,11 @@ namespace SmoothControlsTester
             //WildMouse.SmoothControls.General.DrawDropShadow(gCanvas, rImageArea, pbTestCanvas.BackColor, Color.FromArgb(100, 100, 100), 5);
 
             gCanvas.DrawRectangle(new Pen(Color.FromArgb(100, 100, 100)), rImageArea);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            alphaListBox1.RowControls.Clear();
         }
     }
 }

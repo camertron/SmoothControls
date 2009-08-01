@@ -11,28 +11,36 @@ using WildMouse.Graphics;
 
 namespace WildMouse.SmoothControls
 {
-    internal partial class VerticalScrollHandle : UserControl
+    public partial class VerticalScrollHandle : UserControl
     {
         private DBGraphics memGraphics;
 
         private Color BorderColor;
         private float Diameter;
         private float Radius;
+
         private Color[] GradientColors;
         private Color GradientStart;
         private Color GradientFinish;
+
+        private Color BackgroundGradientStart;
+        private Color BackgroundGradientFinish;
+
         private Pen GradientPen;
         private Pen BorderPen;
+
+        private Bitmap m_bgImage;
 
         public VerticalScrollHandle()
         {
             InitializeComponent();
 
             GradientPen = new Pen(Color.Black);
-            //GradientStart = Color.FromArgb(188, 193, 232);
-            //GradientFinish = Color.FromArgb(135, 144, 210);
             GradientStart = Color.FromArgb(220, 220, 220);
             GradientFinish = Color.FromArgb(180, 180, 180);
+
+            BackgroundGradientStart = Color.FromArgb(244, 244, 244);
+            BackgroundGradientFinish = Color.FromArgb(225, 225, 225);
             UpdateGradients();
 
             BorderColor = Color.FromArgb(152, 152, 152);
@@ -45,18 +53,19 @@ namespace WildMouse.SmoothControls
             this.Resize += new EventHandler(VerticalScrollHandle_Resize);
             this.MouseUp += new MouseEventHandler(VerticalScrollHandle_MouseUp);
 
-            UpdateRegion();
+            UpdateBG();
         }
 
         private void VerticalScrollHandle_MouseUp(object sender, MouseEventArgs e)
         {
-            InvalidateParent();
+            this.Invalidate();
         }
 
         private void VerticalScrollHandle_Resize(object sender, EventArgs e)
         {
-            UpdateRegion();
             UpdateGradients();
+            UpdateBG();
+
             InvalidateParent();
         }
 
@@ -65,6 +74,9 @@ namespace WildMouse.SmoothControls
             memGraphics.g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
             FindDiameter();
+
+            //Gradient.DrawGradient(memGraphics.g, Gradient.GradientDirection.Horizontal, BackgroundGradientStart, BackgroundGradientFinish, this.Width, this.Height);
+            memGraphics.g.DrawImage((Image)m_bgImage, 0, 0);
 
             //draw gradient
             float RadiusSquared = (float)Math.Pow(Radius - 1, 2);
@@ -88,66 +100,63 @@ namespace WildMouse.SmoothControls
             CreateDoubleBuffer();
         }
 
-        private void InvalidateParent()
-        {
-            if (this.Parent == null)
-                return;
+         private void UpdateBG()
+         {
+             m_bgImage = new Bitmap(this.Width, this.Height);
+             Color[] caBgColors = Gradient.ComputeGradient(BackgroundGradientStart, BackgroundGradientFinish, this.Width);
 
-            Rectangle rc = new Rectangle(this.Location, this.Size);
-            this.Parent.Invalidate(rc, true);
-        }
+             for (int c = 0; c < this.Width; c++)
+             {
+                 for (int r = 0; r < this.Height; r++)
+                     m_bgImage.SetPixel(c, r, caBgColors[c]);
+             }
+         }
 
-        private void CreateDoubleBuffer()
-        {
-            memGraphics.CreateDoubleBuffer(this.CreateGraphics(), this.ClientRectangle.Width, this.ClientRectangle.Height);
-        }
+         private void InvalidateParent()
+         {
+             if (this.Parent == null)
+                 return;
 
-        private void UpdateRegion()
-        {
-            FindDiameter();
+             Rectangle rc = new Rectangle(this.Location, this.Size);
+             this.Parent.Invalidate(rc, true);
+         }
 
-            System.Drawing.Drawing2D.GraphicsPath FormRegion = new System.Drawing.Drawing2D.GraphicsPath();
+         private void CreateDoubleBuffer()
+         {
+             memGraphics.CreateDoubleBuffer(this.CreateGraphics(), this.ClientRectangle.Width, this.ClientRectangle.Height);
+         }
 
-            //define region
-            FormRegion.AddArc(0, 0, Diameter, Diameter, 0, -180);
-            FormRegion.AddLine(this.Width - 1, Radius, this.Width - 1, this.Height - Radius);
-            FormRegion.AddArc(0, this.Height - (Diameter + 1), Diameter, Diameter, 0, 180);
-            FormRegion.AddLine(0, this.Height - (Radius + 1), 0, Radius);
+         private void UpdateGradients()
+         {
+             GradientColors = Gradient.ComputeGradient(GradientStart, GradientFinish, this.Width);
+         }
 
-            FormRegion.CloseAllFigures();
+         private void FindDiameter()
+         {
+             if (this.Height <= this.Width)
+                 Diameter = this.Height - 1;
+             else
+                 Diameter = this.Width - 1;
 
-            this.Region = new System.Drawing.Region(FormRegion);
-        }
+             Radius = Diameter / 2.0f;
+         }
 
-        private void UpdateGradients()
-        {
-            GradientColors = Gradient.ComputeGradient(GradientStart, GradientFinish, this.Width);
-        }
-
-        private void FindDiameter()
-        {
-            if (this.Height <= this.Width)
-                Diameter = this.Height - 1;
-            else
-                Diameter = this.Width - 1;
-
-            Radius = Diameter / 2.0f;
-        }
-
-        protected override void OnPaintBackground(PaintEventArgs e)
-        {
-            //do nothing
-        }
-
-        protected override CreateParams CreateParams
-        {
-            get
-            {
-                //turn the form transparent - sweet, eh?
-                CreateParams cp = base.CreateParams;
-                cp.ExStyle |= 0x20;
-                return cp;
-            }
-        }
+         protected override void OnPaintBackground(PaintEventArgs e)
+         {
+             //do nothing
+         }
+        
+         /*
+         protected override CreateParams CreateParams
+         {
+             get
+             {
+                 //turn the form transparent - sweet, eh?
+                 CreateParams cp = base.CreateParams;
+                 cp.ExStyle |= 0x20;
+                 return cp;
+             }
+         }
+         */
     }
 }

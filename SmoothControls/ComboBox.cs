@@ -164,6 +164,8 @@ namespace WildMouse.SmoothControls
                 ShowPopout();
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
+        [Editor("System.Windows.Forms.Design.StringCollectionEditor, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", typeof(System.Drawing.Design.UITypeEditor))]
         public StringCollectionWithEvents Items
         {
             get { return m_scItems; }

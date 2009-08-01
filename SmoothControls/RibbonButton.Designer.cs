@@ -33,13 +33,16 @@
             // 
             // CaptionLbl
             // 
+            this.CaptionLbl.Bold = false;
             this.CaptionLbl.FontSize = 9;
+            this.CaptionLbl.Italic = false;
             this.CaptionLbl.Location = new System.Drawing.Point(3, 77);
             this.CaptionLbl.Name = "CaptionLbl";
             this.CaptionLbl.Size = new System.Drawing.Size(78, 14);
             this.CaptionLbl.TabIndex = 0;
             this.CaptionLbl.Text = "Hello";
             this.CaptionLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.CaptionLbl.TextColor = System.Drawing.Color.Black;
             // 
             // RibbonButton
             // 

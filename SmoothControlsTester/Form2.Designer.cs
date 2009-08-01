@@ -29,7 +29,13 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
+            WildMouse.SmoothControls.ListHeaderCollection listHeaderCollection1 = new WildMouse.SmoothControls.ListHeaderCollection();
             this.button1 = new System.Windows.Forms.Button();
+            this.iconListRow1 = new WildMouse.SmoothControls.IconListRow();
+            this.compilationResultList1 = new WildMouse.SmoothControls.CompilationResultList();
+            this.codeViewSwitcher1 = new WildMouse.SmoothControls.CodeViewSwitcher();
+            this.textBox1 = new WildMouse.SmoothControls.MedusaViewSwitcher();
+            this.lvMedusa = new WildMouse.SmoothControls.ListView();
             this.sequentialListBox1 = new WildMouse.SmoothControls.SequentialListBox();
             this.alphaListBox1 = new WildMouse.SmoothControls.AlphaListBox();
             this.smoothToggleSwitch1 = new WildMouse.SmoothControls.SmoothToggleSwitch();
@@ -58,16 +64,75 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // iconListRow1
+            // 
+            this.iconListRow1.FontSize = 10;
+            this.iconListRow1.Icon = ((System.Drawing.Bitmap)(resources.GetObject("iconListRow1.Icon")));
+            this.iconListRow1.Location = new System.Drawing.Point(239, 389);
+            this.iconListRow1.Name = "iconListRow1";
+            this.iconListRow1.Selected = false;
+            this.iconListRow1.SeparatorColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.iconListRow1.Size = new System.Drawing.Size(150, 23);
+            this.iconListRow1.TabIndex = 16;
+            this.iconListRow1.Text = "iconListRow1";
+            this.iconListRow1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.iconListRow1.TextColor = System.Drawing.Color.Black;
+            this.iconListRow1.TextLeft = 25;
+            // 
+            // compilationResultList1
+            // 
+            this.compilationResultList1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.compilationResultList1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(152)))));
+            this.compilationResultList1.Location = new System.Drawing.Point(669, 12);
+            this.compilationResultList1.Name = "compilationResultList1";
+            this.compilationResultList1.SelectedIndex = -1;
+            this.compilationResultList1.Size = new System.Drawing.Size(228, 188);
+            this.compilationResultList1.TabIndex = 15;
+            this.compilationResultList1.UseRowColoring = true;
+            // 
+            // codeViewSwitcher1
+            // 
+            this.codeViewSwitcher1.Location = new System.Drawing.Point(42, 489);
+            this.codeViewSwitcher1.Name = "codeViewSwitcher1";
+            this.codeViewSwitcher1.Size = new System.Drawing.Size(316, 22);
+            this.codeViewSwitcher1.TabIndex = 13;
+            this.codeViewSwitcher1.View = WildMouse.SmoothControls.CodeViewSwitcher.SelectedView.Microcode;
+            // 
+            // textBox1
+            // 
+            this.textBox1.BackColor = System.Drawing.Color.White;
+            this.textBox1.Buttons.Add("Split");
+            this.textBox1.Buttons.Add("Code");
+            this.textBox1.Buttons.Add("ALU");
+            this.textBox1.Buttons.Add("M-JUMP");
+            this.textBox1.Location = new System.Drawing.Point(42, 264);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.SelectedIndex = 0;
+            this.textBox1.Size = new System.Drawing.Size(306, 23);
+            this.textBox1.TabIndex = 12;
+            // 
+            // lvMedusa
+            // 
+            this.lvMedusa.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lvMedusa.FontSize = 9;
+            this.lvMedusa.Headers = listHeaderCollection1;
+            this.lvMedusa.Location = new System.Drawing.Point(450, 246);
+            this.lvMedusa.Name = "lvMedusa";
+            this.lvMedusa.SelectedIndex = -1;
+            this.lvMedusa.Size = new System.Drawing.Size(332, 274);
+            this.lvMedusa.TabIndex = 11;
+            this.lvMedusa.TextColor = System.Drawing.Color.Empty;
+            // 
             // sequentialListBox1
             // 
             this.sequentialListBox1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.sequentialListBox1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(152)))));
-            this.sequentialListBox1.Location = new System.Drawing.Point(450, 254);
+            this.sequentialListBox1.Location = new System.Drawing.Point(624, 59);
             this.sequentialListBox1.Name = "sequentialListBox1";
             this.sequentialListBox1.SelectedIndex = -1;
-            this.sequentialListBox1.Size = new System.Drawing.Size(168, 150);
+            this.sequentialListBox1.Size = new System.Drawing.Size(168, 159);
             this.sequentialListBox1.TabIndex = 10;
-            this.sequentialListBox1.UseRowColoring = false;
+            this.sequentialListBox1.UseRowColoring = true;
             // 
             // alphaListBox1
             // 
@@ -78,12 +143,12 @@
             this.alphaListBox1.SelectedIndex = -1;
             this.alphaListBox1.Size = new System.Drawing.Size(168, 160);
             this.alphaListBox1.TabIndex = 9;
-            this.alphaListBox1.UseRowColoring = false;
+            this.alphaListBox1.UseRowColoring = true;
             // 
             // smoothToggleSwitch1
             // 
             this.smoothToggleSwitch1.IsOn = false;
-            this.smoothToggleSwitch1.Location = new System.Drawing.Point(260, 303);
+            this.smoothToggleSwitch1.Location = new System.Drawing.Point(239, 341);
             this.smoothToggleSwitch1.Name = "smoothToggleSwitch1";
             this.smoothToggleSwitch1.Size = new System.Drawing.Size(65, 22);
             this.smoothToggleSwitch1.TabIndex = 8;
@@ -157,7 +222,7 @@
             this.ribbonButton1.Location = new System.Drawing.Point(7, 6);
             this.ribbonButton1.Name = "ribbonButton1";
             this.ribbonButton1.ShortcutKey = System.Windows.Forms.Keys.None;
-            this.ribbonButton1.Size = new System.Drawing.Size(57, 71);
+            this.ribbonButton1.Size = new System.Drawing.Size(62, 71);
             this.ribbonButton1.TabIndex = 7;
             this.ribbonButton1.Text = "Internet";
             // 
@@ -200,7 +265,7 @@
             // segmentChooser1
             // 
             this.segmentChooser1.Items = ((System.Collections.Specialized.StringCollection)(resources.GetObject("segmentChooser1.Items")));
-            this.segmentChooser1.Location = new System.Drawing.Point(144, 59);
+            this.segmentChooser1.Location = new System.Drawing.Point(247, 70);
             this.segmentChooser1.Name = "segmentChooser1";
             this.segmentChooser1.SelectedIndex = 2;
             this.segmentChooser1.Size = new System.Drawing.Size(142, 23);
@@ -233,6 +298,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(934, 552);
+            this.Controls.Add(this.iconListRow1);
+            this.Controls.Add(this.compilationResultList1);
+            this.Controls.Add(this.codeViewSwitcher1);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.lvMedusa);
             this.Controls.Add(this.sequentialListBox1);
             this.Controls.Add(this.alphaListBox1);
             this.Controls.Add(this.smoothToggleSwitch1);
@@ -270,5 +340,10 @@
         private WildMouse.SmoothControls.SmoothToggleSwitch smoothToggleSwitch1;
         private WildMouse.SmoothControls.AlphaListBox alphaListBox1;
         private WildMouse.SmoothControls.SequentialListBox sequentialListBox1;
+        private WildMouse.SmoothControls.ListView lvMedusa;
+        private WildMouse.SmoothControls.MedusaViewSwitcher textBox1;
+        private WildMouse.SmoothControls.CodeViewSwitcher codeViewSwitcher1;
+        private WildMouse.SmoothControls.CompilationResultList compilationResultList1;
+        private WildMouse.SmoothControls.IconListRow iconListRow1;
     }
 }

@@ -162,6 +162,9 @@ namespace WildMouse.SmoothControls
             {
                 pSelectedTab = value;
                 this.Invalidate();
+
+                if (TabClicked != null)
+                    TabClicked(this, value);
             }
         }
 

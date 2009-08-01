@@ -38,7 +38,6 @@ namespace WildMouse.SmoothControls
 
             pFontSize = 10;
             pFont = FontVault.GetFontVault().GetFont(FontVault.AvailableFonts.MyriadPro, pFontSize);
-            MeasureLbl.Font = pFont;
 
             pTextAlign = ContentAlignment.TopLeft;
         }
@@ -127,8 +126,10 @@ namespace WildMouse.SmoothControls
 
             float Top = 0;
             float Left = 0;
-            int LblHeight = MeasureLbl.Height + 1;  //a little tweaking...
-            int LblWidth = MeasureLbl.Width - 5;
+
+            SizeF sfStringSize = e.Graphics.MeasureString(pText, pFont);
+            int LblHeight = (int)sfStringSize.Height;
+            int LblWidth = (int)sfStringSize.Width;
 
             switch (pTextAlign)
             {
@@ -181,7 +182,6 @@ namespace WildMouse.SmoothControls
             set
             {
                 pText = value;
-                MeasureLbl.Text = pText;
                 this.Invalidate();
             }
         }

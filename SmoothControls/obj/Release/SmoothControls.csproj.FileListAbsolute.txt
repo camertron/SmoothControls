@@ -42,3 +42,6 @@ C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControls\obj\Release\WildMouse.Sm
 C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControls\obj\Release\SmoothControls.csproj.GenerateResource.Cache
 C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControls\obj\Release\SmoothControls.dll
 C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControls\obj\Release\SmoothControls.pdb
+C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControls\obj\Release\WildMouse.SmoothControls.WorkingIndicator.resources
+C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControls\obj\Release\WildMouse.SmoothControls.CodeViewSwitcher.resources
+C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControls\obj\Release\WildMouse.SmoothControls.CompilationResultRow.resources

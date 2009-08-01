@@ -22,6 +22,10 @@ namespace WildMouse.SmoothControls
         private Color BackgroundColor;
         private SolidBrush BackgroundBrush;
         private bool bEnabled;
+        private Font pFont;
+        private int pFontSize;
+        private string m_sText;
+        private SolidBrush m_bshTextBrush;
 
         private float Diameter;
         private float Radius;
@@ -36,7 +40,7 @@ namespace WildMouse.SmoothControls
         public event System.EventHandler CtrlMouseLeave;
         public event System.EventHandler CtrlClick;
 
-        private const int SMALL_IMAGE_MAX_WIDTH = 30;
+        private const int SMALL_IMAGE_MAX_WIDTH = 19;
         private const int SMALL_IMAGE_PADDING = 5;
 
         public enum RibbonButtonType
@@ -74,6 +78,7 @@ namespace WildMouse.SmoothControls
             this.MouseDown += new MouseEventHandler(RibbonButton_MouseDown);
             this.MouseUp += new MouseEventHandler(RibbonButton_MouseUp);
             this.Click += new EventHandler(RibbonButton_Click);
+            CaptionLbl.MouseEnter += new EventHandler(CaptionLbl_MouseEnter);
             CaptionLbl.MouseMove += new MouseEventHandler(CaptionLbl_MouseMove);
             CaptionLbl.MouseLeave += new EventHandler(CaptionLbl_MouseLeave);
             CaptionLbl.Click += new EventHandler(RibbonButton_Click);
@@ -85,6 +90,11 @@ namespace WildMouse.SmoothControls
 
             pImage = null;
             bEnabled = false;
+
+            pFontSize = 10;
+            pFont = FontVault.GetFontVault().GetFont(FontVault.AvailableFonts.MyriadPro, pFontSize);
+
+            m_bshTextBrush = new SolidBrush(Color.Black);
         }
 
         /// <summary>
@@ -205,6 +215,13 @@ namespace WildMouse.SmoothControls
         private void CaptionLbl_MouseLeave(object sender, EventArgs e)
         {
             IsMouseOver = false;
+            this.Invalidate();
+        }
+
+        private void CaptionLbl_MouseEnter(object sender, EventArgs e)
+        {
+            IsMouseOver = true;
+            this.Invalidate();
         }
 
         [EditorBrowsable(EditorBrowsableState.Always)]
@@ -213,8 +230,8 @@ namespace WildMouse.SmoothControls
         [Bindable(true)]
         public override string Text
         {
-            get { return CaptionLbl.Text; }
-            set { CaptionLbl.Text = value; }
+            get { return m_sText; }
+            set { m_sText = value; }
         }
 
         private void RibbonButton_Click(object sender, EventArgs e)
@@ -254,29 +271,16 @@ namespace WildMouse.SmoothControls
 
         private void RibbonButton_Resize(object sender, EventArgs e)
         {
-            switch (pButtonType)
-            {
-                case RibbonButtonType.Large:
-                    CaptionLbl.Top = this.Height - (int)(CaptionLbl.Height + Radius);
-                    CaptionLbl.Width = this.Width - (int)(Radius * 2);
-                    break;
-
-                case RibbonButtonType.Small:
-                    CaptionLbl.Top = (this.Height / 2) - (CaptionLbl.Height / 2);
-                    CaptionLbl.Width = this.Width - (SMALL_IMAGE_MAX_WIDTH + (int)(Radius * 2));
-                    CaptionLbl.Left = SMALL_IMAGE_MAX_WIDTH + (int)Radius;
-                    break;
-            }
-
             UpdateRegion();
         }
 
         private void RibbonButton_Paint(object sender, PaintEventArgs e)
         {
+            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
+
             if (IsMouseOver)
             {
-                e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-
                 //fill background
                 e.Graphics.FillEllipse(BackgroundBrush, 1, 1, Diameter, Diameter);
                 e.Graphics.FillEllipse(BackgroundBrush, 1, this.Height - (Diameter + 1), Diameter, Diameter);
@@ -320,12 +324,30 @@ namespace WildMouse.SmoothControls
 
                     case RibbonButtonType.Small:
                         ImagePos.X = SMALL_IMAGE_PADDING;
-                        ImagePos.Y = (this.Height / 2) - (UseImage.Height / 2);
+                        ImagePos.Y = (this.Height / 2) - (CaptionLbl.Height / 2);
                         break;
                 }
 
                 e.Graphics.DrawImage(UseImage, ImagePos);
             }
+
+            SizeF sfStringSize = e.Graphics.MeasureString(m_sText, pFont);
+            int iX = 0, iY = 0;
+
+            switch (pButtonType)
+            {
+                case RibbonButtonType.Large:
+                    iY = this.Height - (int)(sfStringSize.Height + Radius);
+                    iX = (this.Width / 2) - ((int)sfStringSize.Width / 2);
+                    break;
+
+                case RibbonButtonType.Small:
+                    iY = (this.Height / 2) - ((int)sfStringSize.Height / 2);
+                    iX = SMALL_IMAGE_MAX_WIDTH + (int)Radius;
+                    break;
+            }
+
+            e.Graphics.DrawString(m_sText, pFont, m_bshTextBrush, iX, iY);
         }
 
         public RibbonButtonType ButtonType

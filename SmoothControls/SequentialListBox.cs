@@ -50,6 +50,7 @@ namespace WildMouse.SmoothControls
             pRowControls.EntryRemoved += new ListRowCollection.EntryRemovedHandler(pRowControls_EntryRemoved);
             pRowControls.EntryChanged += new ListRowCollection.EntryChangedHandler(pRowControls_EntryChanged);
             pRowControls.EntryClicked += new ListRowCollection.EntryClickedHandler(pRowControls_EntryClicked);
+            pRowControls.EntriesCleared += new EventHandler(pRowControls_EntriesCleared);
             pRowControls.CmdKeyPressed += new CmdKeyPressedHandler(pRowControls_CmdKeyPressed);
 
             ListScroller.Scroll += new ScrollEventHandler(ListScroller_Scroll);
@@ -67,6 +68,12 @@ namespace WildMouse.SmoothControls
             RowSelectedColor = Color.FromArgb(213, 218, 244);
             RowColor2 = Color.FromArgb(255, 255, 255);
             RowColor1 = Color.FromArgb(245, 245, 245);
+        }
+
+        private void pRowControls_EntriesCleared(object sender, EventArgs e)
+        {
+            for (int i = 0; i < pRowControls.Count; i ++)
+                this.ElementsPanel.Controls.Remove((Control)pRowControls[i]);
         }
 
         private void pRowControls_CmdKeyPressed(object sender, Keys Key)
@@ -462,13 +469,14 @@ namespace WildMouse.SmoothControls
 
         public void Clear()
         {
+            if (EntriesCleared != null)
+                EntriesCleared(this, EventArgs.Empty);
+
             for (int i = 0; i < Items.Count; i++)
                 Detach(Items[i]);
 
             Items.Clear();
-
-            if (EntriesCleared != null)
-                EntriesCleared(this, EventArgs.Empty);
+            
         }
 
         public int Count { get { return Items.Count; } }

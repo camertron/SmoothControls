@@ -109,7 +109,13 @@
             // 
             // comboBox1
             // 
-            this.comboBox1.Location = new System.Drawing.Point(192, 475);
+            this.comboBox1.Items.AddRange(new string[] {
+            "Hello",
+            "My",
+            "Name",
+            "Is",
+            "Bob"});
+            this.comboBox1.Location = new System.Drawing.Point(224, 478);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.SelectedIndex = -1;
             this.comboBox1.Size = new System.Drawing.Size(171, 20);
@@ -125,7 +131,7 @@
             this.smoothLabel1.Size = new System.Drawing.Size(150, 23);
             this.smoothLabel1.TabIndex = 18;
             this.smoothLabel1.Text = "smoothLabel1";
-            this.smoothLabel1.TextAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.smoothLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.smoothLabel1.TextColor = System.Drawing.Color.Black;
             // 
             // textBox1

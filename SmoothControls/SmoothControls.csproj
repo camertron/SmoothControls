@@ -83,6 +83,12 @@
     <Compile Include="CheckBox.Designer.cs">
       <DependentUpon>CheckBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="CodeViewSwitcher.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CodeViewSwitcher.Designer.cs">
+      <DependentUpon>CodeViewSwitcher.cs</DependentUpon>
+    </Compile>
     <Compile Include="ColorWell.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -101,6 +107,18 @@
     <Compile Include="ComboPopoutItem.Designer.cs">
       <DependentUpon>ComboPopoutItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="CompilationResultList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CompilationResultList.Designer.cs">
+      <DependentUpon>CompilationResultList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CompilationResultRow.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CompilationResultRow.Designer.cs">
+      <DependentUpon>CompilationResultRow.cs</DependentUpon>
+    </Compile>
     <Compile Include="IconListRow.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -112,6 +130,12 @@
     </Compile>
     <Compile Include="ListBox.designer.cs">
       <DependentUpon>ListBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MedusaViewSwitcher.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MedusaViewSwitcher.designer.cs">
+      <DependentUpon>MedusaViewSwitcher.cs</DependentUpon>
     </Compile>
     <Compile Include="RectButton.cs">
       <SubType>UserControl</SubType>
@@ -564,6 +588,14 @@
     <EmbeddedResource Include="Resources\process-working_30.png" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="CodeViewSwitcher.resx">
+      <DependentUpon>CodeViewSwitcher.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CompilationResultRow.resx">
+      <DependentUpon>CompilationResultRow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\process-working_31.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

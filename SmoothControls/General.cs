@@ -185,6 +185,12 @@ namespace WildMouse.SmoothControls
                 ItemAdded(this, sNewStr);
         }
 
+        public new void AddRange(string[] saRange)
+        {
+            for (int i = 0; i < saRange.Length; i ++)
+                Add(saRange[i]);
+        }
+
         public new void RemoveAt(int iIndex)
         {
             string sRemovedTxt = base[iIndex];

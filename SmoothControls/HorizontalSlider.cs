@@ -117,13 +117,9 @@ namespace WildMouse.SmoothControls
 
         private void CalculateValue()
         {
-            //these are algebraic reversals of the formulas above in RepositionHandle()
-            float Percent = (float)Handle.Left / ((float)this.Width - (((float)PADDING * 2.0f) - ((float)Handle.Width / 2.0f)));
-
-            //if (Percent < 0.05)
-                //Percent = 0;
-            //else if (Percent > 0.98)
-                //Percent = 1.0f;
+            int iPos = Handle.Left - (PADDING - (Handle.Width / 2));
+            int iTotalWidth = this.Width - (PADDING * 2);
+            float Percent = (float)iPos / (float)iTotalWidth;
             float CalcValue = Percent * ((float)pMax - (float)pMin) + (float)pMin;
 
             pValue = (int)CalcValue;

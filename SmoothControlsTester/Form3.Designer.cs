@@ -35,12 +35,15 @@
             this.alphaListBox1 = new WildMouse.SmoothControls.AlphaListBox();
             this.smoothToggleSwitch1 = new WildMouse.SmoothControls.SmoothToggleSwitch();
             this.smoothLabel1 = new WildMouse.SmoothControls.SmoothLabel();
+            this.sequentialListBox1 = new WildMouse.SmoothControls.SequentialListBox();
+            this.iconListRow2 = new WildMouse.SmoothControls.IconListRow();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbTestCanvas)).BeginInit();
             this.SuspendLayout();
             // 
             // pbTestCanvas
             // 
-            this.pbTestCanvas.Location = new System.Drawing.Point(67, 200);
+            this.pbTestCanvas.Location = new System.Drawing.Point(44, 74);
             this.pbTestCanvas.Name = "pbTestCanvas";
             this.pbTestCanvas.Size = new System.Drawing.Size(127, 94);
             this.pbTestCanvas.TabIndex = 3;
@@ -48,7 +51,7 @@
             // 
             // btnDraw
             // 
-            this.btnDraw.Location = new System.Drawing.Point(67, 310);
+            this.btnDraw.Location = new System.Drawing.Point(44, 184);
             this.btnDraw.Name = "btnDraw";
             this.btnDraw.Size = new System.Drawing.Size(127, 23);
             this.btnDraw.TabIndex = 4;
@@ -96,7 +99,7 @@
             this.smoothLabel1.Bold = false;
             this.smoothLabel1.FontSize = 10;
             this.smoothLabel1.Italic = false;
-            this.smoothLabel1.Location = new System.Drawing.Point(164, 239);
+            this.smoothLabel1.Location = new System.Drawing.Point(141, 113);
             this.smoothLabel1.Name = "smoothLabel1";
             this.smoothLabel1.Size = new System.Drawing.Size(150, 18);
             this.smoothLabel1.TabIndex = 5;
@@ -104,11 +107,50 @@
             this.smoothLabel1.TextAlign = System.Drawing.ContentAlignment.TopLeft;
             this.smoothLabel1.TextColor = System.Drawing.Color.Black;
             // 
+            // sequentialListBox1
+            // 
+            this.sequentialListBox1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.sequentialListBox1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(152)))));
+            this.sequentialListBox1.Location = new System.Drawing.Point(44, 233);
+            this.sequentialListBox1.Name = "sequentialListBox1";
+            this.sequentialListBox1.SelectedIndex = -1;
+            this.sequentialListBox1.Size = new System.Drawing.Size(235, 218);
+            this.sequentialListBox1.TabIndex = 6;
+            this.sequentialListBox1.UseRowColoring = false;
+            // 
+            // iconListRow2
+            // 
+            this.iconListRow2.FontSize = 10;
+            this.iconListRow2.Icon = ((System.Drawing.Bitmap)(resources.GetObject("iconListRow2.Icon")));
+            this.iconListRow2.Location = new System.Drawing.Point(44, 457);
+            this.iconListRow2.Name = "iconListRow2";
+            this.iconListRow2.Selected = false;
+            this.iconListRow2.SeparatorColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.iconListRow2.Size = new System.Drawing.Size(235, 23);
+            this.iconListRow2.TabIndex = 17;
+            this.iconListRow2.Text = "iconListRow2";
+            this.iconListRow2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.iconListRow2.TextColor = System.Drawing.Color.Black;
+            this.iconListRow2.TextLeft = 25;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(216, 104);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 18;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(705, 586);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.iconListRow2);
+            this.Controls.Add(this.sequentialListBox1);
             this.Controls.Add(this.smoothLabel1);
             this.Controls.Add(this.btnDraw);
             this.Controls.Add(this.pbTestCanvas);
@@ -131,6 +173,9 @@
         private System.Windows.Forms.PictureBox pbTestCanvas;
         private System.Windows.Forms.Button btnDraw;
         private WildMouse.SmoothControls.SmoothLabel smoothLabel1;
+        private WildMouse.SmoothControls.SequentialListBox sequentialListBox1;
+        private WildMouse.SmoothControls.IconListRow iconListRow2;
+        private System.Windows.Forms.Button button1;
 
     }
 }
