@@ -12,3 +12,4 @@ C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControlsTester\obj\Debug\SmoothCo
 C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControlsTester\obj\Debug\SmoothControlsTester.csproj.GenerateResource.Cache
 C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControlsTester\obj\Debug\SmoothControlsTester.exe
 C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControlsTester\obj\Debug\SmoothControlsTester.pdb
+C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControlsTester\obj\Debug\SmoothControlsTester.Form4.resources

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using WildMouse.Graphics;
+using GDIDB;
 
 namespace WildMouse.SmoothControls
 {
@@ -34,6 +35,7 @@ namespace WildMouse.SmoothControls
         private Color m_cGradientFinish;
         private int m_iTotalWidth = 100; //the width of the drawn table (not the width of the entire usercontrol)
         private int m_iTotalHeight = 100; //the height of the drawn table
+        private DBGraphics m_dbgGraphics;
 
         public SmoothTable()
         {
@@ -53,6 +55,8 @@ namespace WildMouse.SmoothControls
             m_cGradientStart = Color.FromArgb(230, 230, 230);
             m_cGradientFinish = Color.FromArgb(180, 180, 180);
 
+            m_dbgGraphics = new DBGraphics();
+
             this.Paint += new PaintEventHandler(SmoothTable_Paint);
             this.Resize += new EventHandler(SmoothTable_Resize);
         }
@@ -65,14 +69,16 @@ namespace WildMouse.SmoothControls
 
         private void SmoothTable_Paint(object sender, PaintEventArgs e)
         {
+            m_dbgGraphics.CreateDoubleBuffer(e.Graphics, this.Width, this.Height);
+
             System.Drawing.Point ptDrawStart = new Point(0, m_iColumnHeight);
             System.Drawing.Point ptDrawFinish = new Point(0, 0);
             System.Drawing.Point ptLabelPoint = new Point();
             System.Drawing.SizeF sfLabelSize;
-            Region m_rgOrigRegion = e.Graphics.Clip;
+            Region m_rgOrigRegion = m_dbgGraphics.g.Clip;
 
-            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-            e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
+            m_dbgGraphics.g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            m_dbgGraphics.g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
 
             m_iTotalHeight = 0;
             m_iTotalWidth = 0;
@@ -83,17 +89,17 @@ namespace WildMouse.SmoothControls
             for (int i = 0; i < m_lsRowLabels.Count; i ++)
             {
                 //draw background gradient of row label
-                Gradient.DrawGradient(e.Graphics, Gradient.GradientDirection.Vertical, m_cGradientStart, m_cGradientFinish, m_iRowWidth, m_lsRowLabels[i].Height, ptDrawStart);
+                Gradient.DrawGradient(m_dbgGraphics.g, Gradient.GradientDirection.Vertical, m_cGradientStart, m_cGradientFinish, m_iRowWidth, m_lsRowLabels[i].Height, ptDrawStart);
 
                 //draw row label
                 m_lsRowLabels[i].Region = new Rectangle(ptDrawStart.X, ptDrawStart.Y, m_iRowWidth, m_lsRowLabels[i].Height);
-                sfLabelSize = e.Graphics.MeasureString(m_lsRowLabels[i].Text, m_fntLabelFont);
+                sfLabelSize = m_dbgGraphics.g.MeasureString(m_lsRowLabels[i].Text, m_fntLabelFont);
                 ptLabelPoint.X = ptDrawStart.X + ((m_lsRowLabels[i].Region.Width / 2) - ((int)sfLabelSize.Width / 2));
                 ptLabelPoint.Y = ptDrawStart.Y + ((m_lsRowLabels[i].Region.Height / 2) - ((int)sfLabelSize.Height / 2));
 
-                e.Graphics.Clip = new Region(m_lsRowLabels[i].Region);
-                e.Graphics.DrawString(m_lsRowLabels[i].Text, m_fntLabelFont, m_bshLabelTextBrush, ptLabelPoint);
-                e.Graphics.Clip = m_rgOrigRegion;
+                m_dbgGraphics.g.Clip = new Region(m_lsRowLabels[i].Region);
+                m_dbgGraphics.g.DrawString(m_lsRowLabels[i].Text, m_fntLabelFont, m_bshLabelTextBrush, ptLabelPoint);
+                m_dbgGraphics.g.Clip = m_rgOrigRegion;
 
                 ptDrawStart.Y += m_lsRowLabels[i].Height;
             }
@@ -107,21 +113,21 @@ namespace WildMouse.SmoothControls
             //draw columns and column lines, build total width while you're at it
             for (int i = 0; i < m_lsColumnLabels.Count; i++)
             {
-                Gradient.DrawGradient(e.Graphics, Gradient.GradientDirection.Vertical, m_cGradientStart, m_cGradientFinish, m_lsColumnLabels[i].Width, m_iColumnHeight, ptDrawStart);
+                Gradient.DrawGradient(m_dbgGraphics.g, Gradient.GradientDirection.Vertical, m_cGradientStart, m_cGradientFinish, m_lsColumnLabels[i].Width, m_iColumnHeight, ptDrawStart);
 
                 //draw column label
                 m_lsColumnLabels[i].Region = new Rectangle(ptDrawStart.X, ptDrawStart.Y, m_lsColumnLabels[i].Width, m_iColumnHeight);
-                sfLabelSize = e.Graphics.MeasureString(m_lsColumnLabels[i].Text, m_fntLabelFont);
+                sfLabelSize = m_dbgGraphics.g.MeasureString(m_lsColumnLabels[i].Text, m_fntLabelFont);
                 ptLabelPoint.X = ptDrawStart.X + ((m_lsColumnLabels[i].Region.Width / 2) - ((int)sfLabelSize.Width / 2));
                 ptLabelPoint.Y = ptDrawStart.Y + ((m_lsColumnLabels[i].Region.Height / 2) - ((int)sfLabelSize.Height / 2));
 
-                e.Graphics.Clip = new Region(m_lsColumnLabels[i].Region);
-                e.Graphics.DrawString(m_lsColumnLabels[i].Text, m_fntLabelFont, m_bshLabelTextBrush, ptLabelPoint);
-                e.Graphics.Clip = m_rgOrigRegion;
+                m_dbgGraphics.g.Clip = new Region(m_lsColumnLabels[i].Region);
+                m_dbgGraphics.g.DrawString(m_lsColumnLabels[i].Text, m_fntLabelFont, m_bshLabelTextBrush, ptLabelPoint);
+                m_dbgGraphics.g.Clip = m_rgOrigRegion;
 
                 //draw grid line
                 ptDrawFinish.X = ptDrawStart.X;
-                e.Graphics.DrawLine(m_pGridPen, ptDrawStart, ptDrawFinish);
+                m_dbgGraphics.g.DrawLine(m_pGridPen, ptDrawStart, ptDrawFinish);
  
                 ptDrawStart.X += m_lsColumnLabels[i].Width;
             }
@@ -137,18 +143,20 @@ namespace WildMouse.SmoothControls
             //draw final row lines now that total width has been calculated
             for (int i = 0; i < m_lsRowLabels.Count; i ++)
             {
-                e.Graphics.DrawLine(m_pGridPen, ptDrawStart, ptDrawFinish);
+                m_dbgGraphics.g.DrawLine(m_pGridPen, ptDrawStart, ptDrawFinish);
                 ptDrawStart.Y += m_lsRowLabels[i].Height;
                 ptDrawFinish.Y = ptDrawStart.Y;
             }
 
             //final border around everything
-            e.Graphics.DrawRectangle(m_pGridPen, 0, 0, m_iTotalWidth, m_iTotalHeight);
+            m_dbgGraphics.g.DrawRectangle(m_pGridPen, 0, 0, m_iTotalWidth, m_iTotalHeight);
 
             //final resize to match size of drawn table
             this.SmoothTable_Resize(this, EventArgs.Empty);
 
-            Fill(e.Graphics);
+            Fill(m_dbgGraphics.g);
+
+            m_dbgGraphics.Render(e.Graphics);
         }
 
         private void Fill(System.Drawing.Graphics gCanvas)
@@ -212,7 +220,7 @@ namespace WildMouse.SmoothControls
             m_dRows[iRow][iCol] = sNewValue;
         }
 
-        [EditorBrowsable(EditorBrowsableState.Never)]
+        [EditorBrowsable(EditorBrowsableState.Always)]
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [Bindable(false)]
@@ -222,7 +230,7 @@ namespace WildMouse.SmoothControls
             set { m_lsRowLabels = value; }
         }
 
-        [EditorBrowsable(EditorBrowsableState.Never)]
+        [EditorBrowsable(EditorBrowsableState.Always)]
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [Bindable(false)]
