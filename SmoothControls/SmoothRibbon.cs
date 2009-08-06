@@ -16,7 +16,14 @@ namespace WildMouse.SmoothControls
     [Designer("System.Windows.Forms.Design.ParentControlDesigner, System.Design", typeof(IDesigner))]
     public partial class SmoothRibbon : UserControl
     {
+        public enum RibbonOrientation
+        {
+            Up = 1,
+            Down = 2
+        }
+
         private const int RIBBON_COLLAPSED_HEIGHT = 18;
+        public const int C_DIVIDER_PADDING = 18;
 
         private Color GradientStart;
         private Color GradientFinish;
@@ -30,10 +37,10 @@ namespace WildMouse.SmoothControls
 
         private float Diameter;
         private float Radius;
-        private float DividerPadding;
 
         private bool pExpanded;
         private int pExpandedHeight;
+        private RibbonOrientation m_rOrient;
 
         public delegate void ExpandedEventHandler(object sender, bool Expanded);
 
@@ -56,7 +63,7 @@ namespace WildMouse.SmoothControls
             this.Paint += new PaintEventHandler(SmoothRibbon_Paint);
             this.Resize += new EventHandler(SmoothRibbon_Resize);
 
-            BottomFillColor = Color.FromArgb(245, 245, 245);
+            BottomFillColor = Color.FromArgb(250, 250, 250);
             TextLbl.BackColor = BottomFillColor;
 
             DividerColor = Color.FromArgb(200, 200, 200);
@@ -68,7 +75,6 @@ namespace WildMouse.SmoothControls
 
             Diameter = 7.0f;
             Radius = 3.5f;
-            DividerPadding = 18;
 
             GradientFinish = Color.FromArgb(223, 223, 223);
             GradientStart = Color.FromArgb(240, 240, 240);
@@ -83,6 +89,24 @@ namespace WildMouse.SmoothControls
             pExpanded = true;
             pExpandedHeight = this.Height;
             pVisibleControls = new ArrayList();
+
+            m_rOrient = RibbonOrientation.Down;
+
+            for (int i = 0; i < this.Controls.Count; i++)
+            {
+                this.Controls[i].MouseEnter += new EventHandler(Control_MouseEnter);
+                this.Controls[i].MouseLeave += new EventHandler(Control_MouseLeave);
+            }
+        }
+
+        private void Control_MouseLeave(object sender, EventArgs e)
+        {
+            base.OnMouseLeave(e);  //bubble event
+        }
+
+        private void Control_MouseEnter(object sender, EventArgs e)
+        {
+            base.OnMouseEnter(e);  //bubble event
         }
 
         [EditorBrowsable(EditorBrowsableState.Always)]
@@ -161,6 +185,21 @@ namespace WildMouse.SmoothControls
             set { TextLbl.Text = value; }
         }
 
+        [EditorBrowsable(EditorBrowsableState.Always)]
+        [Browsable(true)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        [Bindable(true)]
+        public RibbonOrientation Orientation
+        {
+            get { return m_rOrient; }
+            set
+            {
+                m_rOrient = value;
+                this.Invalidate();
+                this.SmoothRibbon_Resize(this, EventArgs.Empty);
+            }
+        }
+
         private void SmoothRibbon_Resize(object sender, EventArgs e)
         {
             if (!pExpanded)
@@ -168,9 +207,13 @@ namespace WildMouse.SmoothControls
 
             UpdateGradients();
 
-            TextLbl.Top = this.Height - ((int)DividerPadding - 1);
             TextLbl.Left = 3;
             TextLbl.Width = this.Width - 6;
+
+            if (m_rOrient == RibbonOrientation.Down)
+                TextLbl.Top = this.Height - (C_DIVIDER_PADDING - 1);
+            else
+                TextLbl.Top = 2;
         }
 
         private void UpdateGradients()
@@ -197,10 +240,20 @@ namespace WildMouse.SmoothControls
                 else
                     ChordWidth = Radius;
 
-                if (i > (this.Height - DividerPadding))
-                    GradientPen.Color = BottomFillColor;
+                if (m_rOrient == RibbonOrientation.Down)
+                {
+                    if (i > (this.Height - C_DIVIDER_PADDING))
+                        GradientPen.Color = BottomFillColor;
+                    else
+                        GradientPen.Color = GradientColors[(int)i];
+                }
                 else
-                    GradientPen.Color = GradientColors[(int)i];
+                {
+                    if (i <= C_DIVIDER_PADDING)
+                        GradientPen.Color = BottomFillColor;
+                    else
+                        GradientPen.Color = GradientColors[(int)i];
+                }
 
                 e.Graphics.DrawLine(GradientPen, Radius - ChordWidth, (float)i, this.Width - ((Radius - ChordWidth) + 1), (float)i);
             }
@@ -218,7 +271,10 @@ namespace WildMouse.SmoothControls
             e.Graphics.DrawLine(BorderPen, this.Width - 1, Radius, this.Width - 1, this.Height - (Radius + 1));
 
             //draw divider line
-            e.Graphics.DrawLine(DividerPen, 1, this.Height - DividerPadding, this.Width - 2, this.Height - DividerPadding);
+            if (m_rOrient == RibbonOrientation.Down)
+                e.Graphics.DrawLine(DividerPen, 1, this.Height - C_DIVIDER_PADDING, this.Width - 2, this.Height - C_DIVIDER_PADDING);
+            else
+                e.Graphics.DrawLine(DividerPen, 1, C_DIVIDER_PADDING, this.Width - 2, C_DIVIDER_PADDING);
         }
     }
 }

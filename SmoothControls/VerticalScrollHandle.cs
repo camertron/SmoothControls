@@ -102,13 +102,16 @@ namespace WildMouse.SmoothControls
 
          private void UpdateBG()
          {
-             m_bgImage = new Bitmap(this.Width, this.Height);
-             Color[] caBgColors = Gradient.ComputeGradient(BackgroundGradientStart, BackgroundGradientFinish, this.Width);
-
-             for (int c = 0; c < this.Width; c++)
+             if (this.Height > 0)
              {
-                 for (int r = 0; r < this.Height; r++)
-                     m_bgImage.SetPixel(c, r, caBgColors[c]);
+                 m_bgImage = new Bitmap(this.Width, this.Height);
+                 Color[] caBgColors = Gradient.ComputeGradient(BackgroundGradientStart, BackgroundGradientFinish, this.Width);
+
+                 for (int c = 0; c < this.Width; c++)
+                 {
+                     for (int r = 0; r < this.Height; r++)
+                         m_bgImage.SetPixel(c, r, caBgColors[c]);
+                 }
              }
          }
 

@@ -13,7 +13,10 @@ namespace WildMouse.SmoothControls
 {
     public partial class SequentialListBox : UserControl
     {
+        public delegate void RowClickedEventHandler(object sender, int iIndex);
+
         public event System.EventHandler SelectedIndexChanged;
+        public new event RowClickedEventHandler RowDoubleClick;
 
         protected const int SCROLL_LARGE_CHANGE = 10;
         protected const int SCROLL_SMALL_CHANGE = 5;
@@ -221,6 +224,7 @@ namespace WildMouse.SmoothControls
 
         protected virtual void RowEntryRemoved(int RemovedIndex)
         {
+            ((Control)pRowControls[RemovedIndex]).DoubleClick -= new EventHandler(RowControl_DoubleClick);
             pRowControls.RemoveAt(RemovedIndex);
 
             UpdateLayout();
@@ -240,6 +244,13 @@ namespace WildMouse.SmoothControls
         protected void HookUpRow(Control ToHookUp)
         {
             ElementsPanel.Controls.Add(ToHookUp);
+            ToHookUp.DoubleClick += new EventHandler(RowControl_DoubleClick);
+        }
+
+        private void RowControl_DoubleClick(object sender, EventArgs e)
+        {
+            if (RowDoubleClick != null)
+                RowDoubleClick(this, RowControls.IndexOf((IListRow)sender));
         }
 
         private void ListScroller_Scroll(object sender, ScrollEventArgs e)

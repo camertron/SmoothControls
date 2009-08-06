@@ -179,6 +179,12 @@
     <Compile Include="SmoothRibbon.Designer.cs">
       <DependentUpon>SmoothRibbon.cs</DependentUpon>
     </Compile>
+    <Compile Include="SmoothTable.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SmoothTable.Designer.cs">
+      <DependentUpon>SmoothTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="SmoothToggle.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -597,6 +603,10 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\process-working_31.png" />
+    <EmbeddedResource Include="SmoothTable.resx">
+      <DependentUpon>SmoothTable.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

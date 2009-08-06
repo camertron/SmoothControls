@@ -40,8 +40,8 @@ C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControls\obj\Debug\WildMouse.Smoo
 C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControls\obj\Debug\WildMouse.SmoothControls.ViewChooser.resources
 C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControls\obj\Debug\WildMouse.SmoothControls.ViewChooserRow.resources
 C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControls\obj\Debug\WildMouse.SmoothControls.WorkingIndicator.resources
+C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControls\obj\Debug\WildMouse.SmoothControls.CodeViewSwitcher.resources
+C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControls\obj\Debug\WildMouse.SmoothControls.CompilationResultRow.resources
 C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControls\obj\Debug\SmoothControls.csproj.GenerateResource.Cache
 C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControls\obj\Debug\SmoothControls.dll
 C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControls\obj\Debug\SmoothControls.pdb
-C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControls\obj\Debug\WildMouse.SmoothControls.CodeViewSwitcher.resources
-C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControls\obj\Debug\WildMouse.SmoothControls.CompilationResultRow.resources

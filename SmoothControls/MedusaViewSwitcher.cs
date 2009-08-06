@@ -28,7 +28,7 @@ namespace WildMouse.SmoothControls
         private SolidBrush m_bshTextBrush;
         private Pen m_pDividerPen;
 
-        public EventHandler SelectedIndexChanged;
+        public event EventHandler SelectedIndexChanged;
 
         public MedusaViewSwitcher()
         {

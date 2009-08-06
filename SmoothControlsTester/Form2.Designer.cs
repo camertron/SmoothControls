@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
             WildMouse.SmoothControls.ListHeaderCollection listHeaderCollection1 = new WildMouse.SmoothControls.ListHeaderCollection();
             this.button1 = new System.Windows.Forms.Button();
+            this.smoothRibbon2 = new WildMouse.SmoothControls.SmoothRibbon();
             this.iconListRow1 = new WildMouse.SmoothControls.IconListRow();
             this.compilationResultList1 = new WildMouse.SmoothControls.CompilationResultList();
             this.codeViewSwitcher1 = new WildMouse.SmoothControls.CodeViewSwitcher();
@@ -63,6 +64,16 @@
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // smoothRibbon2
+            // 
+            this.smoothRibbon2.Expanded = true;
+            this.smoothRibbon2.Location = new System.Drawing.Point(404, 284);
+            this.smoothRibbon2.Name = "smoothRibbon2";
+            this.smoothRibbon2.Orientation = WildMouse.SmoothControls.SmoothRibbon.RibbonOrientation.Down;
+            this.smoothRibbon2.Size = new System.Drawing.Size(314, 124);
+            this.smoothRibbon2.TabIndex = 17;
+            this.smoothRibbon2.Text = "smoothRibbon2";
             // 
             // iconListRow1
             // 
@@ -173,7 +184,8 @@
             this.smoothRibbon1.Expanded = true;
             this.smoothRibbon1.Location = new System.Drawing.Point(35, 141);
             this.smoothRibbon1.Name = "smoothRibbon1";
-            this.smoothRibbon1.Size = new System.Drawing.Size(242, 105);
+            this.smoothRibbon1.Orientation = WildMouse.SmoothControls.SmoothRibbon.RibbonOrientation.Up;
+            this.smoothRibbon1.Size = new System.Drawing.Size(269, 105);
             this.smoothRibbon1.TabIndex = 6;
             this.smoothRibbon1.Text = "Paragraph";
             // 
@@ -298,6 +310,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(934, 552);
+            this.Controls.Add(this.smoothRibbon2);
             this.Controls.Add(this.iconListRow1);
             this.Controls.Add(this.compilationResultList1);
             this.Controls.Add(this.codeViewSwitcher1);
@@ -345,5 +358,6 @@
         private WildMouse.SmoothControls.CodeViewSwitcher codeViewSwitcher1;
         private WildMouse.SmoothControls.CompilationResultList compilationResultList1;
         private WildMouse.SmoothControls.IconListRow iconListRow1;
+        private WildMouse.SmoothControls.SmoothRibbon smoothRibbon2;
     }
 }

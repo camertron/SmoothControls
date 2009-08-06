@@ -1,6 +1,6 @@
 ﻿namespace WildMouse.SmoothControls
 {
-    partial class SmoothRibbon
+    partial class SmoothTable
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,36 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.TextLbl = new WildMouse.SmoothControls.SmoothLabel();
             this.SuspendLayout();
             // 
-            // TextLbl
-            // 
-            this.TextLbl.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.TextLbl.Bold = false;
-            this.TextLbl.FontSize = 9;
-            this.TextLbl.Italic = false;
-            this.TextLbl.Location = new System.Drawing.Point(119, 83);
-            this.TextLbl.Name = "TextLbl";
-            this.TextLbl.Size = new System.Drawing.Size(150, 15);
-            this.TextLbl.TabIndex = 0;
-            this.TextLbl.Text = "smoothribbon";
-            this.TextLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.TextLbl.TextColor = System.Drawing.Color.Black;
-            // 
-            // SmoothRibbon
+            // SmoothTable
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.TextLbl);
-            this.Name = "SmoothRibbon";
-            this.Size = new System.Drawing.Size(299, 124);
+            this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.Name = "SmoothTable";
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private SmoothLabel TextLbl;
     }
 }
