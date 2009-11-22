@@ -55,6 +55,8 @@ namespace WildMouse.SmoothControls
 
             UpdateLayout();
             base.List_Resize(this, EventArgs.Empty);
+
+            this.BackColor = Color.White;
         }
 
         private void pListItems_EntryChanged(object sender, int EntryIndex)

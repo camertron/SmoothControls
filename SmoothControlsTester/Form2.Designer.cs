@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
-            WildMouse.SmoothControls.ListHeaderCollection listHeaderCollection1 = new WildMouse.SmoothControls.ListHeaderCollection();
+            WildMouse.SmoothControls.ListHeaderCollection listHeaderCollection2 = new WildMouse.SmoothControls.ListHeaderCollection();
             this.button1 = new System.Windows.Forms.Button();
             this.smoothRibbon2 = new WildMouse.SmoothControls.SmoothRibbon();
             this.iconListRow1 = new WildMouse.SmoothControls.IconListRow();
@@ -92,9 +92,9 @@
             // 
             // compilationResultList1
             // 
-            this.compilationResultList1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.compilationResultList1.BackColor = System.Drawing.Color.White;
             this.compilationResultList1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(152)))));
-            this.compilationResultList1.Location = new System.Drawing.Point(669, 12);
+            this.compilationResultList1.Location = new System.Drawing.Point(818, 40);
             this.compilationResultList1.Name = "compilationResultList1";
             this.compilationResultList1.SelectedIndex = -1;
             this.compilationResultList1.Size = new System.Drawing.Size(228, 188);
@@ -126,7 +126,7 @@
             // 
             this.lvMedusa.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.lvMedusa.FontSize = 9;
-            this.lvMedusa.Headers = listHeaderCollection1;
+            this.lvMedusa.Headers = listHeaderCollection2;
             this.lvMedusa.Location = new System.Drawing.Point(450, 246);
             this.lvMedusa.Name = "lvMedusa";
             this.lvMedusa.SelectedIndex = -1;
@@ -136,7 +136,7 @@
             // 
             // sequentialListBox1
             // 
-            this.sequentialListBox1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.sequentialListBox1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.sequentialListBox1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(152)))));
             this.sequentialListBox1.Location = new System.Drawing.Point(624, 59);
             this.sequentialListBox1.Name = "sequentialListBox1";
@@ -147,7 +147,7 @@
             // 
             // alphaListBox1
             // 
-            this.alphaListBox1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.alphaListBox1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.alphaListBox1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(152)))));
             this.alphaListBox1.Location = new System.Drawing.Point(450, 59);
             this.alphaListBox1.Name = "alphaListBox1";
@@ -266,6 +266,7 @@
             // 
             // listViewRow1
             // 
+            this.listViewRow1.BackColor = System.Drawing.Color.White;
             this.listViewRow1.ListInfo = null;
             this.listViewRow1.Location = new System.Drawing.Point(159, 118);
             this.listViewRow1.Name = "listViewRow1";
@@ -309,7 +310,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(934, 552);
+            this.ClientSize = new System.Drawing.Size(1074, 552);
             this.Controls.Add(this.smoothRibbon2);
             this.Controls.Add(this.iconListRow1);
             this.Controls.Add(this.compilationResultList1);

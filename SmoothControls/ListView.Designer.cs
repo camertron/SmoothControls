@@ -40,7 +40,7 @@
             // ElementsPanel
             // 
             this.ElementsPanel.Location = new System.Drawing.Point(1, 24);
-            this.ElementsPanel.Size = new System.Drawing.Size(163, 153);
+            this.ElementsPanel.Size = new System.Drawing.Size(158, 153);
             // 
             // HeaderBar
             // 
@@ -54,7 +54,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.HeaderBar);
             this.Name = "ListView";
             this.Size = new System.Drawing.Size(182, 178);

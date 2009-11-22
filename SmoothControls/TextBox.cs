@@ -53,8 +53,8 @@ namespace WildMouse.SmoothControls
             pFont = FontVault.GetFontVault().GetFont(FontVault.AvailableFonts.MyriadPro, pFontSize);
             TextField.Font = pFont;
 
-            StartColor = Color.FromArgb(230, 230, 230);
-            FinishColor = Color.FromArgb(190, 190, 190);
+            StartColor = Color.FromArgb(200, 200, 200);
+            FinishColor = Color.FromArgb(170, 170, 170);
             BorderColors = Gradient.ComputeGradient(StartColor, FinishColor, GRADIENT_DISTANCE);
 
             BorderPen = new Pen(Color.Black);

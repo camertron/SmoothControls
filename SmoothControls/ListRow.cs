@@ -21,6 +21,7 @@ namespace WildMouse.SmoothControls
 
         public new event System.EventHandler OnClick;
         public event CmdKeyPressedHandler CmdKeyPressed;
+        public new event System.EventHandler OnDoubleClick;
 
         public ListRow()
         {
@@ -41,6 +42,7 @@ namespace WildMouse.SmoothControls
             SeparatorPen = new Pen(SeparatorColor);
 
             this.Click += new System.EventHandler(ListViewRow_Click);
+            this.DoubleClick += new System.EventHandler(ListViewRow_DoubleClick);
 
             pTextColor = Color.Black;
         }
@@ -75,6 +77,12 @@ namespace WildMouse.SmoothControls
                 pTextColor = value;
                 InvalidateParent();
             }
+        }
+
+        private void ListViewRow_DoubleClick(object sender, System.EventArgs e)
+        {
+            if (OnDoubleClick != null)
+                OnDoubleClick(this, System.EventArgs.Empty);
         }
 
         private void ListViewRow_Click(object sender, System.EventArgs e)
@@ -147,6 +155,7 @@ namespace WildMouse.SmoothControls
                 {
                     CurLbl = new SmoothLabel();
                     CurLbl.Click += new System.EventHandler(DisplayLbl_Click);
+                    CurLbl.DoubleClick += new System.EventHandler(ListViewRow_DoubleClick);
                     CurLbl.AutoSize = false;
                     this.Controls.Add(CurLbl);
                     DisplayLabels.Add(CurLbl);

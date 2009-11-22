@@ -33,6 +33,8 @@ namespace WildMouse.SmoothControls
         protected bool bScrollbarUpdating;
 
         public event System.EventHandler SelectedIndexChanged;
+        public event System.EventHandler OnRowClick;
+        public event System.EventHandler OnRowDoubleClick;
 
         public ListBox()
         {
@@ -70,6 +72,8 @@ namespace WildMouse.SmoothControls
 
             ListScroller.Visible = false;
             bLayoutUpdating = false;
+
+            this.BackColor = Color.White;
 
             UpdateLayout();
         }
@@ -208,8 +212,10 @@ namespace WildMouse.SmoothControls
                         NewRow = new ListRow();
                         NewRow.CmdKeyPressed += new CmdKeyPressedHandler(Row_ArrowPressed);
                         NewRow.OnClick += new EventHandler(Row_OnClick);
+                        NewRow.OnDoubleClick += new EventHandler(Row_OnDoubleClick);
                         NewRow.Width = this.Width;
                         NewRow.Left = 0;
+                        NewRow.BackColor = Color.White;
                         ElementsPanel.Controls.Add(NewRow);
                         ListRows.EnqueueBack(NewRow);
                     }
@@ -340,6 +346,17 @@ namespace WildMouse.SmoothControls
 
             if (SelectedIndexChanged != null)
                 SelectedIndexChanged(this, EventArgs.Empty);
+
+            if (OnRowClick != null)
+                OnRowClick(this, EventArgs.Empty);
+        }
+
+        private void Row_OnDoubleClick(object sender, EventArgs e)
+        {
+            Row_OnClick(sender, e);
+
+            if (OnRowDoubleClick != null)
+                OnRowDoubleClick(this, EventArgs.Empty);
         }
 
         protected virtual int CalcScrollIndex()

@@ -30,6 +30,9 @@ namespace WildMouse.SmoothControls
 
         private DBGraphics memGraphics;
         private bool bPressed;
+        private string m_sText;
+        private Font m_fntTextFont;
+        private SolidBrush m_bshTextBrush;
 
         public RectButton()
         {
@@ -60,9 +63,21 @@ namespace WildMouse.SmoothControls
             BorderPen = new Pen(BorderColor);
 
             pIcon = null;
+            m_fntTextFont = FontVault.GetFontVault().GetFont(FontVault.AvailableFonts.MyriadPro, 10);
+            m_bshTextBrush = new SolidBrush(Color.Black);
 
             memGraphics = new DBGraphics();
             CreateDoubleBuffer();
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Always)]
+        [Browsable(true)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        [Bindable(true)]
+        public override string Text
+        {
+            get { return m_sText; }
+            set { m_sText = value; this.Invalidate(); }
         }
 
         private void RectButton_MouseUp(object sender, MouseEventArgs e)
@@ -118,6 +133,7 @@ namespace WildMouse.SmoothControls
             float ChordWidth;
             float Height = (float)this.Height - 1;
             Color[] GradientToUse;
+            SizeF sfStringSize;
 
             memGraphics.g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             memGraphics.g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
@@ -154,6 +170,9 @@ namespace WildMouse.SmoothControls
 
             if (pIcon != null)
                 memGraphics.g.DrawImage((Image)pIcon, (this.Width / 2) - (pIcon.Width / 2), (this.Height / 2) - (pIcon.Height / 2));
+
+            sfStringSize = memGraphics.g.MeasureString(m_sText, m_fntTextFont);
+            memGraphics.g.DrawString(m_sText, m_fntTextFont, m_bshTextBrush, ((this.Width / 2) - (sfStringSize.Width / 2)) + 1, (this.Height / 2) - (sfStringSize.Height / 2));
 
             memGraphics.Render(e.Graphics);
             CreateDoubleBuffer();
