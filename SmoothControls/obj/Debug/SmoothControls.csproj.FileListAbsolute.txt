@@ -47,3 +47,4 @@ C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControls\obj\Debug\SmoothControls
 C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControls\obj\Debug\SmoothControls.pdb
 C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControls\obj\Debug\WildMouse.SmoothControls.SmoothTable.resources
 C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControls\obj\Debug\WildMouse.SmoothControls.CompilationResultList.resources
+C:\Cameron's Stuff\DotNET\SmoothControls\SmoothControls\obj\Debug\WildMouse.SmoothControls.BulletedLabel.resources

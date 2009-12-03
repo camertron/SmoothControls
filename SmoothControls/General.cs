@@ -163,7 +163,27 @@ namespace WildMouse.SmoothControls
                 rImageArea.Width -= 2;
                 rImageArea.Height -= 2;
             }
-            
+        }
+
+        //adapted from http://www.codeproject.com/KB/GDI-plus/measurestring.aspx
+        public static SizeF MeasureDisplayStringWidth(System.Drawing.Graphics gCanvas, string sText, Font fntFont)
+        {
+            System.Drawing.StringFormat sfFormat = new System.Drawing.StringFormat();
+            System.Drawing.RectangleF rtRect = new System.Drawing.RectangleF(0, 0,
+                                                                          1000, 1000);
+            System.Drawing.CharacterRange[] craRanges = { new System.Drawing.CharacterRange(0, sText.Length) };
+            System.Drawing.Region[] raRegions = new System.Drawing.Region[1];
+
+            sfFormat.SetMeasurableCharacterRanges(craRanges);
+
+            raRegions = gCanvas.MeasureCharacterRanges(sText, fntFont, rtRect, sfFormat);
+            rtRect = raRegions[0].GetBounds(gCanvas);
+
+            SizeF sfFinal = new SizeF();
+            sfFinal.Width = (rtRect.Right + 1.0f);
+            sfFinal.Height = (rtRect.Bottom);
+
+            return sfFinal;
         }
     }
 

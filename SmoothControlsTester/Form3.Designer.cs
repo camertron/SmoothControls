@@ -76,7 +76,7 @@
             // 
             // alphaListBox1
             // 
-            this.alphaListBox1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.alphaListBox1.BackColor = System.Drawing.Color.White;
             this.alphaListBox1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(152)))));
             this.alphaListBox1.Location = new System.Drawing.Point(320, 104);
             this.alphaListBox1.Name = "alphaListBox1";
@@ -109,7 +109,7 @@
             // 
             // sequentialListBox1
             // 
-            this.sequentialListBox1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.sequentialListBox1.BackColor = System.Drawing.Color.White;
             this.sequentialListBox1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(152)))));
             this.sequentialListBox1.Location = new System.Drawing.Point(44, 233);
             this.sequentialListBox1.Name = "sequentialListBox1";

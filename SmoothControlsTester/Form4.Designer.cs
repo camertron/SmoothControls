@@ -28,12 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form4));
             this.button2 = new System.Windows.Forms.Button();
             this.checkBox1 = new WildMouse.SmoothControls.CheckBox();
             this.rectButton1 = new WildMouse.SmoothControls.RectButton();
             this.roundButton2 = new WildMouse.SmoothControls.RoundButton();
             this.roundButton1 = new WildMouse.SmoothControls.RoundButton();
             this.stTable = new WildMouse.SmoothControls.SmoothTable();
+            this.bulletedLabel1 = new WildMouse.SmoothControls.BulletedLabel();
             this.SuspendLayout();
             // 
             // button2
@@ -103,11 +105,24 @@
             this.stTable.Size = new System.Drawing.Size(51, 21);
             this.stTable.TabIndex = 0;
             // 
+            // bulletedLabel1
+            // 
+            this.bulletedLabel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.bulletedLabel1.BulletSize = 4;
+            this.bulletedLabel1.DividerWidth = 20;
+            this.bulletedLabel1.FontSize = 10;
+            this.bulletedLabel1.Items = ((System.Collections.Generic.List<string>)(resources.GetObject("bulletedLabel1.Items")));
+            this.bulletedLabel1.Location = new System.Drawing.Point(118, 85);
+            this.bulletedLabel1.Name = "bulletedLabel1";
+            this.bulletedLabel1.Size = new System.Drawing.Size(384, 94);
+            this.bulletedLabel1.TabIndex = 6;
+            // 
             // Form4
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(632, 515);
+            this.Controls.Add(this.bulletedLabel1);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.rectButton1);
             this.Controls.Add(this.roundButton2);
@@ -128,5 +143,6 @@
         private WildMouse.SmoothControls.RoundButton roundButton2;
         private WildMouse.SmoothControls.RectButton rectButton1;
         private WildMouse.SmoothControls.CheckBox checkBox1;
+        private WildMouse.SmoothControls.BulletedLabel bulletedLabel1;
     }
 }

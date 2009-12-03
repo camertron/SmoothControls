@@ -77,6 +77,12 @@
     <Compile Include="AlphaListRow.Designer.cs">
       <DependentUpon>AlphaListRow.cs</DependentUpon>
     </Compile>
+    <Compile Include="BulletedLabel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BulletedLabel.Designer.cs">
+      <DependentUpon>BulletedLabel.cs</DependentUpon>
+    </Compile>
     <Compile Include="CheckBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -594,6 +600,10 @@
     <EmbeddedResource Include="Resources\process-working_30.png" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="BulletedLabel.resx">
+      <DependentUpon>BulletedLabel.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="CodeViewSwitcher.resx">
       <DependentUpon>CodeViewSwitcher.cs</DependentUpon>
       <SubType>Designer</SubType>

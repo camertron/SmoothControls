@@ -14,6 +14,16 @@ namespace SmoothControlsTester
         public Form4()
         {
             InitializeComponent();
+
+            List<string> hello = new List<string>();
+            hello.Add("Cameron");
+            hello.Add("Casey");
+            hello.Add("Michelle");
+            hello.Add("Terry");
+            hello.Add("Siri");
+            hello.Add("Cheerio");
+            hello.Add("Franja");
+            bulletedLabel1.Items = hello;
         }
 
         private void button2_Click(object sender, EventArgs e)

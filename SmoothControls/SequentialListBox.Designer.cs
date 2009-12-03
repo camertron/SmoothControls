@@ -34,7 +34,7 @@
             // 
             // ElementsPanel
             // 
-            this.ElementsPanel.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.ElementsPanel.BackColor = System.Drawing.Color.White;
             this.ElementsPanel.Location = new System.Drawing.Point(3, 3);
             this.ElementsPanel.Name = "ElementsPanel";
             this.ElementsPanel.Size = new System.Drawing.Size(121, 100);
@@ -56,7 +56,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.ElementsPanel);
             this.Controls.Add(this.ListScroller);
             this.DoubleBuffered = true;
