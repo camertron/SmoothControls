@@ -210,6 +210,8 @@ namespace WildMouse.SmoothControls
 
                 if (HeaderBar != null)
                     HeaderBar.Font = pFont;
+
+                UpdateRowWidths();
             }
         }
     }
