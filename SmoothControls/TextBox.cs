@@ -64,6 +64,18 @@ namespace WildMouse.SmoothControls
             bShowBorder = true;
         }
 
+        public int SelectionStart
+        {
+            get { return TextField.SelectionStart; }
+            set { TextField.SelectionStart = value; }
+        }
+
+        public int SelectionLength
+        {
+            get { return TextField.SelectionLength; }
+            set { TextField.SelectionLength = value; }
+        }
+
         private void TextField_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (KeyPress != null)
